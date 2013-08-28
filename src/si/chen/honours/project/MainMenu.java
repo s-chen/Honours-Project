@@ -1,15 +1,18 @@
 package si.chen.honours.project;
 
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
-public class MainMenu extends Activity {
+
+public class MainMenu extends ActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
