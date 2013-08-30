@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
-
 public class MainMenu extends ActionBarActivity {
 
     @Override
@@ -12,7 +11,9 @@ public class MainMenu extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+     
+        
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
