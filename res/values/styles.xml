@@ -2,8 +2,12 @@
 
     <color name="background">#fdf8bb</color>
     
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar" >
-
+    <style name="AppTheme" parent="android:Theme.Light" >
+		<item name="android:windowNoTitle">true</item>
+    </style>
+    
+    <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat.Light" >
+	
     </style>
 
 </resources>
