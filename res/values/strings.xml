@@ -6,5 +6,6 @@
     <string name="tourist_attraction">Tourist Attractions</string>
     <string name="title_activity_splash">Edinburgh Travel</string>
     <string name="textView_edinburgh_title">Edinburgh Travel</string>
+    <string name="image_content_description">Edinburgh landmark</string>
 
 </resources>

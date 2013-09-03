@@ -16,7 +16,7 @@
             android:theme="@style/CustomActionBarTheme" >
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".SplashScreen"
             android:label="@string/title_activity_splash" 
             android:theme="@style/AppTheme" >
             <intent-filter>
