@@ -1,6 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  	<color name="WhiteText">#ffffff</color>
+  	<color name="White">#ffffff</color>
+	<color name="Black">#000000</color>
     
     <style name="AppTheme" parent="android:Theme.Light" >
 		<item name="android:windowNoTitle">true</item>

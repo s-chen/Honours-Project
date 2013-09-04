@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/background_colour" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/edinburgh_landmark" >
 
     <TextView
         android:id="@+id/textView_edinburgh_title"
@@ -10,12 +10,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="10dp"
         android:text="@string/textView_edinburgh_title"
         android:textAppearance="@style/AppTheme"
+        android:textColor="@color/Black"
         android:textSize="30dp"
-        android:textColor="@color/WhiteText" />
-
+        android:textStyle="bold" />
 
 </RelativeLayout>
 
