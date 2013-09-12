@@ -1,6 +1,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  	<color name="White">#ffffff</color>
+  	<color name="White">#FFFFFF</color>
 	<color name="Black">#000000</color>
     
     <style name="AppTheme" parent="android:Theme.Light" >
@@ -8,7 +8,7 @@
     </style>
     
     <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar" >
-		
+		<item name="displayOptions"></item>
     </style>
-
+    
 </resources>

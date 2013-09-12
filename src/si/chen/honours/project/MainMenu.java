@@ -27,7 +27,7 @@ public class MainMenu extends ActionBarActivity {
         inflater.inflate(R.menu.activity_main_menu, menu);
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
-        searchView.setQueryHint("Search for locations");
+        searchView.setQueryHint("Search Edinburgh");
         return super.onCreateOptionsMenu(menu);
     }
     
@@ -38,6 +38,8 @@ public class MainMenu extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.action_search:
                 return true;
+            case R.id.action_overflow:
+            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

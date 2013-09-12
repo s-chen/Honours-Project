@@ -6,12 +6,13 @@
 
     <Button
         android:id="@+id/button_touristAttraction"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
+        android:layout_width="110dp"
+        android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="74dp"
+        android:background="@drawable/custom_button"
         android:text="@string/tourist_attraction"
         android:textColor="@color/Black"
         android:textStyle="bold" />
