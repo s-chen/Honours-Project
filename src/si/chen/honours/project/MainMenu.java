@@ -38,8 +38,6 @@ public class MainMenu extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.action_search:
                 return true;
-            case R.id.action_overflow:
-            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

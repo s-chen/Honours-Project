@@ -7,6 +7,7 @@
     <string name="title_activity_splash">Edinburgh Travel</string>
     <string name="textView_edinburgh_title">Edinburgh Travel</string>
     <string name="action_search">Search</string>
-    <string name="action_overflow">Action Overflow</string>
+    <string name="sightseeing">Sightseeing</string>
+    <string name="action_maps">Map</string>
 
 </resources>
