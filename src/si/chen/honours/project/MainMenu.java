@@ -1,6 +1,7 @@
 package si.chen.honours.project;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -30,10 +31,9 @@ public class MainMenu extends ActionBarActivity {
         inflater.inflate(R.menu.activity_main_menu, menu);
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
-        searchView.setQueryHint("Search Edinburgh");
+        searchView.setQueryHint("Search Edinburgh");       
         return super.onCreateOptionsMenu(menu);
     }
-    
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -41,6 +41,11 @@ public class MainMenu extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.action_search:
                 return true;
+            case R.id.action_maps:
+            	Toast.makeText(getApplicationContext(), "CLICKED ON MAPS", Toast.LENGTH_SHORT).show();
+            	Intent intent = new Intent(this, MapActivity.class);
+            	startActivity(intent);
+            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -58,7 +63,7 @@ public class MainMenu extends ActionBarActivity {
     	if(resultCode != ConnectionResult.SUCCESS) {
     		Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 1);
     		dialog.show();
-    		Log.d("GooglePlayVersionCheck", "resultCode: " + resultCode);
     	} 
+    	Log.d("GooglePlayVersionCheck", "resultCode: " + resultCode);
     }
 }

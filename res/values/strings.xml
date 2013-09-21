@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Edinburgh Travel</string>
@@ -9,5 +10,8 @@
     <string name="action_search">Search</string>
     <string name="sightseeing">Sightseeing</string>
     <string name="action_maps">Map</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
