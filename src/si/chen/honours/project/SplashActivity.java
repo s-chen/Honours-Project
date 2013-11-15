@@ -9,8 +9,8 @@ import android.preference.PreferenceManager;
 
 public class SplashActivity extends Activity {
 
-	// Display welcome screen for 3000ms
-	private final int SPLASH_DISPLAY_TIME = 3000;
+	// Display welcome screen for 1000ms
+	private final int SPLASH_DISPLAY_TIME = 1000;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class SplashActivity extends Activity {
     	
     	if (!splashScreenShown) {
     		
-    		// Show splash screen for 3 seconds
+    		// Show splash screen for 1 second
     		new Handler().postDelayed(new Runnable() {
     			
     			public void run() {

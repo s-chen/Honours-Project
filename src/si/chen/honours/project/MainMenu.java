@@ -22,7 +22,7 @@ public class MainMenu extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -42,9 +42,9 @@ public class MainMenu extends ActionBarActivity {
             case R.id.action_search:
                 return true;
             case R.id.action_maps:
-            	Toast.makeText(getApplicationContext(), "CLICKED ON MAPS", Toast.LENGTH_SHORT).show();
-            	Intent intent = new Intent(this, MapActivity.class);
-            	startActivity(intent);
+            	Toast.makeText(getApplicationContext(), "Opening maps...", Toast.LENGTH_SHORT).show();
+            	Intent intentMap = new Intent(this, MapActivity.class);
+            	startActivity(intentMap);
             	return true;
             default:
                 return super.onOptionsItemSelected(item);
