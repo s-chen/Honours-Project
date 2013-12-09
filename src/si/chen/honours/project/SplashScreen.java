@@ -8,8 +8,8 @@ import android.os.Handler;
 
 public class SplashScreen extends Activity {
 
-	// Display welcome screen for 3 seconds
-	private final int SPLASH_DURATION = 3000; 
+	// Display welcome screen for 0.1 seconds
+	private final int SPLASH_DURATION = 100; 
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {

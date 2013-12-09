@@ -29,4 +29,17 @@
         android:textColor="@color/Black"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/button_thingsToDo"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/button_sightseeing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/things_to_do"
+        android:textColor="@color/Black"
+        android:textStyle="bold" 
+        android:onClick="thingsToDo"/>
+
 </RelativeLayout>

@@ -11,7 +11,15 @@ public class UserBubbles extends BubbleListService {
 		super(bubbleNum);
 		uid = UID;
 		type = BubbleListTypes.USERBUBBLES;
-		url = Constants.servicesBaseURL + "myBubbles.php";
+		url = Constants.servicesBaseURL + "myBubbles.php?" + "userId=" + UID;
 	}
-	
+
+	public String getUserBubbleURL(int bubbleNum, int UID) {
+		
+		UserBubbles osmBubbles = new UserBubbles(bubbleNum, UID);
+		
+		String osmURL = osmBubbles.url;
+		
+		return osmURL;
+	}
 }

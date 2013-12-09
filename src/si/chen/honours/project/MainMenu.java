@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -21,8 +22,6 @@ public class MainMenu extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -42,7 +41,7 @@ public class MainMenu extends ActionBarActivity {
             case R.id.action_search:
                 return true;
             case R.id.action_maps:
-            	Toast.makeText(getApplicationContext(), "Opening maps...", Toast.LENGTH_SHORT).show();
+            	Toast.makeText(getApplicationContext(), "Opening Google Maps", Toast.LENGTH_SHORT).show();
             	Intent intentMap = new Intent(this, MapActivity.class);
             	startActivity(intentMap);
             	return true;
@@ -66,4 +65,13 @@ public class MainMenu extends ActionBarActivity {
     	} 
     	Log.d("GooglePlayVersionCheck", "resultCode: " + resultCode);
     }
+    
+    // Called when 'Things To Do' button is clicked
+    public void thingsToDo(View view) {
+    	
+    	Intent intent = new Intent(this, ThingsToDo.class);
+    	startActivity(intent);
+    	finish();
+    } 
 }
+
