@@ -56,13 +56,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="si.chen.honours.project.ThingsToDo"
-            android:label="@string/title_activity_things_to_do"
-            android:theme="@style/CustomActionBarTheme" >
-        </activity>
-        <activity
-            android:name="si.chen.honours.project.SingleBubble"
-            android:label="@string/title_activity_single_bubble"
+            android:name="si.chen.honours.project.Restaurants"
+            android:label="@string/title_activity_restaurants"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
     </application>

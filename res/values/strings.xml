@@ -8,13 +8,11 @@
     <string name="title_activity_splash">Edinburgh Travel</string>
     <string name="textView_edinburgh_title">Edinburgh Travel</string>
     <string name="action_search">Search</string>
-    <string name="sightseeing">Sightseeing</string>
     <string name="action_maps">Map</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="things_to_do">Things To Do</string>
-    <string name="title_activity_things_to_do">ThingsToDo</string>
-    <string name="title_activity_single_bubble">SingleBubble</string>
+    <string name="title_activity_restaurants">Restaurants</string>
+    <string name="button_restaurants">Restaurants/Fast Food</string>
+    <string name="button_bars">Bars/Pubs</string>
 
 </resources>

@@ -1,5 +1,7 @@
 package si.chen.honours.project;
 
+import java.io.IOException;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -22,6 +25,17 @@ public class MainMenu extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        
+        /** Populate Edinburgh POI database on Android System
+        using database file from assets folder **/
+		DatabaseHelper dbHelper = new DatabaseHelper(this);
+		
+		try {
+			dbHelper.createDatabase();
+		} catch (IOException e) {
+			System.out.println("Unable to create database");
+		}
+		
     }
 
     @Override
@@ -66,10 +80,10 @@ public class MainMenu extends ActionBarActivity {
     	Log.d("GooglePlayVersionCheck", "resultCode: " + resultCode);
     }
     
-    // Called when 'Things To Do' button is clicked
-    public void thingsToDo(View view) {
+    // Called when 'Restaurants' button is clicked
+    public void restaurants(View view) {
     	
-    	Intent intent = new Intent(this, ThingsToDo.class);
+    	Intent intent = new Intent(this, Restaurants.class);
     	startActivity(intent);
     	finish();
     } 
