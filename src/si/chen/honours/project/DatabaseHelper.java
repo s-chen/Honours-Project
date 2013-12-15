@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -114,24 +116,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		super.close();
 	}
-	
-
-	// SQL query to get restaurant/takeaway POI data
-	public Cursor getRestaurantData() {
 		
-		String sqlStatement = "SELECT rowid _id, name, services FROM edinburgh "
+	// Get a List of restaurant data from the result of a SQL query
+	public List<PointOfInterest> getRestaurantData() {
+		
+		List<PointOfInterest> restaurantList = new ArrayList<PointOfInterest>(); 
+		
+		// Retrieve all restaurant or fast food type services
+		String sqlQuery = "SELECT * FROM edinburgh "
 				+ "WHERE services = 'restaurant' OR services = 'fast_food'";
 		
-		Cursor c = mDB.rawQuery(sqlStatement, null);
-		
-		if (c != null) {
-			c.moveToNext();
+		// Open database for querying
+		try {
+			openDatabase();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return c;
+		
+		Cursor cursor = mDB.rawQuery(sqlQuery, null);
+		
+		// Loop through all rows and add to list
+		if (cursor.moveToFirst()) {
+				do {
+					PointOfInterest poi = new PointOfInterest();
+					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setName(cursor.getString(1));
+					poi.setServices(cursor.getString(2));
+					poi.setLatitude(cursor.getFloat(3));
+					poi.setLongitude(cursor.getFloat(4));
+					poi.setContentURL(cursor.getString(5));
+				
+					// Add restaurant data to list
+					restaurantList.add(poi);
+					
+				} while (cursor.moveToNext());
+		}
+		
+		return restaurantList;	
 	}
-	
-	
-	
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {

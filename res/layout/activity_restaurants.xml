@@ -17,23 +17,7 @@
         android:layout_centerHorizontal="true" >
     </ListView>
 
-    <TextView
-        android:id="@+id/textView_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView_services"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView_name"
-        android:layout_alignRight="@+id/listView_restaurants"
-        android:layout_marginRight="5dp"
-        android:textSize="15sp" />
     
     
 </RelativeLayout>
