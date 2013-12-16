@@ -60,6 +60,11 @@
             android:label="@string/title_activity_restaurants"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.RestaurantInfo"
+            android:label="@string/title_activity_restaurant_info"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package si.chen.honours.project;
 
+
+
 /** Model Object provides getter/setter methods for storing and retrieving Point of Interest data **/
-public class PointOfInterest {
+public class PointOfInterest implements Comparable<PointOfInterest> {
 
 	private int id;
 	private String name;
@@ -84,6 +86,18 @@ public class PointOfInterest {
 	// Formats the look when displayed in ListView
 	public String toString() {
 		return this.name + " - " + "(" + this.services + ")";
+	}
+	
+	// Comparator to compare and sort in alphabetical order
+	public int compareTo(PointOfInterest poi) {
+		
+		int result = this.name.compareToIgnoreCase(poi.name);
+		
+		if (result != 0) {
+			return result;
+		} else {
+			return new String(this.name).compareTo(new String(poi.name));
+		}
 	}
 }
 
