@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,28 +15,26 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-/** Called when 'Restaurant' button pressed **/
+/** Called when 'Food' button pressed **/
 public class Restaurants extends ActionBarActivity {
 	
 	private List<PointOfInterest> restaurant_list;
 	private int[] restaurant_id;
 	private String[] restaurant_name;
 	private String[] services;
-	private float[] restaurant_latitude;
-	private float[] restaurant_longitude;
+	private double[] restaurant_latitude;
+	private double[] restaurant_longitude;
 	private String[] restaurant_url;
 	private ArrayAdapter<PointOfInterest> restaurant_adapter;
 	private ListView lv_restaurants;
 	private PointOfInterest restaurant_data[];
-	private Parcelable lv_state;
-	
-	
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_restaurants);
-		
+				
 		setTitle("Restaurants and Takeaways");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -56,8 +53,8 @@ public class Restaurants extends ActionBarActivity {
 		restaurant_id = new int[restaurant_list.size()];
 		restaurant_name = new String[restaurant_list.size()];
 		services = new String[restaurant_list.size()];
-		restaurant_latitude = new float[restaurant_list.size()];
-		restaurant_longitude = new float[restaurant_list.size()];
+		restaurant_latitude = new double[restaurant_list.size()];
+		restaurant_longitude = new double[restaurant_list.size()];
 		restaurant_url = new String[restaurant_list.size()];
 		restaurant_data = new PointOfInterest[restaurant_list.size()];
 		
@@ -77,18 +74,14 @@ public class Restaurants extends ActionBarActivity {
 		for (int i = 0; i < restaurant_list.size(); i++) {
 			restaurant_data[i] = new PointOfInterest(restaurant_name[i], services[i]);
 		}
-		
-		
-		// Save ListView state
-		lv_state = lv_restaurants.onSaveInstanceState();
-		
+
 		
 		// Display restaurant name, service type in ListView
 		Log.i("RestaurantListView", "Adding restaurant data to list view.");
 		restaurant_adapter = new ArrayAdapter<PointOfInterest>(this, R.layout.activity_restaurants, R.id.textView_restaurant_info, restaurant_data);
 		lv_restaurants.setAdapter(restaurant_adapter);
-		
-		
+	
+
 		// Display more specific information about a particular restaurant
 		lv_restaurants.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,13 +127,6 @@ public class Restaurants extends ActionBarActivity {
     	Intent intent = new Intent(this, MainMenu.class);
     	startActivity(intent);
     	finish();
-    }
-    
-    @Override
-    public void onRestart() {
-    	super.onRestart();
-    	
-    	lv_restaurants.onRestoreInstanceState(lv_state);
     }
 
 }

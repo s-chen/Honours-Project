@@ -12,9 +12,10 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_restaurants">Restaurants</string>
-    <string name="button_restaurants">Restaurants/Fast Food</string>
-    <string name="button_bars">Bars/Pubs</string>
+    <string name="button_restaurants">Food</string>
+    <string name="button_drinks">Drinks</string>
     <string name="title_activity_restaurant_info">RestaurantInfo</string>
+    <string name="title_activity_gpslistener">GPSListener</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -8,10 +8,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RestaurantInfo" >
 
-	<fragment
+    <fragment
 	    android:id="@+id/restaurant_map"
 	    android:layout_width="match_parent"
 	    android:layout_height="150dp"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
 	    class="com.google.android.gms.maps.SupportMapFragment" />
+    
+    
+	<TextView
+	    android:id="@+id/textView_distance_info"
+	    android:layout_width="wrap_content"
+	    android:layout_height="20dp"
+	    android:layout_alignLeft="@+id/restaurant_map"
+	    android:layout_alignParentBottom="true"
+	    android:layout_below="@+id/restaurant_map"
+	    android:layout_marginBottom="155dp"
+	    android:textSize="20sp"
+	    android:textStyle="bold" />
+
+	
 
 </RelativeLayout>

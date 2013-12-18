@@ -80,7 +80,7 @@ public class MainMenu extends ActionBarActivity {
     	Log.d("GooglePlayVersionCheck", "resultCode: " + resultCode);
     }
     
-    // Called when 'Restaurants' button is clicked
+    // Called when 'Food' button is clicked
     public void restaurants(View view) {
     	
     	Intent intent = new Intent(this, Restaurants.class);
