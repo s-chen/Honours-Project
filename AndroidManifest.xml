@@ -67,7 +67,8 @@
         </activity>
         <activity
             android:name="si.chen.honours.project.GPSListener"
-            android:label="@string/title_activity_gpslistener" >
+            android:label="@string/title_activity_gpslistener"
+            android:theme="@style/CustomActionBarTheme" >
         </activity>
     </application>
 

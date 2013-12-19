@@ -1,5 +1,10 @@
 package si.chen.honours.project;
 
+import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -12,6 +17,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 public class GPSListener extends Service implements LocationListener {
 
@@ -27,7 +33,7 @@ public class GPSListener extends Service implements LocationListener {
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 metres
 
     // Minimum time between updates in milliseconds
-    private static final long MIN_TIME_UPDATES = 1000 * 60; // 1 minute 
+    private static final long MIN_TIME_BETWEEN_UPDATES = 1000 * 60; // 60s
     
     protected LocationManager locationManager;
     
@@ -57,9 +63,9 @@ public class GPSListener extends Service implements LocationListener {
                 this.canGetLocation = true;
                 
                 if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     
-                    Log.d("Network", "Network connection enabled");
+                    Log.d("NETWORK_ENABLED", "Network connection enabled");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (location != null) {
@@ -72,9 +78,9 @@ public class GPSListener extends Service implements LocationListener {
                 // if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled) {
                     if (location == null) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         
-                        Log.d("GPS_Enabled", "GPS Enabled");
+                        Log.d("GPS_ENABLED", "GPS Enabled");
                         if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
@@ -89,6 +95,8 @@ public class GPSListener extends Service implements LocationListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        Log.d("CURRENT_USER_LAT_LNG", "\nLat:" + latitude + "\nLng:" + longitude);
 
         return location;
     }
@@ -155,9 +163,14 @@ public class GPSListener extends Service implements LocationListener {
         // Showing Alert Message
         alertDialog.show();
     }
+  
 
-    
+    // Update user location (called automatically)
     public void onLocationChanged(Location location) {
+    	
+    	Log.d("LOCATION_UPDATE", "User location updated");
+    	getLocation();
+    	
     }
 
     public void onProviderDisabled(String provider) {

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -87,5 +88,6 @@ public class MainMenu extends ActionBarActivity {
     	startActivity(intent);
     	finish();
     } 
+    
 }
 

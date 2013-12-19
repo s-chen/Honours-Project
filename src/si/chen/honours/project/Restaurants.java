@@ -115,10 +115,15 @@ public class Restaurants extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 		switch(item.getItemId()) {
-			case android.R.id.home:
-				onBackPressed();
+		case android.R.id.home:
+			 // Go to previous screen when app icon in action bar is clicked
+            Intent intent = new Intent(this, MainMenu.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+			return true;
+		default:
+		      return super.onOptionsItemSelected(item);
 		}
-		return true;
 	}
 	
     @Override

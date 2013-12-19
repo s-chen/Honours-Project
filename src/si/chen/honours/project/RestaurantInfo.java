@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +32,9 @@ public class RestaurantInfo extends ActionBarActivity {
 	private GPSListener gps;
 	private Location user_location;
 	private Location restaurant_location;
+	private double user_latitude;
+	private double user_longitude;
+	private int distance;
 	
 
 	
@@ -51,9 +53,9 @@ public class RestaurantInfo extends ActionBarActivity {
 		if (gps.canGetLocation()) {
 	
 			// get user's current location
-			user_location = gps.getLocation();
+			user_latitude = gps.getLatitude();
+			user_longitude = gps.getLongitude();
 			
-			Toast.makeText(getApplicationContext(), "Current Location \nLat:" + user_location.getLatitude() + "\nLong:" + user_location.getLongitude(), Toast.LENGTH_SHORT).show();
 		} else {
 			// GPS or network not enabled, ask user to enable GPS/network in settings menu
 			gps.showSettingsAlert();
@@ -83,17 +85,36 @@ public class RestaurantInfo extends ActionBarActivity {
 		restaurant_map.setMyLocationEnabled(true);
 		
 		
-		// Calculate distance from user's current location to restaurant
+		// Set lat, lng coordinates for restaurant location 
 		restaurant_location = new Location("restaurant_location");
 		restaurant_location.setLatitude(restaurant_latitude);
 		restaurant_location.setLongitude(restaurant_longitude);
-		int distance = (int) user_location.distanceTo(restaurant_location);
+		
+		// Set lat, lng coordinates for user location 
+		user_location = new Location("user_location");
+		user_location.setLatitude(user_latitude);
+		user_location.setLongitude(user_longitude);
+		
+		// Calculate distance from user's current location to restaurant
+		distance = (int) user_location.distanceTo(restaurant_location);
 		
 		Log.d("DISTANCE_TO", Integer.toString(distance));
+	
+
 		
 		// Display distance in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info);
 		distance_information.setText("Distance to destination: " + distance + "m");
+		
+
+
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 
@@ -109,9 +130,17 @@ public class RestaurantInfo extends ActionBarActivity {
 		// Handle presses on the action bar items
 		switch(item.getItemId()) {
 			case android.R.id.home:
-				onBackPressed();
+				 // Go to previous screen when app icon in action bar is clicked
+	            Intent intent = new Intent(this, Restaurants.class);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);
+				return true;
+			case R.id.action_refresh:
+				refresh();
+				return true;
+			default:
+			      return super.onOptionsItemSelected(item);
 		}
-		return true;
 	}
 
     @Override
@@ -120,6 +149,36 @@ public class RestaurantInfo extends ActionBarActivity {
     	Intent intent = new Intent(this, Restaurants.class);
     	startActivity(intent);
     	finish();
+    }
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+    	gps.stopUsingGPS();
+    }
+    
+    @Override
+    public void onDestroy() {
+    	super.onDestroy();;
+    	gps.stopUsingGPS();
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	gps.getLocation();
+    }
+    
+    // Refresh activity - called when 'Refresh' action button clicked
+    public void refresh() {
+    	
+    	Intent intent = getIntent();
+    	overridePendingTransition(0, 0);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+
+   	    overridePendingTransition(0, 0);
+   	    startActivity(intent);
     }
 
 
