@@ -6,8 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RestaurantInfo" 
-    android:background="@drawable/background_colour" >
+    tools:context=".RestaurantInfo" >
 
     <fragment
 	    android:id="@+id/restaurant_map"
@@ -17,29 +16,17 @@
 	    android:layout_centerHorizontal="true"
 	    class="com.google.android.gms.maps.SupportMapFragment" />
     
+    
 	<TextView
 	    android:id="@+id/textView_distance_info"
 	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
+	    android:layout_height="20dp"
 	    android:layout_alignLeft="@+id/restaurant_map"
 	    android:layout_alignParentBottom="true"
 	    android:layout_below="@+id/restaurant_map"
-	    android:textColor="@color/White"
 	    android:textSize="20sp"
 	    android:textStyle="bold" />
-	
-	<TextView
-	    android:id="@+id/textView_restaurant_content_url"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/button_search_restaurant_info_online"
-	    android:layout_alignLeft="@+id/restaurant_map"
-	    android:textSize="20sp"
-	    android:textStyle="bold"
-	    android:autoLink="web" 
-	    android:textColor="@color/White"
-	    android:textColorLink="@color/White" />
-	
+
 	<Button
 	    android:id="@+id/button_add_to_favourites"
 	    android:layout_width="wrap_content"
@@ -47,9 +34,7 @@
 	    android:layout_alignBottom="@+id/button_search_restaurant_info_online"
 	    android:layout_alignRight="@+id/restaurant_map"
 	    android:text="@string/button_add_to_favourites"
-	    android:background="@drawable/custom_button"
-	    android:textStyle="bold"
-	    android:layout_alignParentBottom="true" />
+	    android:background="@drawable/custom_button" />
 
 	<Button
 	    android:id="@+id/button_search_restaurant_info_online"
@@ -57,10 +42,8 @@
 	    android:layout_height="55dp"
 	    android:layout_alignBottom="@+id/textView_distance_info"
 	    android:layout_alignLeft="@+id/textView_distance_info"
+	    android:layout_marginBottom="44dp"
 	    android:background="@drawable/custom_button"
-	    android:onClick="searchRestaurantOnline"
-	    android:text="@string/button_search_restaurant_info_online"
-	    android:textStyle="bold"
-	    android:layout_alignParentBottom="true" />
+	    android:text="@string/button_search_restaurant_info_online" />
 
 </RelativeLayout>

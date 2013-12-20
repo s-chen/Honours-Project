@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_colour" >
+
+    <Button
+        android:id="@+id/button_drinks"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/button_drinks"
+        android:textColor="@color/Black"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_touristAttraction"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/tourist_attraction"
+        android:textColor="@color/Black"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_restaurants"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignBaseline="@+id/button_drinks"
+        android:layout_alignBottom="@+id/button_drinks"
+        android:layout_alignLeft="@+id/button_touristAttraction"
+        android:background="@drawable/custom_button"
+        android:onClick="restaurants"
+        android:text="@string/button_restaurants"
+        android:textColor="@color/Black"
+        android:textStyle="bold" />
+
+</RelativeLayout>

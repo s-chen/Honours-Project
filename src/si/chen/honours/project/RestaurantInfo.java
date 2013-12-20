@@ -1,5 +1,6 @@
 package si.chen.honours.project;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -100,22 +102,34 @@ public class RestaurantInfo extends ActionBarActivity {
 		
 		Log.d("DISTANCE_TO", Integer.toString(distance));
 	
-
 		
-		// Display distance in TextView
+		// Display distance information in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info);
 		distance_information.setText("Distance to destination: " + distance + "m");
 		
-
-
+		
+		System.out.println("RESTAURANT_URL: " + restaurant_url);
 		
 		
+		TextView restaurant_content_url = (TextView) findViewById(R.id.textView_restaurant_content_url);
+		// Display restaurant website url, if it exists
+		if (restaurant_url.equals("")) {
+			restaurant_content_url.setVisibility(View.INVISIBLE);
+		} else {
+			restaurant_content_url.setVisibility(View.VISIBLE);
+			restaurant_content_url.setText("Website (Click to view): " + restaurant_url);
+		}
 		
 		
-		
-		
-		
-		
+	}
+	
+	// Called when 'Search Web' button is clicked
+	public void searchRestaurantOnline(View view) {
+	
+		String query = restaurant_name + " " + services + ", Edinburgh"  ;
+		Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+		intent.putExtra(SearchManager.QUERY, query); // query contains search string
+		startActivity(intent);
 	}
 
 	@Override
