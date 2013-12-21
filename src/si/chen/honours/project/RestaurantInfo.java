@@ -1,7 +1,13 @@
 package si.chen.honours.project;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 import android.app.SearchManager;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -29,7 +36,7 @@ public class RestaurantInfo extends ActionBarActivity {
 	private double restaurant_latitude;
 	private double restaurant_longitude;
 	private String restaurant_url;
-	private LatLng restaurant_lat_lng;
+
 
 	private GPSListener gps;
 	private Location user_location;
@@ -37,6 +44,7 @@ public class RestaurantInfo extends ActionBarActivity {
 	private double user_latitude;
 	private double user_longitude;
 	private int distance;
+	private StringBuilder formatted_restaurant_address;
 	
 
 	
@@ -64,8 +72,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		}
 	
 		
-		
-		/** Get restaurant data passed from Restaurants.java class **/
+		// Get restaurant data passed from Restaurants.java class
 		Log.i("RetrieveData", "Retrieve selected restaurant data.");
         restaurantIntent = getIntent();
         restaurant_id = restaurantIntent.getIntExtra("KEY_ID", 0);
@@ -75,18 +82,68 @@ public class RestaurantInfo extends ActionBarActivity {
         restaurant_longitude = restaurantIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		restaurant_url = restaurantIntent.getStringExtra("KEY_CONTENT_URL");
 		
-		// Get restaurant lat, lng coordinates from intent
-		restaurant_lat_lng = new LatLng(restaurant_latitude, restaurant_longitude);
-				
-		// Display map fragment, with marker of restaurant location
-		restaurant_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.restaurant_map)).getMap();
-		Marker location = restaurant_map.addMarker(new MarkerOptions().position(restaurant_lat_lng).title(restaurant_name + " (" + services + ")"));
-		restaurant_map.moveCamera(CameraUpdateFactory.newLatLngZoom(location.getPosition(), 17));
-				
-		// Display current user's location
-		restaurant_map.setMyLocationEnabled(true);
 		
 		
+		
+		// Uses reverse Geocoding to obtain address of restaurant from the restaurant lat, lng coordinates
+		Geocoder geocoder = new Geocoder(getBaseContext(), Locale.ENGLISH);
+        try {
+            List<Address> addresses = geocoder.getFromLocation(restaurant_latitude, restaurant_longitude, 1);
+
+            if (addresses.size() > 0) {
+            	
+                Address restaurant_address = addresses.get(0);
+                formatted_restaurant_address = new StringBuilder("Address:\n");
+                
+                // Adds each address line to the string
+                for (int i = 0; i < restaurant_address.getMaxAddressLineIndex(); i++) {
+                    formatted_restaurant_address.append(restaurant_address.getAddressLine(i)).append("\n");
+                }
+                
+                //adrs.setText(strReturnedAddress.toString());
+            } else {
+            	System.out.println("NO ADDRESS FOUND");
+               // adrs.setText("No Address returned!");
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        }
+		
+		
+        TextView restaurant_address_info = (TextView) findViewById(R.id.textView_restaurant_address);
+        restaurant_address_info.setText(formatted_restaurant_address);
+        
+        
+        
+        
+        
+        
+		
+     	// Display map fragment, with marker of restaurant location given by lat, lng coordinates
+     	restaurant_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.restaurant_map)).getMap();
+     	LatLng restaurant_lat_lng = new LatLng(restaurant_latitude, restaurant_longitude);
+     	Marker location = restaurant_map.addMarker(new MarkerOptions()
+     				.position(restaurant_lat_lng).snippet(formatted_restaurant_address.toString())
+     				.title(restaurant_name + " (" + services + ")"));
+     	restaurant_map.moveCamera(CameraUpdateFactory.newLatLngZoom(location.getPosition(), 15));
+     				
+     	// Display current user's location
+     	restaurant_map.setMyLocationEnabled(true);
+     	
+     	
+     	
+     	
+
+
+     	
+     	
+     	
+        
+        
+        
+        
 		// Set lat, lng coordinates for restaurant location 
 		restaurant_location = new Location("restaurant_location");
 		restaurant_location.setLatitude(restaurant_latitude);

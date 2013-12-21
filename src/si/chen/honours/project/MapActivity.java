@@ -29,9 +29,13 @@ public class MapActivity extends ActionBarActivity {
 		// Open Google Maps 
 		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		
-		Marker edinburgh = map.addMarker(new MarkerOptions().position(EDINBURGH).title("Edinburgh"));
+		// Add marker
+		Marker edinburgh = map.addMarker(new MarkerOptions()
+				.position(EDINBURGH)
+				.title("Edinburgh"));
 		
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(edinburgh.getPosition(), 12));//(EDINBURGH, 12));
+		// Zoom in to location
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(edinburgh.getPosition(), 12));
 		
 		map.setMyLocationEnabled(true);
 	}

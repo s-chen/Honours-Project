@@ -63,4 +63,14 @@
 	    android:textStyle="bold"
 	    android:layout_alignParentBottom="true" />
 
+	<TextView
+	    android:id="@+id/textView_restaurant_address"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBottom="@+id/textView_distance_info"
+	    android:layout_alignLeft="@+id/restaurant_map"
+	    android:textSize="20sp"
+	    android:textStyle="bold"
+	    android:textColor="@color/White" />
+
 </RelativeLayout>
