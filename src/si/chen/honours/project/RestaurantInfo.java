@@ -37,7 +37,6 @@ public class RestaurantInfo extends ActionBarActivity {
 	private double restaurant_longitude;
 	private String restaurant_url;
 
-
 	private GPSListener gps;
 	private Location user_location;
 	private Location restaurant_location;
@@ -72,6 +71,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		}
 	
 		
+		
 		// Get restaurant data passed from Restaurants.java class
 		Log.i("RetrieveData", "Retrieve selected restaurant data.");
         restaurantIntent = getIntent();
@@ -84,12 +84,32 @@ public class RestaurantInfo extends ActionBarActivity {
 		
 		
 		
+		// Set lat, lng coordinates for restaurant location 
+		restaurant_location = new Location("restaurant_location");
+		restaurant_location.setLatitude(restaurant_latitude);
+		restaurant_location.setLongitude(restaurant_longitude);
 		
+		// Set lat, lng coordinates for user location 
+		user_location = new Location("user_location");
+		user_location.setLatitude(user_latitude);
+		user_location.setLongitude(user_longitude);
+		
+		// Calculate distance from user's current location to restaurant
+		distance = (int) user_location.distanceTo(restaurant_location);
+		
+		// Display distance information in TextView
+		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info);
+		distance_information.setText("Distance to destination: " + distance + "m");
+		
+		
+	
+		 
 		// Uses reverse Geocoding to obtain address of restaurant from the restaurant lat, lng coordinates
 		Geocoder geocoder = new Geocoder(getBaseContext(), Locale.ENGLISH);
         try {
+        	
             List<Address> addresses = geocoder.getFromLocation(restaurant_latitude, restaurant_longitude, 1);
-
+            
             if (addresses.size() > 0) {
             	
                 Address restaurant_address = addresses.get(0);
@@ -99,24 +119,26 @@ public class RestaurantInfo extends ActionBarActivity {
                 for (int i = 0; i < restaurant_address.getMaxAddressLineIndex(); i++) {
                     formatted_restaurant_address.append(restaurant_address.getAddressLine(i)).append("\n");
                 }
-                
-                //adrs.setText(strReturnedAddress.toString());
+                          
             } else {
-            	System.out.println("NO ADDRESS FOUND");
-               // adrs.setText("No Address returned!");
+            	Log.d("NO_RESTAURANT_ADDRESS", "No restaurant address found");
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-
         }
-		
-		
-        TextView restaurant_address_info = (TextView) findViewById(R.id.textView_restaurant_address);
-        restaurant_address_info.setText(formatted_restaurant_address);
         
+        TextView restaurant_address_website_info = (TextView) findViewById(R.id.textView_restaurant_address_website_info);
+        // Display restaurant address in TextView
+    	restaurant_address_website_info.setText(formatted_restaurant_address);
         
-        
+		// Also display restaurant website url in TextView, if it exists.
+		if (restaurant_url.equals("")) {
+			// Do nothing
+			Log.d("NO_RESTAURANT_URL", "Restaurant url does not exist");
+		} else {
+			StringBuilder restaurant_address_and_url = formatted_restaurant_address.append("\n").append("Website:").append("\n").append(restaurant_url);
+			restaurant_address_website_info.setText(restaurant_address_and_url);
+		}
         
         
         
@@ -132,51 +154,6 @@ public class RestaurantInfo extends ActionBarActivity {
      	// Display current user's location
      	restaurant_map.setMyLocationEnabled(true);
      	
-     	
-     	
-     	
-
-
-     	
-     	
-     	
-        
-        
-        
-        
-		// Set lat, lng coordinates for restaurant location 
-		restaurant_location = new Location("restaurant_location");
-		restaurant_location.setLatitude(restaurant_latitude);
-		restaurant_location.setLongitude(restaurant_longitude);
-		
-		// Set lat, lng coordinates for user location 
-		user_location = new Location("user_location");
-		user_location.setLatitude(user_latitude);
-		user_location.setLongitude(user_longitude);
-		
-		// Calculate distance from user's current location to restaurant
-		distance = (int) user_location.distanceTo(restaurant_location);
-		
-		Log.d("DISTANCE_TO", Integer.toString(distance));
-	
-		
-		// Display distance information in TextView
-		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info);
-		distance_information.setText("Distance to destination: " + distance + "m");
-		
-		
-		System.out.println("RESTAURANT_URL: " + restaurant_url);
-		
-		
-		TextView restaurant_content_url = (TextView) findViewById(R.id.textView_restaurant_content_url);
-		// Display restaurant website url, if it exists
-		if (restaurant_url.equals("")) {
-			restaurant_content_url.setVisibility(View.INVISIBLE);
-		} else {
-			restaurant_content_url.setVisibility(View.VISIBLE);
-			restaurant_content_url.setText("Website (Click to view): " + restaurant_url);
-		}
-		
 		
 	}
 	

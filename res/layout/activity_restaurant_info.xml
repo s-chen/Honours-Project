@@ -22,24 +22,11 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignLeft="@+id/restaurant_map"
-	    android:layout_alignParentBottom="true"
 	    android:layout_below="@+id/restaurant_map"
 	    android:textColor="@color/White"
 	    android:textSize="20sp"
 	    android:textStyle="bold" />
-	
-	<TextView
-	    android:id="@+id/textView_restaurant_content_url"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/button_search_restaurant_info_online"
-	    android:layout_alignLeft="@+id/restaurant_map"
-	    android:textSize="20sp"
-	    android:textStyle="bold"
-	    android:autoLink="web" 
-	    android:textColor="@color/White"
-	    android:textColorLink="@color/White" />
-	
+		
 	<Button
 	    android:id="@+id/button_add_to_favourites"
 	    android:layout_width="wrap_content"
@@ -64,13 +51,15 @@
 	    android:layout_alignParentBottom="true" />
 
 	<TextView
-	    android:id="@+id/textView_restaurant_address"
+	    android:id="@+id/textView_restaurant_address_website_info"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignBottom="@+id/textView_distance_info"
+	    android:layout_below="@+id/textView_distance_info"
 	    android:layout_alignLeft="@+id/restaurant_map"
 	    android:textSize="20sp"
 	    android:textStyle="bold"
+	    android:autoLink="web" 
+	    android:textColorLink="@color/White"
 	    android:textColor="@color/White" />
 
 </RelativeLayout>
