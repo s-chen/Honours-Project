@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -45,7 +47,7 @@ public class GPSListener extends Service implements LocationListener {
     
     // Get user's current location
     public Location getLocation() {
-    	
+
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
 
@@ -127,16 +129,15 @@ public class GPSListener extends Service implements LocationListener {
     }
    
     
-    /** Function to check GPS/wifi enabled **/
+    /** Function to check GPS/Location Services enabled **/
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
    
     
     
-    /** Function shows settings alert dialog
-     	Toggle Settings Options **/
-    public void showSettingsAlert() {
+    /** Function shows settings alert dialog **/
+    public void showGPSSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
         
         // Setting Dialog Title
@@ -165,6 +166,8 @@ public class GPSListener extends Service implements LocationListener {
     }
   
 
+
+    
     // Update user location (called automatically)
     public void onLocationChanged(Location location) {
     	
