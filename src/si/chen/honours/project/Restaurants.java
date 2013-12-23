@@ -120,6 +120,7 @@ public class Restaurants extends ActionBarActivity {
             Intent intent = new Intent(this, MainMenu.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
 			return true;
 		default:
 		      return super.onOptionsItemSelected(item);

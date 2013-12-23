@@ -135,8 +135,21 @@ public class GPSListener extends Service implements LocationListener {
     }
    
     
+    // Check whether Wifi/Mobile Network is available
+    public boolean isConnectionAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting()) {
+        	Log.d("INTERNET_CONNECTION_AVAILABLE", "Internet connection available");
+        	return true;
+        }
+        Log.d("INTERNET_CONNECTION_UNAVAILABLE", "No internet connection available");
+        return false;
+    }
     
-    /** Function shows settings alert dialog **/
+    
+    /** Function shows GPS settings alert dialog **/
     public void showGPSSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
         
@@ -144,7 +157,9 @@ public class GPSListener extends Service implements LocationListener {
         alertDialog.setTitle("GPS settings");
 
         // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+        alertDialog.setMessage("GPS is not enabled."
+        		+ " The application will not be able to provide location-based information."
+        		+ "\nDo you want to go to settings menu to enable GPS/Location Services?");
 
         // Pressing 'Settings' button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
@@ -164,16 +179,45 @@ public class GPSListener extends Service implements LocationListener {
         // Showing Alert Message
         alertDialog.show();
     }
+    
+    
+    /** Function shows Internet Connection settings alert dialog **/
+    public void showInternetSettingsAlert() {
+    	AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+    
+    	// Setting Dialog Title
+    	alertDialog.setTitle("Internet Connection Settings");
+
+    	// Setting Dialog Message
+    	alertDialog.setMessage("Wifi or Network connection not enabled."
+    			+ " The application will not be able to provide location-based information." 
+    			+ "\nDo you want to go to Settings menu to enable Wifi/Mobile Network?");
+
+    	// Pressing 'Settings' button
+    	alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int which) {
+    			Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+    			mContext.startActivity(intent);
+    		}
+    	});
+
+    	// Pressing 'Cancel' button
+    	alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int which) {
+    			dialog.cancel();
+    		}
+    	});
+
+    	// Showing Alert Message
+    	alertDialog.show();
+    }
   
 
 
     
     // Update user location (called automatically)
     public void onLocationChanged(Location location) {
-    	
     	Log.d("LOCATION_UPDATE", "User location updated");
-    	getLocation();
-    	
     }
 
     public void onProviderDisabled(String provider) {
@@ -189,5 +233,5 @@ public class GPSListener extends Service implements LocationListener {
     public IBinder onBind(Intent arg0) {
         return null;
     }
-
+    
 }

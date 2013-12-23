@@ -102,7 +102,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		
 		// Display distance information in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info);
-		if (isConnectionAvailable()) {
+		if (gps.isConnectionAvailable() && gps.canGetLocation) {
 			distance_information.setText("Distance to destination: " + distance + "m");
 		} else {
 			distance_information.setText("Distance information not available");
@@ -110,7 +110,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		
 		
 	
-		if (isConnectionAvailable()) {
+		if (gps.isConnectionAvailable() && gps.canGetLocation) {
 			// Uses reverse Geocoding to obtain address of restaurant from the restaurant lat, lng coordinates
 			Geocoder geocoder = new Geocoder(getBaseContext(), Locale.ENGLISH);
 			try {
@@ -134,7 +134,7 @@ public class RestaurantInfo extends ActionBarActivity {
 				e.printStackTrace();
 			}
 		} else {
-			formatted_restaurant_address = new StringBuilder("No address available");
+			formatted_restaurant_address = new StringBuilder("Address information not available\n");
 		}
         
         TextView restaurant_address_website_info = (TextView) findViewById(R.id.textView_restaurant_address_website_info);
@@ -194,6 +194,7 @@ public class RestaurantInfo extends ActionBarActivity {
 	            Intent intent = new Intent(this, Restaurants.class);
 	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	            startActivity(intent);
+	            finish();
 				return true;
 			case R.id.action_refresh:
 				refresh();
@@ -205,6 +206,8 @@ public class RestaurantInfo extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
+    	
+    	gps.stopUsingGPS();
     	
     	Intent intent = new Intent(this, Restaurants.class);
     	startActivity(intent);
@@ -224,9 +227,13 @@ public class RestaurantInfo extends ActionBarActivity {
     }
     
     @Override
-    public void onResume() {
-    	super.onResume();
-    	gps.getLocation();
+    public void onRestart() {
+    	super.onRestart();
+    	
+    	// Show GPS settings menu, if not detected
+    	if (!gps.canGetLocation) {
+    		gps.showGPSSettingsAlert();
+    	}
     }
     
     // Refresh activity - called when 'Refresh' action button clicked
@@ -239,19 +246,5 @@ public class RestaurantInfo extends ActionBarActivity {
 
    	    overridePendingTransition(0, 0);
    	    startActivity(intent);
-    }
-    
-    // Check whether Wifi/Mobile Network is available
-    public boolean isConnectionAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        
-        if (activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting()) {
-        	Log.d("INTERNET_CONNECTION_AVAILABLE", "Internet connection available");
-        	return true;
-        }
-        Log.d("INTERNET_CONNECTION_UNAVAILABLE", "No internet connection available");
-        return false;
-    }
-    
+    }    
 }

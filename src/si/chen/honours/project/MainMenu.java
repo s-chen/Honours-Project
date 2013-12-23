@@ -24,10 +24,14 @@ import android.widget.Toast;
 
 
 
+
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class MainMenu extends ActionBarActivity {
+	
+	private GPSListener gps;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,11 +49,13 @@ public class MainMenu extends ActionBarActivity {
 		}
 		
 		
-		// Show Internet Connection Settings if no Wifi/Mobile network detected
-		if (!isConnectionAvailable()) {
-			showInternetSettingsAlert();
-		}
+		// Create instance of GPSListener
+		gps = new GPSListener(this);
 		
+		// Show Internet Connection Settings if no Wifi/Mobile network detected
+		if (!gps.isConnectionAvailable()) {
+			gps.showInternetSettingsAlert();
+		}
 		
     }
 
@@ -93,7 +99,27 @@ public class MainMenu extends ActionBarActivity {
     		dialog.show();
     	} 
     	Log.d("GooglePlayVersionCheck", "resultCode: " + resultCode);
+    	
     }
+    
+    @Override
+    public void onRestart() {
+    	super.onRestart();
+    	
+    	// Show Internet Connection Settings if no Wifi/Mobile network detected
+    	if (!gps.isConnectionAvailable()) {
+    		gps.showInternetSettingsAlert();
+    	}
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	finish();
+    	Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+    	homeIntent.addCategory(Intent.CATEGORY_HOME);
+    	startActivity(homeIntent);
+    }
+    
     
     // Called when 'Food' button is clicked
     public void restaurants(View view) {
@@ -102,52 +128,6 @@ public class MainMenu extends ActionBarActivity {
     	startActivity(intent);
     	finish();
     } 
-    
-    
-    // Check whether Wifi/Mobile Network is available
-    public boolean isConnectionAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        
-        if (activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting()) {
-        	Log.d("INTERNET_CONNECTION_AVAILABLE", "Internet connection available");
-        	return true;
-        }
-        Log.d("INTERNET_CONNECTION_UNAVAILABLE", "No internet connection available");
-        return false;
-    }
-    
-    
-    /** Function shows settings alert dialog **/
-    public void showInternetSettingsAlert() {
-    	AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-    
-    	// Setting Dialog Title
-    	alertDialog.setTitle("Internet Connection Settings");
-
-    	// Setting Dialog Message
-    	alertDialog.setMessage("Wifi or Network connection not currently enabled."
-    			+ "\nThe application will not be able to provide location-based information." 
-    			+ "\nDo you want to go to Settings menu to switch on Wifi/Mobile Network?");
-
-    	// Pressing 'Settings' button
-    	alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-    		public void onClick(DialogInterface dialog, int which) {
-    			Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-    			startActivity(intent);
-    		}
-    	});
-
-    	// Pressing 'Cancel' button
-    	alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-    		public void onClick(DialogInterface dialog, int which) {
-    			dialog.cancel();
-    		}
-    	});
-
-    	// Showing Alert Message
-    	alertDialog.show();
-    }
-    
+       
 }
 
