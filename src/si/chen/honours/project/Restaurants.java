@@ -35,7 +35,7 @@ public class Restaurants extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_restaurants);
 				
-		setTitle("Restaurants and Takeaways");
+		setTitle("Food");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		

@@ -18,7 +18,9 @@
     <string name="title_activity_gpslistener">GPSListener</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_refresh">Refresh</string>
-    <string name="button_search_restaurant_info_online">Search Web</string>
+    <string name="button_search_info_online">Search Web</string>
     <string name="button_add_to_favourites">Add To Favourites</string>
+    <string name="title_activity_drinks">Drinks</string>
+    <string name="title_activity_drinks_info">DrinksInfo</string>
 
 </resources>

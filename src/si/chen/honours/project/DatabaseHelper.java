@@ -155,6 +155,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return restaurantList;	
 	}
 	
+	
+	// Get a List of drinks data from the result of a SQL query
+	public List<PointOfInterest> getDrinksData() {
+		
+		List<PointOfInterest> drinksList = new ArrayList<PointOfInterest>(); 
+		
+		// Retrieve all bar/cafe/pub/nightclub type services
+		String sqlQuery = "SELECT * FROM edinburgh "
+				+ "WHERE services = 'bar' OR services = 'cafe' OR services = 'pub' OR services = 'nightclub'";
+		
+		// Open database for querying
+		try {
+			openDatabase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Cursor cursor = mDB.rawQuery(sqlQuery, null);
+		
+		// Loop through all rows and add to list
+		if (cursor.moveToFirst()) {
+				do {
+					PointOfInterest poi = new PointOfInterest();
+					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setName(cursor.getString(1));
+					poi.setServices(cursor.getString(2));
+					poi.setLatitude(cursor.getFloat(3));
+					poi.setLongitude(cursor.getFloat(4));
+					poi.setContentURL(cursor.getString(5));
+				
+					// Add restaurant data to list
+					drinksList.add(poi);
+					
+				} while (cursor.moveToNext());
+		}
+		
+		return drinksList;	
+	}
+	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 	

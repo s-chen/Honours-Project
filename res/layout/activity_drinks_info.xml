@@ -6,60 +6,62 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RestaurantInfo" 
+    tools:context=".DrinksInfo"
     android:background="@drawable/background_colour" >
 
-    <fragment
-	    android:id="@+id/restaurant_map"
+  	<fragment
+	    android:id="@+id/drinks_map"
 	    android:layout_width="match_parent"
 	    android:layout_height="250dp"
 	    android:layout_alignParentTop="true"
 	    android:layout_centerHorizontal="true"
 	    class="com.google.android.gms.maps.SupportMapFragment" />
-    
-	<TextView
-	    android:id="@+id/textView_distance_info_restaurant"
+  	
+  	<TextView
+	    android:id="@+id/textView_distance_info_drinks"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/restaurant_map"
-	    android:layout_below="@+id/restaurant_map"
+	    android:layout_alignLeft="@+id/drinks_map"
+	    android:layout_below="@+id/drinks_map"
 	    android:textColor="@color/White"
 	    android:textSize="20sp"
 	    android:textStyle="bold" />
-		
-	<Button
-	    android:id="@+id/button_add_to_favourites_restaurant"
+
+  	<Button
+	    android:id="@+id/button_add_to_favourites_drinks"
 	    android:layout_width="wrap_content"
 	    android:layout_height="55dp"
-	    android:layout_alignBottom="@+id/button_search_restaurant_info_online"
-	    android:layout_alignRight="@+id/restaurant_map"
+	    android:layout_alignBottom="@+id/button_search_drinks_info_online"
+	    android:layout_alignRight="@+id/drinks_map"
 	    android:text="@string/button_add_to_favourites"
+	    android:textColor="@color/Black"
 	    android:background="@drawable/custom_button"
 	    android:textStyle="bold"
 	    android:layout_alignParentBottom="true" />
-
-	<Button
-	    android:id="@+id/button_search_restaurant_info_online"
+  	
+  	<Button
+	    android:id="@+id/button_search_drinks_info_online"
 	    android:layout_width="wrap_content"
 	    android:layout_height="55dp"
-	    android:layout_alignBottom="@+id/textView_distance_info_restaurant"
-	    android:layout_alignLeft="@+id/textView_distance_info_restaurant"
+	    android:layout_alignBottom="@+id/textView_distance_info_drinks"
+	    android:layout_alignLeft="@+id/textView_distance_info_drinks"
 	    android:background="@drawable/custom_button"
-	    android:onClick="searchRestaurantOnline"
+	    android:onClick="searchDrinksOnline"
 	    android:text="@string/button_search_info_online"
+	    android:textColor="@color/Black"
 	    android:textStyle="bold"
 	    android:layout_alignParentBottom="true" />
-
-	<TextView
-	    android:id="@+id/textView_restaurant_address_website_info"
+  	
+  	<TextView
+	    android:id="@+id/textView_drinks_address_website_info"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/textView_distance_info_restaurant"
-	    android:layout_alignLeft="@+id/restaurant_map"
+	    android:layout_below="@+id/textView_distance_info_drinks"
+	    android:layout_alignLeft="@+id/drinks_map"
 	    android:textSize="20sp"
 	    android:textStyle="bold"
 	    android:autoLink="web" 
 	    android:textColorLink="@color/White"
 	    android:textColor="@color/White" />
-
+  	
 </RelativeLayout>

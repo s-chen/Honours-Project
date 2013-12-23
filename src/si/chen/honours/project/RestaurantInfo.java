@@ -59,7 +59,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		
 		
 		// Get restaurant data passed from Restaurants.java class
-		Log.i("RetrieveData", "Retrieve selected restaurant data.");
+		Log.i("RETRIEVE_DATA", "Retrieve selected restaurant data.");
 		restaurantIntent = getIntent();
 		restaurant_id = restaurantIntent.getIntExtra("KEY_ID", 0);
         restaurant_name = restaurantIntent.getStringExtra("KEY_NAME");
@@ -101,7 +101,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		distance = (int) user_location.distanceTo(restaurant_location);
 		
 		// Display distance information in TextView
-		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info);
+		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_restaurant);
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
 			distance_information.setText("Distance to destination: " + distance + "m");
 		} else {

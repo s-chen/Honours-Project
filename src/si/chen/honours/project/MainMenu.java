@@ -128,6 +128,14 @@ public class MainMenu extends ActionBarActivity {
     	startActivity(intent);
     	finish();
     } 
+    
+    // Called when 'Drinks' button is clicked
+    public void drinks(View view) {
+    
+    	Intent intent = new Intent(this, Drinks.class);
+    	startActivity(intent);
+    	finish();
+    }
        
 }
 

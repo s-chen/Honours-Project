@@ -218,6 +218,7 @@ public class GPSListener extends Service implements LocationListener {
     // Update user location (called automatically)
     public void onLocationChanged(Location location) {
     	Log.d("LOCATION_UPDATE", "User location updated");
+    	//getLocation();
     }
 
     public void onProviderDisabled(String provider) {
