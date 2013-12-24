@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".AccommodationInfo"
+    android:background="@drawable/background_colour" >
+
+  	<fragment
+	    android:id="@+id/accommodation_map"
+	    android:layout_width="match_parent"
+	    android:layout_height="250dp"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    class="com.google.android.gms.maps.SupportMapFragment" />
+  	
+  	<TextView
+	    android:id="@+id/textView_distance_info_accommodation"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/accommodation_map"
+	    android:layout_below="@+id/accommodation_map"
+	    android:textColor="@color/White"
+	    android:textSize="20sp"
+	    android:textStyle="bold" />
+  	
+   	<Button
+	    android:id="@+id/button_add_to_favourites_accommodation"
+	    android:layout_width="wrap_content"
+	    android:layout_height="55dp"
+	    android:layout_alignBottom="@+id/button_search_accommodation_info_online"
+	    android:layout_alignRight="@+id/accommodation_map"
+	    android:text="@string/button_add_to_favourites"
+	    android:textColor="@color/Black"
+	    android:background="@drawable/custom_button"
+	    android:textStyle="bold"
+	    android:layout_alignParentBottom="true" />
+
+   	 <Button
+	    android:id="@+id/button_search_accommodation_info_online"
+	    android:layout_width="wrap_content"
+	    android:layout_height="55dp"
+	    android:layout_alignBottom="@+id/textView_distance_info_accommodation"
+	    android:layout_alignLeft="@+id/textView_distance_info_accommodation"
+	    android:background="@drawable/custom_button"
+	    android:onClick="searchAccommodationOnline"
+	    android:text="@string/button_search_info_online"
+	    android:textColor="@color/Black"
+	    android:textStyle="bold"
+	    android:layout_alignParentBottom="true" />
+   	
+	 <TextView
+	    android:id="@+id/textView_accommodation_address_website_info"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/textView_distance_info_accommodation"
+	    android:layout_alignLeft="@+id/accommodation_map"
+	    android:textSize="20sp"
+	    android:textStyle="bold"
+	    android:autoLink="web" 
+	    android:textColorLink="@color/White"
+	    android:textColor="@color/White" />
+
+</RelativeLayout>

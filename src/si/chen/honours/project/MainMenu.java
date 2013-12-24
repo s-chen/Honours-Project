@@ -136,6 +136,21 @@ public class MainMenu extends ActionBarActivity {
     	startActivity(intent);
     	finish();
     }
-       
+      
+    // Called when 'Tourist Attractions' button is clicked
+    public void touristAttractions(View view) {
+    	
+    	Intent intent = new Intent(this, Attractions.class);
+    	startActivity(intent);
+    	finish();
+    }
+    
+    // Called when 'Accommodation' button is clicked
+    public void accommodation(View view) {
+    	
+    	Intent intent = new Intent(this, Accommodation.class);
+    	startActivity(intent);
+    	finish();
+    }
 }
 

@@ -194,6 +194,89 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return drinksList;	
 	}
 	
+	
+	// Get a List of attractions data from the result of a SQL query
+	public List<PointOfInterest> getAttractionsData() {
+		
+		List<PointOfInterest> attractionsList = new ArrayList<PointOfInterest>(); 
+		
+		// Retrieve all tourist attraction types
+		String sqlQuery = "SELECT * FROM edinburgh "
+				+ "WHERE services = 'archaeological_site' OR services = 'artwork' OR services = 'attraction' "
+				+ "OR services = 'battlefield' OR services = 'camp_site' OR services = 'cannon' OR services = 'caravan_site' "
+				+ "OR services = 'castle' OR services = 'gallery' OR services = 'garden' OR services = 'golf_course' "
+				+ "OR services = 'hill' OR services = 'information' OR services = 'memorial' OR services = 'monument' "
+				+ "OR services = 'museum' OR services = 'nature_reserve' OR services = 'park' OR services = 'ruins' "
+				+ "OR services = 'theatre' OR services = 'viewpoint' OR services = 'zoo'";
+		
+		// Open database for querying
+		try {
+			openDatabase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Cursor cursor = mDB.rawQuery(sqlQuery, null);
+		
+		// Loop through all rows and add to list
+		if (cursor.moveToFirst()) {
+				do {
+					PointOfInterest poi = new PointOfInterest();
+					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setName(cursor.getString(1));
+					poi.setServices(cursor.getString(2));
+					poi.setLatitude(cursor.getFloat(3));
+					poi.setLongitude(cursor.getFloat(4));
+					poi.setContentURL(cursor.getString(5));
+				
+					// Add attractions data to list
+					attractionsList.add(poi);
+					
+				} while (cursor.moveToNext());
+		}
+		
+		return attractionsList;	
+	}
+	
+	
+	// Get a List of accommmodation data from the result of a SQL query
+	public List<PointOfInterest> getAccommodationData() {
+			
+		List<PointOfInterest> accommodationList = new ArrayList<PointOfInterest>(); 
+			
+		// Retrieve all accommodation types
+		String sqlQuery = "SELECT * FROM edinburgh "
+				+ "WHERE services = 'guest_house' OR services = 'hostel' OR services = 'hotel'";
+			
+		// Open database for querying
+		try {
+			openDatabase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		Cursor cursor = mDB.rawQuery(sqlQuery, null);
+			
+		// Loop through all rows and add to list
+		if (cursor.moveToFirst()) {
+				do {
+					PointOfInterest poi = new PointOfInterest();
+					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setName(cursor.getString(1));
+					poi.setServices(cursor.getString(2));
+					poi.setLatitude(cursor.getFloat(3));
+					poi.setLongitude(cursor.getFloat(4));
+					poi.setContentURL(cursor.getString(5));
+					
+					// Add attractions data to list
+					accommodationList.add(poi);
+						
+				} while (cursor.moveToNext());
+		}
+			
+		return accommodationList;	
+	}
+	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 	

@@ -22,5 +22,10 @@
     <string name="button_add_to_favourites">Add To Favourites</string>
     <string name="title_activity_drinks">Drinks</string>
     <string name="title_activity_drinks_info">DrinksInfo</string>
+    <string name="title_activity_attractions">Attractions</string>
+    <string name="title_activity_attractions_info">AttractionsInfo</string>
+    <string name="button_accommodation">Accommodation</string>
+    <string name="title_activity_accommodation">Accommodation</string>
+    <string name="title_activity_accommodation_info">AccommodationInfo</string>
 
 </resources>

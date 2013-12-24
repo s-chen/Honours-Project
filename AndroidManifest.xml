@@ -87,6 +87,26 @@
             android:label="@string/title_activity_drinks_info"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.Attractions"
+            android:label="@string/title_activity_attractions"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.AttractionsInfo"
+            android:label="@string/title_activity_attractions_info"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.Accommodation"
+            android:label="@string/title_activity_accommodation"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.AccommodationInfo"
+            android:label="@string/title_activity_accommodation_info"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
     </application>
 
 </manifest>

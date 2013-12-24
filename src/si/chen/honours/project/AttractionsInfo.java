@@ -25,45 +25,45 @@ import android.view.View;
 import android.widget.TextView;
 
 
-/** Details of the particular drinks service - called when the service name is selected in the ListView **/
-public class DrinksInfo extends ActionBarActivity {
+/** Details of the particular attraction - called when the name is selected in the ListView **/
+public class AttractionsInfo extends ActionBarActivity {
 
-	private GoogleMap drinks_map;
-	private Intent drinksIntent;
-	private int drinks_id;
-	private String drinks_name;
+	private GoogleMap attractions_map;
+	private Intent attractionsIntent;
+	private int attractions_id;
+	private String attractions_name;
 	private String services;
-	private double drinks_latitude;
-	private double drinks_longitude;
-	private String drinks_url;
+	private double attractions_latitude;
+	private double attractions_longitude;
+	private String attractions_url;
 
 	private GPSListener gps;
 	private Location user_location;
-	private Location drinks_location;
+	private Location attractions_location;
 	private double user_latitude;
 	private double user_longitude;
 	private int distance;
-	private StringBuilder formatted_drinks_address;
+	private StringBuilder formatted_attractions_address;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_drinks_info);
+		setContentView(R.layout.activity_attractions_info);
 		
 		setTitle("View information");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		
-		// Get drinks data passed from Drinks.java class
-		Log.i("RETRIEVE_DATA", "Retrieve selected drinks data.");
-		drinksIntent = getIntent();
-		drinks_id = drinksIntent.getIntExtra("KEY_ID", 0);
-		drinks_name = drinksIntent.getStringExtra("KEY_NAME");
-		services = drinksIntent.getStringExtra("KEY_SERVICES");
-		drinks_latitude = drinksIntent.getDoubleExtra("KEY_LATITUDE", 0);
-        drinks_longitude = drinksIntent.getDoubleExtra("KEY_LONGITUDE", 0);
-		drinks_url = drinksIntent.getStringExtra("KEY_CONTENT_URL");
+		// Get attractions data passed from Attractions.java class
+		Log.i("RETRIEVE_DATA", "Retrieve selected attractions data.");
+		attractionsIntent = getIntent();
+		attractions_id = attractionsIntent.getIntExtra("KEY_ID", 0);
+		attractions_name = attractionsIntent.getStringExtra("KEY_NAME");
+		services = attractionsIntent.getStringExtra("KEY_SERVICES");
+		attractions_latitude = attractionsIntent.getDoubleExtra("KEY_LATITUDE", 0);
+        attractions_longitude = attractionsIntent.getDoubleExtra("KEY_LONGITUDE", 0);
+		attractions_url = attractionsIntent.getStringExtra("KEY_CONTENT_URL");
 		
 		
 
@@ -83,21 +83,21 @@ public class DrinksInfo extends ActionBarActivity {
 		}
 		
 		
-		// Set lat, lng coordinates for drinks location 
-		drinks_location = new Location("drinks_location");
-		drinks_location.setLatitude(drinks_latitude);
-		drinks_location.setLongitude(drinks_longitude);
+		// Set lat, lng coordinates for attractions location 
+		attractions_location = new Location("attractions_location");
+		attractions_location.setLatitude(attractions_latitude);
+		attractions_location.setLongitude(attractions_longitude);
 				
 		// Set lat, lng coordinates for user location 
 		user_location = new Location("user_location");
 		user_location.setLatitude(user_latitude);
 		user_location.setLongitude(user_longitude);
 				
-		// Calculate distance from user's current location to bar/pub/cafe/club
-		distance = (int) user_location.distanceTo(drinks_location);
+		// Calculate distance from user's current location to attraction
+		distance = (int) user_location.distanceTo(attractions_location);
 		
 		// Display distance information in TextView
-		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_drinks);
+		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_attractions);
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
 			distance_information.setText("Distance to destination: " + distance + "m");
 		} else {
@@ -105,64 +105,64 @@ public class DrinksInfo extends ActionBarActivity {
 		}
 		
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
-			// Uses reverse Geocoding to obtain address of drinks service from the drinks lat, lng coordinates
+			// Uses reverse Geocoding to obtain address of attraction from the lat, lng coordinates
 			Geocoder geocoder = new Geocoder(getBaseContext(), Locale.ENGLISH);
 			try {
         	
-				List<Address> addresses = geocoder.getFromLocation(drinks_latitude, drinks_longitude, 1);
+				List<Address> addresses = geocoder.getFromLocation(attractions_latitude, attractions_longitude, 1);
             
 				if (addresses.size() > 0) {
             	
-					Address drinks_address = addresses.get(0);
-					formatted_drinks_address = new StringBuilder("Address:\n");
+					Address attractions_address = addresses.get(0);
+					formatted_attractions_address = new StringBuilder("Address:\n");
                 
 					// Adds each address line to the string
-					for (int i = 0; i < drinks_address.getMaxAddressLineIndex(); i++) {
-						formatted_drinks_address.append(drinks_address.getAddressLine(i)).append("\n");
+					for (int i = 0; i < attractions_address.getMaxAddressLineIndex(); i++) {
+						formatted_attractions_address.append(attractions_address.getAddressLine(i)).append("\n");
 					}
                           
 				} else {
-					Log.d("NO_DRINKS_ADDRESS", "No drinks service address found");
+					Log.d("NO_ATTRACTIONS_ADDRESS", "No attractions address found");
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
-			formatted_drinks_address = new StringBuilder("Address information not available\n");
+			formatted_attractions_address = new StringBuilder("Address information not available\n");
 		}
 		
-		TextView drinks_address_website_info = (TextView) findViewById(R.id.textView_drinks_address_website_info);
-        // Display drinks service address in TextView
-    	drinks_address_website_info.setText(formatted_drinks_address);
+		TextView attractions_address_website_info = (TextView) findViewById(R.id.textView_attractions_address_website_info);
+        // Display attractions address in TextView
+    	attractions_address_website_info.setText(formatted_attractions_address);
         
-		// Also display drinks service website url in TextView, if it exists.
-		if (drinks_url.equals("")) {
+		// Also display attractions website url in TextView, if it exists.
+		if (attractions_url.equals("")) {
 			// Do nothing
-			Log.d("NO_DRINKS_URL", "Drinks service url does not exist");
+			Log.d("NO_ATTRACTIONS_URL", "Attractions url does not exist");
 		} else {
-			StringBuilder drinks_address_and_url = formatted_drinks_address.append("\n").append("Website:").append("\n").append(drinks_url);
-			drinks_address_website_info.setText(drinks_address_and_url);
+			StringBuilder attractions_address_and_url = formatted_attractions_address.append("\n").append("Website:").append("\n").append(attractions_url);
+			attractions_address_website_info.setText(attractions_address_and_url);
 		}
 		
 		
 		
-		// Display map fragment, with marker of drinks service location given by lat, lng coordinates
-     	drinks_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.drinks_map)).getMap();
-     	LatLng drinks_lat_lng = new LatLng(drinks_latitude, drinks_longitude);
-     	Marker location = drinks_map.addMarker(new MarkerOptions()
-     				.position(drinks_lat_lng).snippet(formatted_drinks_address.toString())
-     				.title(drinks_name + " (" + services + ")"));
-     	drinks_map.moveCamera(CameraUpdateFactory.newLatLngZoom(location.getPosition(), 15));
+		// Display map fragment, with marker of attractions location given by lat, lng coordinates
+     	attractions_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.attractions_map)).getMap();
+     	LatLng attractions_lat_lng = new LatLng(attractions_latitude, attractions_longitude);
+     	Marker location = attractions_map.addMarker(new MarkerOptions()
+     				.position(attractions_lat_lng).snippet(formatted_attractions_address.toString())
+     				.title(attractions_name + " (" + services + ")"));
+     	attractions_map.moveCamera(CameraUpdateFactory.newLatLngZoom(location.getPosition(), 15));
      				
      	// Display current user's location
-     	drinks_map.setMyLocationEnabled(true);
+     	attractions_map.setMyLocationEnabled(true);
 		
 	}
 	
 	// Called when 'Search Web' button is clicked
-	public void searchDrinksOnline(View view) {
+	public void searchAttractionsOnline(View view) {
 		
-		String query = drinks_name + " " + services + ", Edinburgh"  ;
+		String query = attractions_name + " " + services + ", Edinburgh"  ;
 		Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
 		intent.putExtra(SearchManager.QUERY, query); // query contains search string
 		startActivity(intent);
@@ -171,7 +171,7 @@ public class DrinksInfo extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.drinks_info, menu);
+		getMenuInflater().inflate(R.menu.attractions_info, menu);
 		return true;
 	}
 	
@@ -181,7 +181,7 @@ public class DrinksInfo extends ActionBarActivity {
 		switch(item.getItemId()) {
 			case android.R.id.home:
 				 // Go to previous screen when app icon in action bar is clicked
-	            Intent intent = new Intent(this, Drinks.class);
+	            Intent intent = new Intent(this, Attractions.class);
 	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	            startActivity(intent);
 	            finish();
@@ -199,7 +199,7 @@ public class DrinksInfo extends ActionBarActivity {
     	
     	gps.stopUsingGPS();
     	
-    	Intent intent = new Intent(this, Drinks.class);
+    	Intent intent = new Intent(this, Attractions.class);
     	startActivity(intent);
     	finish();
     }
