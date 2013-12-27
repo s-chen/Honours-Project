@@ -99,9 +99,9 @@ public class DrinksInfo extends ActionBarActivity {
 		// Display distance information in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_drinks);
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
-			distance_information.setText("Distance to destination: " + distance + "m");
+			distance_information.setText("Distance to destination: " + distance + "m\n");
 		} else {
-				distance_information.setText("Distance information not available");
+				distance_information.setText("Distance information not available\n");
 		}
 		
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
@@ -125,6 +125,8 @@ public class DrinksInfo extends ActionBarActivity {
 					Log.d("NO_DRINKS_ADDRESS", "No drinks service address found");
 				}
 			} catch (IOException e) {
+				formatted_drinks_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
+				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {

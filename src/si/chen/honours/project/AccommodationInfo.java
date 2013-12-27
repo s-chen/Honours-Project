@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /** Details of the particular accommodation - called when the name is selected in the ListView **/
@@ -99,9 +100,9 @@ public class AccommodationInfo extends ActionBarActivity {
 		// Display distance information in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_accommodation);
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
-			distance_information.setText("Distance to destination: " + distance + "m");
+			distance_information.setText("Distance to destination: " + distance + "m\n");
 		} else {
-			distance_information.setText("Distance information not available");
+			distance_information.setText("Distance information not available\n");
 		}
 		
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
@@ -125,6 +126,8 @@ public class AccommodationInfo extends ActionBarActivity {
 					Log.d("NO_ACCOMMODATION_ADDRESS", "No accommodation address found");
 				}
 			} catch (IOException e) {
+				formatted_accommodation_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
+				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {

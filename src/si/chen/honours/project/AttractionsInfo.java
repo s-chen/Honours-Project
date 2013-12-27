@@ -99,11 +99,12 @@ public class AttractionsInfo extends ActionBarActivity {
 		// Display distance information in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_attractions);
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
-			distance_information.setText("Distance to destination: " + distance + "m");
+			distance_information.setText("Distance to destination: " + distance + "m\n");
 		} else {
-				distance_information.setText("Distance information not available");
+				distance_information.setText("Distance information not available\n");
 		}
-		
+	
+			
 		if (gps.isConnectionAvailable() && gps.canGetLocation) {
 			// Uses reverse Geocoding to obtain address of attraction from the lat, lng coordinates
 			Geocoder geocoder = new Geocoder(getBaseContext(), Locale.ENGLISH);
@@ -125,6 +126,8 @@ public class AttractionsInfo extends ActionBarActivity {
 					Log.d("NO_ATTRACTIONS_ADDRESS", "No attractions address found");
 				}
 			} catch (IOException e) {
+				formatted_attractions_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
+				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {
