@@ -6,14 +6,18 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class Accommodation extends ActionBarActivity {
 
@@ -28,6 +32,9 @@ public class Accommodation extends ActionBarActivity {
 	private ListView lv_accommodation;
 	private PointOfInterest accommodation_data[];
 	
+	private EditText search_accommodation;
+	private boolean is_filtered = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +45,7 @@ public class Accommodation extends ActionBarActivity {
 
 		
 		lv_accommodation = (ListView) findViewById(R.id.listView_accommodation);
+		search_accommodation = (EditText) findViewById(R.id.editText_accommodation_search);
 		
 		DatabaseHelper dbHelper = new DatabaseHelper(this);
 		
@@ -69,24 +77,58 @@ public class Accommodation extends ActionBarActivity {
 				
 		// Store custom PointOfInterest object (name, services)
 		for (int i = 0; i < accommodation_list.size(); i++) {
-			accommodation_data[i] = new PointOfInterest(accommodation_name[i], services[i]);
+			accommodation_data[i] = new PointOfInterest(i+1, accommodation_name[i], services[i]);
 		}
 			
 
 		// Display accommodation name, service type in ListView
 		Log.i("AccommodationListView", "Adding accommodation data to list view.");
-		accommodation_adapter = new ArrayAdapter<PointOfInterest>(this, R.layout.activity_accommodation, R.id.textView_accommodation_info, accommodation_data);
+		accommodation_adapter = new ArrayAdapter<PointOfInterest>(this, R.layout.point_of_interest_list, R.id.list_item, accommodation_data);
 		lv_accommodation.setAdapter(accommodation_adapter);
 		
 
-		
+		// Detect text entered when user performs search
+		search_accommodation.addTextChangedListener(new TextWatcher() {
+			
+			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+				// When user changed the Text
+				Accommodation.this.accommodation_adapter.getFilter().filter(cs);
+				is_filtered = true;
+			}
+			
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				// TODO Auto-generated method stub	
+			}
+			
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub							
+			}
+			
+		});
+
 		
 		// Display more specific information about a particular attraction
 		lv_accommodation.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						
+				
+				// Check whether ListView is filtered (user performs search)
+				if (is_filtered) {
+					
+					Log.d("LIST_FILTERED", "ListView is filtered");
+					
+					// Get current List Item position
+					String currentItem = lv_accommodation.getItemAtPosition(position).toString();
+				
+					// Update List Item position when ListView is filtered
+					for (int updatedIndex = 0; updatedIndex < accommodation_data.length; updatedIndex++) {
+						if (currentItem.equals(accommodation_data[updatedIndex].toString())) {
+							position = updatedIndex;
+							break;
+						}
+					}
+				}
+								
 				Intent accommodationIntent = new Intent(getApplicationContext(), AccommodationInfo.class);
-				accommodationIntent.putExtra("KEY_ID", accommodation_id[position]);
 				accommodationIntent.putExtra("KEY_NAME", accommodation_name[position]);
 				accommodationIntent.putExtra("KEY_SERVICES", services[position]);
 				accommodationIntent.putExtra("KEY_LATITUDE", accommodation_latitude[position]);
@@ -98,7 +140,7 @@ public class Accommodation extends ActionBarActivity {
 			}
 					
 		});
-		
+			
 		// Close database
 		dbHelper.close();
 	}

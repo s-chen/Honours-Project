@@ -65,7 +65,8 @@
         <activity
             android:name="si.chen.honours.project.Restaurants"
             android:label="@string/title_activity_restaurants"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="si.chen.honours.project.RestaurantInfo"
@@ -80,7 +81,8 @@
         <activity
             android:name="si.chen.honours.project.Drinks"
             android:label="@string/title_activity_drinks"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="si.chen.honours.project.DrinksInfo"
@@ -90,7 +92,8 @@
         <activity
             android:name="si.chen.honours.project.Attractions"
             android:label="@string/title_activity_attractions"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="si.chen.honours.project.AttractionsInfo"
@@ -100,7 +103,8 @@
         <activity
             android:name="si.chen.honours.project.Accommodation"
             android:label="@string/title_activity_accommodation"
-            android:theme="@style/CustomActionBarTheme" >
+      		android:theme="@style/CustomActionBarTheme"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="si.chen.honours.project.AccommodationInfo"

@@ -27,5 +27,9 @@
     <string name="button_accommodation">Accommodation</string>
     <string name="title_activity_accommodation">Accommodation</string>
     <string name="title_activity_accommodation_info">AccommodationInfo</string>
+    <string name="search_accommodation">Search Accommodation</string>
+    <string name="search_drinks">Search Drinks</string>
+    <string name="search_restaurants">Search Restaurants</string>
+    <string name="search_attractions">Search Attractions</string>
 
 </resources>

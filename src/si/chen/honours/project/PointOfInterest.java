@@ -6,6 +6,7 @@ package si.chen.honours.project;
 public class PointOfInterest implements Comparable<PointOfInterest> {
 
 	private int id;
+	private int num;
 	private String name;
 	private String services;
 	private float latitude;
@@ -31,6 +32,13 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 	// Constructor with name and services
 	public PointOfInterest(String name, String services) {
 		
+		this.name = name;
+		this.services = services;
+	}
+	
+	// Constructor includes PointOfInterest no. to identify same POI data
+	public PointOfInterest(int num, String name, String services) {
+		this.num = num;
 		this.name = name;
 		this.services = services;
 	}
@@ -85,7 +93,7 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 	
 	// Formats the look when displayed in ListView
 	public String toString() {
-		return this.name + " - " + "(" + this.services + ")";
+		return this.num + ".  " + this.name + " - " + "(" + this.services + ")";
 	}
 	
 	// Comparator to compare and sort in alphabetical order
