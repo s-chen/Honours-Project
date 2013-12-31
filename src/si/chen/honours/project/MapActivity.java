@@ -16,28 +16,63 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapActivity extends ActionBarActivity {
 
 	private GoogleMap map;
+	private GPSListener gps;
 	final LatLng EDINBURGH = new LatLng(55.9531, -3.1889);
+	LatLng current_user_location;
+	Marker user_location_marker;
+	Marker edinburgh_marker;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		
-		setTitle("Map of Edinburgh");
+		setTitle("Map");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		// Open Google Maps 
 		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		
-		// Add marker
-		Marker edinburgh = map.addMarker(new MarkerOptions()
-				.position(EDINBURGH)
-				.title("Edinburgh"));
-		
-		// Zoom in to location
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(edinburgh.getPosition(), 12));
-		
-		map.setMyLocationEnabled(true);
+		// Create instance of GPSListener
+		gps = new GPSListener(this);
+				
+		// Check if internet connection is available AND that GPS is enabled
+		if (gps.isConnectionAvailable() && gps.canGetLocation()) {
+			
+			// get user's current location
+			current_user_location = new LatLng(gps.getLatitude(), gps.getLongitude());
+			
+			// Add marker
+			user_location_marker = map.addMarker(new MarkerOptions()
+					.position(current_user_location)
+					.title("You Are Here"));	
+			
+			// Zoom in to user location
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(user_location_marker.getPosition(), 15));
+			
+			map.setMyLocationEnabled(true);
+			
+		// If only internet connection is available, GPS is not enabled, set marker to Edinburgh
+		} else if (gps.isConnectionAvailable()) {
+			
+			// GPS or network not enabled, ask user to enable GPS/network in settings menu
+			gps.showGPSSettingsAlert();
+			
+			// Add marker
+			edinburgh_marker = map.addMarker(new MarkerOptions()
+					.position(EDINBURGH)
+					.title("Edinburgh"));
+			
+			// Zoom in to Edinburgh
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(edinburgh_marker.getPosition(), 12));
+			
+		} else if (!gps.canGetLocation()){
+			
+			// GPS or network not enabled, ask user to enable GPS/network in settings menu
+			gps.showGPSSettingsAlert();
+		}
+
 	}
 
 	@Override
