@@ -31,5 +31,8 @@
     <string name="search_drinks">Search Drinks</string>
     <string name="search_restaurants">Search Restaurants</string>
     <string name="search_attractions">Search Attractions</string>
+    <string name="title_activity_nearby_places">NearbyPlaces</string>
+    <string name="button_nearby_places">Nearby Places</string>
+    <string name="title_activity_display_nearby_places">DisplayNearbyPlaces</string>
 
 </resources>

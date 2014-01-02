@@ -1,8 +1,14 @@
-package si.chen.honours.project;
+package si.chen.honours.project.ui;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import si.chen.honours.project.R;
+import si.chen.honours.project.R.id;
+import si.chen.honours.project.R.layout;
+import si.chen.honours.project.R.menu;
+import si.chen.honours.project.location.GPSListener;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -99,13 +105,13 @@ public class AccommodationInfo extends ActionBarActivity {
 		
 		// Display distance information in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_accommodation);
-		if (gps.isConnectionAvailable() && gps.canGetLocation) {
+		if (gps.isConnectionAvailable() && gps.canGetLocation()) {
 			distance_information.setText("Distance to destination: " + distance + "m\n");
 		} else {
 			distance_information.setText("Distance information not available\n");
 		}
 		
-		if (gps.isConnectionAvailable() && gps.canGetLocation) {
+		if (gps.isConnectionAvailable() && gps.canGetLocation()) {
 			// Uses reverse Geocoding to obtain address of accommodation from the lat, lng coordinates
 			Geocoder geocoder = new Geocoder(getBaseContext(), Locale.ENGLISH);
 			try {
@@ -224,7 +230,7 @@ public class AccommodationInfo extends ActionBarActivity {
     	super.onRestart();
     	
     	// Show GPS settings menu, if not detected
-    	if (!gps.canGetLocation) {
+    	if (!gps.canGetLocation()) {
     		gps.showGPSSettingsAlert();
     	}
     }

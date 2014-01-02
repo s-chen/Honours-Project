@@ -1,11 +1,12 @@
-package si.chen.honours.project;
+package si.chen.honours.project.ui;
 
+import si.chen.honours.project.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-
+// Display splash screen
 public class SplashScreen extends Activity {
 
 	// Display welcome screen for 0.1 seconds

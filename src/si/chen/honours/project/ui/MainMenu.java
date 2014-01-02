@@ -1,15 +1,13 @@
-package si.chen.honours.project;
+package si.chen.honours.project.ui;
 
 import java.io.IOException;
 
-import android.app.AlertDialog;
+import si.chen.honours.project.*;
+import si.chen.honours.project.location.GPSListener;
+import si.chen.honours.project.utility.DatabaseHelper;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
@@ -22,13 +20,10 @@ import android.widget.Toast;
 
 
 
-
-
-
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+// Main Menu of app
 public class MainMenu extends ActionBarActivity {
 	
 	private GPSListener gps;
@@ -149,6 +144,14 @@ public class MainMenu extends ActionBarActivity {
     public void accommodation(View view) {
     	
     	Intent intent = new Intent(this, Accommodation.class);
+    	startActivity(intent);
+    	finish();
+    }
+    
+    // Called when 'Nearby Places' button is clicked
+    public void nearbyPlaces(View view) {
+    	
+    	Intent intent = new Intent(this, DisplayNearbyPlaces.class);
     	startActivity(intent);
     	finish();
     }

@@ -1,9 +1,4 @@
-package si.chen.honours.project;
-
-import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+package si.chen.honours.project.location;
 
 import android.app.AlertDialog;
 import android.app.Service;
@@ -19,8 +14,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
-import android.widget.Toast;
 
+// Check GPS status and internet connection status
 public class GPSListener extends Service implements LocationListener {
 
 	private Context mContext;

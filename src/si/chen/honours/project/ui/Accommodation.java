@@ -1,8 +1,11 @@
-package si.chen.honours.project;
+package si.chen.honours.project.ui;
 
 import java.util.Collections;
 import java.util.List;
 
+import si.chen.honours.project.*;
+import si.chen.honours.project.utility.DatabaseHelper;
+import si.chen.honours.project.utility.PointOfInterest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -16,9 +19,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
+// Display list of Accommodation
 public class Accommodation extends ActionBarActivity {
 
 	private List<PointOfInterest> accommodation_list;

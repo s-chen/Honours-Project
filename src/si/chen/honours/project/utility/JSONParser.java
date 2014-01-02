@@ -1,4 +1,4 @@
-package si.chen.honours.project;
+package si.chen.honours.project.utility;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,18 +17,22 @@ import org.json.JSONObject;
 import android.os.StrictMode;
 import android.util.Log;
 
-// Make HTTP Request from Basewarp servers and parses JSON object (bubble data)
+// Make HTTP Request and get JSONObject from URL
 public class JSONParser {
 
 	private static InputStream is = null;
 	private JSONObject jsonObject = null;
 	private String json = "";
 	
-		
+	// Constructor
+	public JSONParser() {
+	}		
+	
+	
 	public JSONObject getJSONFromURL(String url) {
 		
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-		StrictMode.setThreadPolicy(policy);
+		/*StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);*/
 		
 		// Making HTTP request
 		try {

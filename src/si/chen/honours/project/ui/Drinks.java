@@ -1,8 +1,11 @@
-package si.chen.honours.project;
+package si.chen.honours.project.ui;
 
 import java.util.Collections;
 import java.util.List;
 
+import si.chen.honours.project.*;
+import si.chen.honours.project.utility.DatabaseHelper;
+import si.chen.honours.project.utility.PointOfInterest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+// Display list of Pubs/Bars/Clubs/Cafes
 public class Drinks extends ActionBarActivity {
 
 	private List<PointOfInterest> drinks_list;

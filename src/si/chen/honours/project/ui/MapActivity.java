@@ -1,5 +1,10 @@
-package si.chen.honours.project;
+package si.chen.honours.project.ui;
 
+import si.chen.honours.project.R;
+import si.chen.honours.project.R.id;
+import si.chen.honours.project.R.layout;
+import si.chen.honours.project.R.menu;
+import si.chen.honours.project.location.GPSListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,10 +14,12 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+// Display Google Maps with current user location
 public class MapActivity extends ActionBarActivity {
 
 	private GoogleMap map;
@@ -46,7 +53,8 @@ public class MapActivity extends ActionBarActivity {
 			// Add marker
 			user_location_marker = map.addMarker(new MarkerOptions()
 					.position(current_user_location)
-					.title("You Are Here"));	
+					.title("You Are Here")
+					.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));	
 			
 			// Zoom in to user location
 			map.moveCamera(CameraUpdateFactory.newLatLngZoom(user_location_marker.getPosition(), 15));

@@ -1,17 +1,16 @@
-package si.chen.honours.project;
+package si.chen.honours.project.ui;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import si.chen.honours.project.*;
+import si.chen.honours.project.location.GPSListener;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -102,7 +101,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		
 		// Display distance information in TextView
 		TextView distance_information = (TextView) findViewById(R.id.textView_distance_info_restaurant);
-		if (gps.isConnectionAvailable() && gps.canGetLocation) {
+		if (gps.isConnectionAvailable() && gps.canGetLocation()) {
 			distance_information.setText("Distance to destination: " + distance + "m\n");
 		} else {
 			distance_information.setText("Distance information not available\n");
@@ -110,7 +109,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		
 		
 	
-		if (gps.isConnectionAvailable() && gps.canGetLocation) {
+		if (gps.isConnectionAvailable() && gps.canGetLocation()) {
 			// Uses reverse Geocoding to obtain address of restaurant from the restaurant lat, lng coordinates
 			Geocoder geocoder = new Geocoder(getBaseContext(), Locale.ENGLISH);
 			try {
@@ -233,7 +232,7 @@ public class RestaurantInfo extends ActionBarActivity {
     	super.onRestart();
     	
     	// Show GPS settings menu, if not detected
-    	if (!gps.canGetLocation) {
+    	if (!gps.canGetLocation()) {
     		gps.showGPSSettingsAlert();
     	}
     }

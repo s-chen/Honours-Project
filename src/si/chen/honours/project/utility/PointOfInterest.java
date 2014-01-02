@@ -1,6 +1,4 @@
-package si.chen.honours.project;
-
-
+package si.chen.honours.project.utility;
 
 /** Model Object provides getter/setter methods for storing and retrieving Point of Interest data **/
 public class PointOfInterest implements Comparable<PointOfInterest> {

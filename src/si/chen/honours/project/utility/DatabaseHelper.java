@@ -1,4 +1,4 @@
-package si.chen.honours.project;
+package si.chen.honours.project.utility;
 
 import java.io.File;
 import java.io.FileOutputStream;
