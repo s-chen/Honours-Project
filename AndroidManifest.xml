@@ -116,6 +116,16 @@
             android:label="@string/title_activity_display_nearby_places"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.DisplayNearbyPlaceInfo"
+            android:label="@string/title_activity_display_nearby_place_info"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.DisplayNearbyPlacesMap"
+            android:label="@string/title_activity_display_nearby_places_map"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
     </application>
 
 </manifest>

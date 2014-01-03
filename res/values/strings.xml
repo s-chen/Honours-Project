@@ -34,5 +34,10 @@
     <string name="title_activity_nearby_places">NearbyPlaces</string>
     <string name="button_nearby_places">Nearby Places</string>
     <string name="title_activity_display_nearby_places">DisplayNearbyPlaces</string>
+    <string name="title_activity_nearby_place_info">NearbyPlaceInfo</string>
+    <string name="title_activity_display_nearby_place_info">DisplayNearbyPlaceInfo</string>
+    <string name="button_show_nearby_place_map">Show Nearby Places on map</string>
+    <string name="title_activity_nearby_places_map">NearbyPlacesMap</string>
+    <string name="title_activity_display_nearby_places_map">DisplayNearbyPlacesMap</string>
 
 </resources>
