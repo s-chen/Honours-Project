@@ -8,7 +8,9 @@ import org.json.JSONObject;
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.NearbyPlaces;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 
@@ -56,6 +59,7 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 	ArrayList<String> place_name_list = new ArrayList<String>();
 	ArrayList<String> place_latitude_list = new ArrayList<String>();
 	ArrayList<String> place_longitude_list = new ArrayList<String>();
+	ArrayList<String> place_reference_list = new ArrayList<String>();
 	
 	private ListView lv_nearby_places;
 	private Button button_show_nearby_places;
@@ -105,7 +109,7 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 			super.onPreExecute();
 
 			dialog = new ProgressDialog(DisplayNearbyPlaces.this);
-	        dialog.setMessage("Getting Nearby Places..");
+	        dialog.setMessage("Retrieving Nearby Places..");
 	        dialog.setIndeterminate(false);
 	        dialog.setCancelable(false);
 	        dialog.show();
@@ -117,7 +121,7 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 			
 			nearbyPlaceHelper = new NearbyPlaces(user_latitude, user_longitude, radius, types);
 			
-			nearby_places = nearbyPlaceHelper.getNearbyPlaceResponse();
+			nearby_places = nearbyPlaceHelper.getNearbyPlacesResponse();
 			
 			return nearby_places;
         }
@@ -154,10 +158,11 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 								Log.d("NEARBY_PLACES_LAT", place_lat);
 								Log.d("NEARBY_PLACES_LNG", place_lng);
 						
-								// Add place name, latitude, longitude to ArrayList
+								// Add place name, latitude, longitude, reference to ArrayLists
 								place_name_list.add(place_name);
 								place_latitude_list.add(place_lat);
 								place_longitude_list.add(place_lng);
+								place_reference_list.add(place_reference);
 						
 							}
 						
@@ -187,27 +192,92 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 													
 									Intent nearbyPlaceIntent = new Intent(getApplicationContext(), DisplayNearbyPlaceInfo.class);
-									nearbyPlaceIntent.putExtra(KEY_NAME, place_name);
-									nearbyPlaceIntent.putExtra(KEY_REFERENCE, place_reference);
+									nearbyPlaceIntent.putExtra("KEY_NAME", place_name_list.get(position));
+									nearbyPlaceIntent.putExtra("KEY_REFERENCE", place_reference_list.get(position));
+									
 									startActivity(nearbyPlaceIntent);
 									finish();
 								}
 										
 							});
-							
-							
-							
-							
+									
 						
+						} else if (places_status.equals("REQUEST_DENIED")) {
+							// Create and show Alert Dialog
+							AlertDialog.Builder alertDialog = new AlertDialog.Builder(DisplayNearbyPlaces.this);
+							alertDialog.setTitle("Google Places Error");
+							alertDialog.setMessage("An error has occurred. Request Denied.");
+							alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(DisplayNearbyPlaces.this, MainMenu.class);
+									startActivity(intent);
+									finish();
+								}
+							});
+							alertDialog.show();
+							
+						} else if (places_status.equals("ZERO_RESULTS")) {
+							// Create and show Alert Dialog
+							AlertDialog.Builder alertDialog = new AlertDialog.Builder(DisplayNearbyPlaces.this);
+							alertDialog.setTitle("No Nearby Places");
+							alertDialog.setMessage("There are no nearby places. Try changing place types or increase radius of search.");
+							alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(DisplayNearbyPlaces.this, MainMenu.class);
+									startActivity(intent);
+									finish();
+								}
+							});
+							alertDialog.show();
+							
+						} else if (places_status.equals("UNKNOWN_ERROR")) {
+							// Create and show Alert Dialog
+							AlertDialog.Builder alertDialog = new AlertDialog.Builder(DisplayNearbyPlaces.this);
+							alertDialog.setTitle("Google Places Error");
+							alertDialog.setMessage("An unknown error has occurred.");
+							alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(DisplayNearbyPlaces.this, MainMenu.class);
+									startActivity(intent);
+									finish();
+								}
+							});
+							alertDialog.show();
+							
+						} else if (places_status.equals("OVER_QUERY_LIMIT")) {
+							// Create and show Alert Dialog
+							AlertDialog.Builder alertDialog = new AlertDialog.Builder(DisplayNearbyPlaces.this);
+							alertDialog.setTitle("Google Places Request Limit Reached");
+							alertDialog.setMessage("Limit of Google Places request reached. Please try again later.");
+							alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(DisplayNearbyPlaces.this, MainMenu.class);
+									startActivity(intent);
+									finish();
+								}
+							});
+							alertDialog.show();
+							
+						} else if (places_status.equals("INVALID_REQUEST")) {
+							// Create and show Alert Dialog
+							AlertDialog.Builder alertDialog = new AlertDialog.Builder(DisplayNearbyPlaces.this);
+							alertDialog.setTitle("Google Places Error");
+							alertDialog.setMessage("An error has occurred. Invalid request.");
+							alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(DisplayNearbyPlaces.this, MainMenu.class);
+									startActivity(intent);
+									finish();
+								}
+							});
+							alertDialog.show();
 						}
 					
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					
 				}
 			});
-				
 		}
 	}
 

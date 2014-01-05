@@ -1,14 +1,34 @@
 package si.chen.honours.project.ui;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import si.chen.honours.project.R;
+import si.chen.honours.project.utility.NearbyPlaces;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class DisplayNearbyPlaceInfo extends ActionBarActivity {
 
+	NearbyPlaces nearbyPlaceHelper;
+	private JSONObject nearby_place_details;
+	
+	private String place_name;
+	private String place_reference;
+	private TextView textView_place_name;
+	private TextView textView_place_address;
+	private TextView textView_place_phone_number;
+ 	
+	private String KEY_STATUS = "status";
+	private String KEY_RESULTS = "results";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -16,6 +36,91 @@ public class DisplayNearbyPlaceInfo extends ActionBarActivity {
 		
 		setTitle("View Nearby Place Information");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		
+		// Get place name, reference passed from DisplayNearbyPlaces
+		Intent intent = getIntent();
+		place_name = intent.getStringExtra("KEY_NAME");
+		place_reference = intent.getStringExtra("KEY_REFERENCE");
+		
+		
+		textView_place_address = (TextView) findViewById(R.id.textView_nearby_place_address);
+		textView_place_phone_number = (TextView) findViewById(R.id.textView_nearby_place_phone_number);
+		
+		// Set nearby place name in TextView 
+		textView_place_name = (TextView) findViewById(R.id.textView_nearby_place_name);
+		textView_place_name.setText(place_name);
+		
+		
+		// Execute thread to search for nearby place details
+		new getNearbyPlaceDetails().execute();
+	}
+	
+	// Starts AsyncTask to request additional details of nearby place using reference id
+	private class getNearbyPlaceDetails extends AsyncTask<String, String, JSONObject> {
+		
+		private ProgressDialog dialog;
+		
+		// Show Progress Dialog
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			dialog = new ProgressDialog(DisplayNearbyPlaceInfo.this);
+	        dialog.setMessage("Retrieving information..");
+	        dialog.setIndeterminate(false);
+	        dialog.setCancelable(false);
+	        dialog.show();
+		 }
+		
+		// Get JSON object from URL 
+		@Override
+        protected JSONObject doInBackground(String... args) {
+            
+            nearbyPlaceHelper = new NearbyPlaces(place_reference);
+            
+            nearby_place_details = nearbyPlaceHelper.getNearbyPlaceDetailsResponse();
+            
+            return nearby_place_details;
+        }
+		
+		@Override
+		protected void onPostExecute(JSONObject json) {
+			dialog.dismiss();
+			
+			runOnUiThread(new Runnable(){
+				public void run() {
+					
+					try {
+						
+						// Check status from JSON response
+						String place_detail_status = nearby_place_details.getString("status");
+						
+						if (place_detail_status.equals("OK")) {
+							
+							String formatted_address = nearby_place_details.getJSONObject("result").getString("formatted_address");
+							String formatted_phone_number = nearby_place_details.getJSONObject("result").getString("formatted_phone_number");
+							
+							Log.d("NEARBY_PLACE_ADDRESS", formatted_address);
+							Log.d("NEARBY_PLACE_PHONE_NUMBER", formatted_phone_number);
+							
+							// Set place address, phone no. in TextView
+							textView_place_address.setText(formatted_address);
+							textView_place_phone_number.setText(formatted_phone_number);
+							
+						} else {
+							Log.d("STATUS_INFO", place_detail_status);
+							
+							textView_place_address.setText("Address not available.");
+							textView_place_phone_number.setText("Phone number not available.");
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
 	}
 
 	@Override
