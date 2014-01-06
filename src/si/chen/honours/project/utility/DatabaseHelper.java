@@ -277,6 +277,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return accommodationList;	
 	}
 	
+	// Get a List of shops data from the result of a SQL query
+	public List<PointOfInterest> getShopsData() {
+			
+		List<PointOfInterest> shopsList = new ArrayList<PointOfInterest>(); 
+			
+		// Retrieve all accommodation types
+		String sqlQuery = "SELECT * FROM edinburgh "
+				+ "WHERE services = 'alcohol' OR services = 'beverages' OR services = 'deli' "
+				+ "OR services = 'farm' OR services = 'department_store' OR services = 'general' "
+				+ "OR services = 'mall' OR services = 'supermarket' OR services = 'clothes' "
+				+ "OR services = 'jewelry' OR services = 'beauty' OR services = 'electronics' "
+				+ "OR services = 'outdoor' OR services = 'sports' OR services = 'art' OR services = 'music' "
+				+ "OR services = 'gift' OR services = 'ticket'";
+			
+		// Open database for querying
+		try {
+			openDatabase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		Cursor cursor = mDB.rawQuery(sqlQuery, null);
+			
+		// Loop through all rows and add to list
+		if (cursor.moveToFirst()) {
+				do {
+					PointOfInterest poi = new PointOfInterest();
+					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setName(cursor.getString(1));
+					poi.setServices(cursor.getString(2));
+					poi.setLatitude(cursor.getFloat(3));
+					poi.setLongitude(cursor.getFloat(4));
+					poi.setContentURL(cursor.getString(5));
+					
+					// Add shops data to list
+					shopsList.add(poi);
+						
+				} while (cursor.moveToNext());
+		}
+			
+		return shopsList;	
+	}
+	
+	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 	

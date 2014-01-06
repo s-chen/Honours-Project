@@ -148,6 +148,14 @@ public class MainMenu extends ActionBarActivity {
     	finish();
     }
     
+    // Called when 'Shopping' button is clicked
+    public void shops(View view) {
+    	
+    	Intent intent = new Intent(this, Shops.class);
+    	startActivity(intent);
+    	finish();
+    }
+    
     // Called when 'Nearby Places' button is clicked
     public void nearbyPlaces(View view) {
     	

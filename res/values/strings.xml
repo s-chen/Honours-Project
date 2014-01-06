@@ -41,5 +41,9 @@
     <string name="title_activity_display_nearby_places_map">DisplayNearbyPlacesMap</string>
     <string name="nearby_place_address_text">Address:</string>
     <string name="nearby_place_phone_number_text">Phone:</string>
+    <string name="title_activity_shops">Shops</string>
+    <string name="search_shops">Search Shops</string>
+    <string name="button_shops">Shopping</string>
+    <string name="title_activity_shop_info">ShopInfo</string>
 
 </resources>

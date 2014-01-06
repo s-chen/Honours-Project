@@ -126,6 +126,17 @@
             android:label="@string/title_activity_display_nearby_places_map"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.Shops"
+            android:label="@string/title_activity_shops"
+            android:theme="@style/CustomActionBarTheme"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.ShopInfo"
+            android:label="@string/title_activity_shop_info"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
     </application>
 
 </manifest>
