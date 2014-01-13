@@ -1,92 +1,106 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_colour" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  		android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/background_colour" >
+        
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+		<Button
+        	android:id="@+id/button_touristAttraction"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="30dp"
+        	android:background="@drawable/custom_button"
+        	android:text="@string/tourist_attraction"
+        	android:textColor="@color/Black"
+        	android:textStyle="bold"
+        	android:textSize="30sp"
+        	android:onClick="touristAttractions" />
 
-    <Button
-        android:id="@+id/button_touristAttraction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/tourist_attraction"
-        android:textColor="@color/Black"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:onClick="touristAttractions" />
+    	<Button
+        	android:id="@+id/button_restaurants"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="32dp"
+        	android:background="@drawable/custom_button"
+        	android:onClick="restaurants"
+        	android:text="@string/button_restaurants"
+        	android:textColor="@color/Black"
+        	android:textStyle="bold"
+        	android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/button_restaurants"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_touristAttraction"
-        android:layout_marginTop="22dp"
-        android:background="@drawable/custom_button"
-        android:onClick="restaurants"
-        android:text="@string/button_restaurants"
-        android:textColor="@color/Black"
-        android:textStyle="bold"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/button_drinks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_restaurants"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/button_drinks"
-        android:textColor="@color/Black"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:onClick="drinks" />
+    	<Button
+        	android:id="@+id/button_drinks"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="34dp"
+        	android:background="@drawable/custom_button"
+        	android:text="@string/button_drinks"
+        	android:textColor="@color/Black"
+        	android:textStyle="bold"
+        	android:textSize="30sp"
+        	android:onClick="drinks" />
     
     
-  	<Button
-        android:id="@+id/button_accommodation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_drinks"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/button_accommodation"
-        android:textColor="@color/Black"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:onClick="accommodation" />
+  		<Button
+        	android:id="@+id/button_accommodation"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="36dp"
+        	android:background="@drawable/custom_button"
+        	android:text="@string/button_accommodation"
+        	android:textColor="@color/Black"
+        	android:textStyle="bold"
+        	android:textSize="30sp"
+        	android:onClick="accommodation" />
   	
-  	<Button
-        android:id="@+id/button_shops"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_accommodation"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/button_shops"
-        android:textColor="@color/Black"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:onClick="shops" />
+  		<Button
+        	android:id="@+id/button_shops"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="40dp"
+        	android:background="@drawable/custom_button"
+        	android:text="@string/button_shops"
+        	android:textColor="@color/Black"
+        	android:textStyle="bold"
+        	android:textSize="30sp"
+        	android:onClick="shops" />
   	
-  	<Button
-        android:id="@+id/button_nearby_places"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_shops"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/button_nearby_places"
-        android:textColor="@color/Black"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:onClick="nearbyPlaces" />
+  		<Button
+        	android:id="@+id/button_nearby_places"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="42dp"
+        	android:background="@drawable/custom_button"
+        	android:text="@string/button_nearby_places"
+        	android:textColor="@color/Black"
+        	android:textStyle="bold"
+        	android:textSize="30sp"
+        	android:onClick="nearbyPlaces" />
+  		
+  		<Button
+        	android:id="@+id/button_itinerary_planner"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="44dp"
+        	android:background="@drawable/custom_button"
+        	android:text="@string/button_itinerary_planner"
+        	android:textColor="@color/Black"
+        	android:textStyle="bold"
+        	android:textSize="30sp"
+        	android:onClick="itineraryPlanner" />
+	    
+  
+	</LinearLayout>
+	
+</ScrollView>
+    
+   
+  	
+  	
+  	
 
-</RelativeLayout>
+

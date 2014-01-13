@@ -19,7 +19,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_refresh">Refresh</string>
     <string name="button_search_info_online">Search Web</string>
-    <string name="button_add_to_favourites">Add To Favourites</string>
+    <string name="button_add_to_itinerary_planner">Add to Itinerary</string>
     <string name="title_activity_drinks">Drinks</string>
     <string name="title_activity_drinks_info">DrinksInfo</string>
     <string name="title_activity_attractions">Attractions</string>
@@ -45,5 +45,7 @@
     <string name="search_shops">Search Shops</string>
     <string name="button_shops">Shopping</string>
     <string name="title_activity_shop_info">ShopInfo</string>
+    <string name="button_itinerary_planner">Itinerary Planner</string>
+    <string name="title_activity_itinerary_planner">ItineraryPlanner</string>
 
 </resources>

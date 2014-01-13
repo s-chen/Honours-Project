@@ -33,7 +33,7 @@
 	    android:layout_height="55dp"
 	    android:layout_alignBottom="@+id/button_search_shop_info_online"
 	    android:layout_alignRight="@+id/shop_map"
-	    android:text="@string/button_add_to_favourites"
+	    android:text="@string/button_add_to_itinerary_planner"
 	    android:textColor="@color/Black"
 	    android:background="@drawable/custom_button"
 	    android:textStyle="bold"

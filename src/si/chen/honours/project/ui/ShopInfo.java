@@ -13,6 +13,7 @@ import si.chen.honours.project.location.GPSListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,6 +50,7 @@ public class ShopInfo extends ActionBarActivity {
 	private Location shop_location;
 	private double user_latitude;
 	private double user_longitude;
+	private LatLng user_lat_lng;
 	private int distance;
 	private StringBuilder formatted_shop_address;
 	
@@ -83,6 +85,9 @@ public class ShopInfo extends ActionBarActivity {
 			// get user's current location
 			user_latitude = gps.getLatitude();
 			user_longitude = gps.getLongitude();
+			
+			// Set lat, lng coordinates to be displayed on map
+			user_lat_lng = new LatLng(user_latitude, user_longitude);
 			
 		} else {
 			// GPS or network not enabled, ask user to enable GPS/network in settings menu
@@ -161,9 +166,17 @@ public class ShopInfo extends ActionBarActivity {
      	Marker location = shop_map.addMarker(new MarkerOptions()
      				.position(shop_lat_lng).snippet(formatted_shop_address.toString())
      				.title(shop_name + " (" + services + ")"));
+     	location.showInfoWindow();
+     	
      	shop_map.moveCamera(CameraUpdateFactory.newLatLngZoom(location.getPosition(), 15));
      				
-     	// Display current user's location
+     	// Display current user's marker and location
+     	if (user_lat_lng != null) {
+     		shop_map.addMarker(new MarkerOptions()
+     					.position(user_lat_lng)
+     					.title("You Are Here")
+     					.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+     	}
      	shop_map.setMyLocationEnabled(true);
 		
 	}

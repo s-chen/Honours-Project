@@ -55,10 +55,10 @@ public class MapActivity extends ActionBarActivity {
 					.position(current_user_location)
 					.title("You Are Here")
 					.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));	
+			user_location_marker.showInfoWindow();
 			
 			// Zoom in to user location
 			map.moveCamera(CameraUpdateFactory.newLatLngZoom(user_location_marker.getPosition(), 15));
-			
 			map.setMyLocationEnabled(true);
 			
 		// If only internet connection is available, GPS is not enabled, set marker to Edinburgh
@@ -71,6 +71,7 @@ public class MapActivity extends ActionBarActivity {
 			edinburgh_marker = map.addMarker(new MarkerOptions()
 					.position(EDINBURGH)
 					.title("Edinburgh"));
+			edinburgh_marker.showInfoWindow();
 			
 			// Zoom in to Edinburgh
 			map.moveCamera(CameraUpdateFactory.newLatLngZoom(edinburgh_marker.getPosition(), 12));

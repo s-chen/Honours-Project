@@ -57,10 +57,11 @@ public class DisplayNearbyPlacesMap extends ActionBarActivity {
 		nearby_places_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.nearby_places_map)).getMap();
 		
 		// Add user location marker
-		nearby_places_map.addMarker(new MarkerOptions()
+		Marker user_location_marker = nearby_places_map.addMarker(new MarkerOptions()
 			.position(current_user_location)
 			.title("You Are Here")
 			.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+		user_location_marker.showInfoWindow();
 
 		
 		

@@ -137,6 +137,11 @@
             android:label="@string/title_activity_shop_info"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.ItineraryPlanner"
+            android:label="@string/title_activity_itinerary_planner"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
     </application>
 
 </manifest>

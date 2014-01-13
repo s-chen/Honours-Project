@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 
 
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -56,20 +57,15 @@ public class MainMenu extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_menu, menu);
-        MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
-        searchView.setQueryHint("Search Edinburgh");       
-        return super.onCreateOptionsMenu(menu);
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_main_menu, menu);
+		return true;
     }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_search:
-                return true;
             case R.id.action_maps:
             	Toast.makeText(getApplicationContext(), "Opening Google Maps", Toast.LENGTH_SHORT).show();
             	Intent intentMap = new Intent(this, MapActivity.class);
@@ -160,6 +156,14 @@ public class MainMenu extends ActionBarActivity {
     public void nearbyPlaces(View view) {
     	
     	Intent intent = new Intent(this, DisplayNearbyPlaces.class);
+    	startActivity(intent);
+    	finish();
+    }
+    
+    // Called when 'Itinerary Planner' button is clicked
+    public void itineraryPlanner(View view) {
+    	
+    	Intent intent = new Intent(this, ItineraryPlanner.class);
     	startActivity(intent);
     	finish();
     }

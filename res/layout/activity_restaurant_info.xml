@@ -33,7 +33,7 @@
 	    android:layout_height="55dp"
 	    android:layout_alignBottom="@+id/button_search_restaurant_info_online"
 	    android:layout_alignRight="@+id/restaurant_map"
-	    android:text="@string/button_add_to_favourites"
+	    android:text="@string/button_add_to_itinerary_planner"
 	    android:background="@drawable/custom_button"
 	    android:textStyle="bold"
 	    android:layout_alignParentBottom="true" />
