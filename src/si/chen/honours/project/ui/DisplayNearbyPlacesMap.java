@@ -78,8 +78,8 @@ public class DisplayNearbyPlacesMap extends ActionBarActivity {
 		// Loop over ArrayList (all have same size) - add place name, location to a marker then add marker to map 
 		for (int i = 0; i < place_names.size(); i++) {
 			
-			Log.d("PLACE_NAMES_MAP", place_names.get(i));
-			Log.d("PLACE_LOCATIONS_MAP", place_latitudes.get(i) + " " + place_longitudes.get(i));
+			Log.i("PLACE_NAMES_MAP", place_names.get(i));
+			Log.i("PLACE_LOCATIONS_MAP", place_latitudes.get(i) + " " + place_longitudes.get(i));
 			
 			// Get place location from current entry in ArrayList of latitudes, longitudes
 			LatLng place_location = new LatLng(Double.valueOf(place_latitudes.get(i)), Double.valueOf(place_longitudes.get(i)));

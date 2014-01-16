@@ -5,19 +5,8 @@ import java.util.List;
 import java.util.Locale;
 
 import si.chen.honours.project.R;
-import si.chen.honours.project.R.id;
-import si.chen.honours.project.R.layout;
-import si.chen.honours.project.R.menu;
 import si.chen.honours.project.location.GPSListener;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
+import si.chen.honours.project.utility.UserSessionManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.location.Address;
@@ -32,6 +21,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 
 /** Details of the particular accommodation - called when the name is selected in the ListView **/
 public class AccommodationInfo extends ActionBarActivity {
@@ -44,6 +41,7 @@ public class AccommodationInfo extends ActionBarActivity {
 	private double accommodation_latitude;
 	private double accommodation_longitude;
 	private String accommodation_url;
+	private int accommodation_item_position;
 
 	private GPSListener gps;
 	private Location user_location;
@@ -54,6 +52,7 @@ public class AccommodationInfo extends ActionBarActivity {
 	private int distance;
 	private StringBuilder formatted_accommodation_address;
 	
+	private UserSessionManager user_session;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +61,13 @@ public class AccommodationInfo extends ActionBarActivity {
 		
 		setTitle("View information");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		
+		// Instantiates UserSessionManager to manage user preferences
+		user_session = new UserSessionManager(this, "ACCOMMODATION_PREFS");
+		//user_session.deleteItineraryItems();
+		user_session.getAllPlacesData();
+		
 		
 		
 		// Get accommodation data passed from Accommodation.java class
@@ -73,7 +79,7 @@ public class AccommodationInfo extends ActionBarActivity {
 		accommodation_latitude = accommodationIntent.getDoubleExtra("KEY_LATITUDE", 0);
         accommodation_longitude = accommodationIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		accommodation_url = accommodationIntent.getStringExtra("KEY_CONTENT_URL");
-		
+		accommodation_item_position = accommodationIntent.getIntExtra("KEY_ACCOMMODATION_ITEM_POSITION", 0);
 		
 
 		// Create instance of GPSListener
@@ -135,11 +141,11 @@ public class AccommodationInfo extends ActionBarActivity {
 					}
                           
 				} else {
-					Log.d("NO_ACCOMMODATION_ADDRESS", "No accommodation address found");
+					Log.i("NO_ACCOMMODATION_ADDRESS", "No accommodation address found");
 				}
 			} catch (IOException e) {
 				formatted_accommodation_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
-				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
+				Log.i("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {
@@ -153,7 +159,7 @@ public class AccommodationInfo extends ActionBarActivity {
 		// Also display accommodation website url in TextView, if it exists.
 		if (accommodation_url.equals("")) {
 			// Do nothing
-			Log.d("NO_ACCOMMODATION_URL", "Accommodation url does not exist");
+			Log.i("NO_ACCOMMODATION_URL", "Accommodation url does not exist");
 		} else {
 			StringBuilder accommodation_address_and_url = formatted_accommodation_address.append("\n").append("Website:").append("\n").append(accommodation_url);
 			accommodation_address_website_info.setText(accommodation_address_and_url);
@@ -261,4 +267,21 @@ public class AccommodationInfo extends ActionBarActivity {
    	    overridePendingTransition(0, 0);
    	    startActivity(intent);
     }    
+    
+    // Called when 'Add to Itinerary' button is clicked
+    public void itineraryAccommodation(View view) {
+    	 	
+    	// Store position of accommodation item clicked in ListView in SharedPrefs
+    	user_session.storeItemPosition(accommodation_item_position);
+    	
+    	// If item already added to itinerary display a message, otherwise store corresponding information in SharedPrefs
+    	if (user_session.existInItinerary()) {
+    		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
+    	} else { 		
+    		user_session.storePlaceData(accommodation_name, accommodation_latitude, accommodation_longitude);
+    		Toast.makeText(getApplicationContext(), "Added Accommodation to Itinerary", Toast.LENGTH_SHORT).show();
+    	}
+    	
+    	Log.i("SESSION", user_session.getPlaceData());
+    }
 }

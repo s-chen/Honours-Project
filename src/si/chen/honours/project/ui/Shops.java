@@ -117,7 +117,7 @@ public class Shops extends ActionBarActivity {
 				// Check whether ListView is filtered (user performs search)
 				if (is_filtered) {
 					
-					Log.d("LIST_FILTERED", "ListView is filtered");
+					Log.i("LIST_FILTERED", "ListView is filtered");
 					
 					// Get current List Item position
 					String currentItem = lv_shops.getItemAtPosition(position).toString();

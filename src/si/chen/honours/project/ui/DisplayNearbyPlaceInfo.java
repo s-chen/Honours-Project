@@ -101,15 +101,15 @@ public class DisplayNearbyPlaceInfo extends ActionBarActivity {
 							String formatted_address = nearby_place_details.getJSONObject("result").getString("formatted_address");
 							String formatted_phone_number = nearby_place_details.getJSONObject("result").getString("formatted_phone_number");
 							
-							Log.d("NEARBY_PLACE_ADDRESS", formatted_address);
-							Log.d("NEARBY_PLACE_PHONE_NUMBER", formatted_phone_number);
+							Log.i("NEARBY_PLACE_ADDRESS", formatted_address);
+							Log.i("NEARBY_PLACE_PHONE_NUMBER", formatted_phone_number);
 							
 							// Set place address, phone no. in TextView
 							textView_place_address.setText(formatted_address);
 							textView_place_phone_number.setText(formatted_phone_number);
 							
 						} else {
-							Log.d("STATUS_INFO", place_detail_status);
+							Log.i("STATUS_INFO", place_detail_status);
 							
 							textView_place_address.setText("Address not available.");
 							textView_place_phone_number.setText("Phone number not available.");

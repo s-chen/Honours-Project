@@ -28,7 +28,7 @@
 	    android:textStyle="bold" />
   	
    	<Button
-	    android:id="@+id/button_add_to_favourites_accommodation"
+	    android:id="@+id/button_add_to_itinerary_accommodation"
 	    android:layout_width="wrap_content"
 	    android:layout_height="55dp"
 	    android:layout_alignBottom="@+id/button_search_accommodation_info_online"
@@ -37,7 +37,8 @@
 	    android:textColor="@color/Black"
 	    android:background="@drawable/custom_button"
 	    android:textStyle="bold"
-	    android:layout_alignParentBottom="true" />
+	    android:layout_alignParentBottom="true" 
+	    android:onClick="itineraryAccommodation" />
 
    	 <Button
 	    android:id="@+id/button_search_accommodation_info_online"

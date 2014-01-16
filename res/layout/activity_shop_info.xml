@@ -28,7 +28,7 @@
 	    android:textStyle="bold" />
   	
    	<Button
-	    android:id="@+id/button_add_to_favourites_shop"
+	    android:id="@+id/button_add_to_itinerary_shop"
 	    android:layout_width="wrap_content"
 	    android:layout_height="55dp"
 	    android:layout_alignBottom="@+id/button_search_shop_info_online"

@@ -70,7 +70,7 @@ public class NearbyPlaces {
 		}
 		
 		//https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=56.4644033,-2.9925105&radius=1000.0&types=airport|amusement_park|aquarium|art_gallery|atm|bakery|bar|cafe|clothing_store|convenience_store|establishment|food|grocery_or_supermarket|movie_theater|museum|night_club|park|restaurant|shopping_mall|zoo&sensor=false&key=AIzaSyB_Lb3cBA2ex0x0BxYpc0YfSwXLXNZConI
-		Log.d("NEARBY_PLACE_URL", NEARBY_PLACE_URL);
+		Log.i("NEARBY_PLACE_URL", NEARBY_PLACE_URL);
 		return jParser.getJSONFromURL(NEARBY_PLACE_URL);
 	} 
 
@@ -84,7 +84,7 @@ public class NearbyPlaces {
 		
 		
 		//https://maps.googleapis.com/maps/api/place/details/json?reference=&sensor=false&key=AIzaSyB_Lb3cBA2ex0x0BxYpc0YfSwXLXNZConI
-		Log.d("NEARBY_PLACE_DETAILS_URL", NEARBY_PLACE_DETAILS_URL);
+		Log.i("NEARBY_PLACE_DETAILS_URL", NEARBY_PLACE_DETAILS_URL);
 		return jParser.getJSONFromURL(NEARBY_PLACE_DETAILS_URL);
 	}
 }

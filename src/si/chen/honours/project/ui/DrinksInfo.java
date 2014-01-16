@@ -130,11 +130,11 @@ public class DrinksInfo extends ActionBarActivity {
 					}
                           
 				} else {
-					Log.d("NO_DRINKS_ADDRESS", "No drinks service address found");
+					Log.i("NO_DRINKS_ADDRESS", "No drinks service address found");
 				}
 			} catch (IOException e) {
 				formatted_drinks_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
-				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
+				Log.i("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {
@@ -148,7 +148,7 @@ public class DrinksInfo extends ActionBarActivity {
 		// Also display drinks service website url in TextView, if it exists.
 		if (drinks_url.equals("")) {
 			// Do nothing
-			Log.d("NO_DRINKS_URL", "Drinks service url does not exist");
+			Log.i("NO_DRINKS_URL", "Drinks service url does not exist");
 		} else {
 			StringBuilder drinks_address_and_url = formatted_drinks_address.append("\n").append("Website:").append("\n").append(drinks_url);
 			drinks_address_website_info.setText(drinks_address_and_url);

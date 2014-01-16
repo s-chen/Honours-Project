@@ -134,11 +134,11 @@ public class ShopInfo extends ActionBarActivity {
 					}
                           
 				} else {
-					Log.d("NO_SHOP_ADDRESS", "No shop address found");
+					Log.i("NO_SHOP_ADDRESS", "No shop address found");
 				}
 			} catch (IOException e) {
 				formatted_shop_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
-				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
+				Log.i("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {
@@ -152,7 +152,7 @@ public class ShopInfo extends ActionBarActivity {
 		// Also display shop website url in TextView, if it exists.
 		if (shop_url.equals("")) {
 			// Do nothing
-			Log.d("NO_SHOP_URL", "Shop url does not exist");
+			Log.i("NO_SHOP_URL", "Shop url does not exist");
 		} else {
 			StringBuilder shop_address_and_url = formatted_shop_address.append("\n").append("Website:").append("\n").append(shop_url);
 			shop_address_website_info.setText(shop_address_and_url);

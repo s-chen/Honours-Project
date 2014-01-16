@@ -54,7 +54,7 @@ public class GPSListener extends Service implements LocationListener {
 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
-            	Log.d("GPS_NETWORK", "No GPS or Network detected.");
+            	Log.i("GPS_NETWORK", "No GPS or Network detected.");
             } else {
             	
                 this.canGetLocation = true;
@@ -62,7 +62,7 @@ public class GPSListener extends Service implements LocationListener {
                 if (isNetworkEnabled) {
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     
-                    Log.d("NETWORK_ENABLED", "Network connection enabled");
+                    Log.i("NETWORK_ENABLED", "Network connection enabled");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (location != null) {
@@ -77,7 +77,7 @@ public class GPSListener extends Service implements LocationListener {
                     if (location == null) {
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         
-                        Log.d("GPS_ENABLED", "GPS Enabled");
+                        Log.i("GPS_ENABLED", "GPS Enabled");
                         if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
@@ -93,7 +93,7 @@ public class GPSListener extends Service implements LocationListener {
             e.printStackTrace();
         }
         
-        Log.d("CURRENT_USER_LAT_LNG", "\nLat:" + latitude + "\nLng:" + longitude);
+        Log.i("CURRENT_USER_LAT_LNG", "\nLat:" + latitude + "\nLng:" + longitude);
 
         return location;
     }
@@ -136,10 +136,10 @@ public class GPSListener extends Service implements LocationListener {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         
         if (activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting()) {
-        	Log.d("INTERNET_CONNECTION_AVAILABLE", "Internet connection available");
+        	Log.i("INTERNET_CONNECTION_AVAILABLE", "Internet connection available");
         	return true;
         }
-        Log.d("INTERNET_CONNECTION_UNAVAILABLE", "No internet connection available");
+        Log.i("INTERNET_CONNECTION_UNAVAILABLE", "No internet connection available");
         return false;
     }
     
@@ -212,7 +212,7 @@ public class GPSListener extends Service implements LocationListener {
     
     // Update user location (called automatically)
     public void onLocationChanged(Location location) {
-    	Log.d("LOCATION_UPDATE", "User location updated");
+    	Log.i("LOCATION_UPDATE", "User location updated");
     	//getLocation();
     }
 

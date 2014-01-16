@@ -117,7 +117,7 @@ public class Accommodation extends ActionBarActivity {
 				// Check whether ListView is filtered (user performs search)
 				if (is_filtered) {
 					
-					Log.d("LIST_FILTERED", "ListView is filtered");
+					Log.i("LIST_FILTERED", "ListView is filtered");
 					
 					// Get current List Item position
 					String currentItem = lv_accommodation.getItemAtPosition(position).toString();
@@ -137,7 +137,8 @@ public class Accommodation extends ActionBarActivity {
 				accommodationIntent.putExtra("KEY_LATITUDE", accommodation_latitude[position]);
 				accommodationIntent.putExtra("KEY_LONGITUDE", accommodation_longitude[position]);
 				accommodationIntent.putExtra("KEY_CONTENT_URL", accommodation_url[position]);
-						
+				accommodationIntent.putExtra("KEY_ACCOMMODATION_ITEM_POSITION", position);
+				
 				startActivity(accommodationIntent);
 				finish();
 			}

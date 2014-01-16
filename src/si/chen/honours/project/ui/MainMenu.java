@@ -89,7 +89,7 @@ public class MainMenu extends ActionBarActivity {
     		Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 1);
     		dialog.show();
     	} 
-    	Log.d("GooglePlayVersionCheck", "resultCode: " + resultCode);
+    	Log.i("GooglePlayVersionCheck", "resultCode: " + resultCode);
     	
     }
     

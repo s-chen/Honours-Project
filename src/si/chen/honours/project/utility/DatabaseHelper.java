@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		if (dbExist) {
 			// Do nothing
-			Log.d("DB_EXISTS", "Database already exists");
+			Log.i("DB_EXISTS", "Database already exists");
 		} else {
 			
 			this.getReadableDatabase();
@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		outStream.close();
 		inStream.close();
 		
-		Log.d("DB_COPIED", "Copied database file to Android system");
+		Log.i("DB_COPIED", "Copied database file to Android system");
 	}
 	
 	// Open database for querying

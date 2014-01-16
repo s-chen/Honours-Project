@@ -119,7 +119,7 @@ public class Attractions extends ActionBarActivity {
 				// Check whether ListView is filtered (user performs search)
 				if (is_filtered) {
 					
-					Log.d("LIST_FILTERED", "ListView is filtered");
+					Log.i("LIST_FILTERED", "ListView is filtered");
 					
 					// Get current List Item position
 					String currentItem = lv_attractions.getItemAtPosition(position).toString();
@@ -140,6 +140,7 @@ public class Attractions extends ActionBarActivity {
 				attractionsIntent.putExtra("KEY_LATITUDE", attractions_latitude[position]);
 				attractionsIntent.putExtra("KEY_LONGITUDE", attractions_longitude[position]);
 				attractionsIntent.putExtra("KEY_CONTENT_URL", attractions_url[position]);
+				attractionsIntent.putExtra("KEY_ATTRACTION_ITEM_POSITION", position);
 						
 				startActivity(attractionsIntent);
 				finish();

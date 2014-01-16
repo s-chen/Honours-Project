@@ -47,5 +47,6 @@
     <string name="title_activity_shop_info">ShopInfo</string>
     <string name="button_itinerary_planner">Itinerary Planner</string>
     <string name="title_activity_itinerary_planner">ItineraryPlanner</string>
+    <string name="title_activity_itinerary_list">ItineraryList</string>
 
 </resources>

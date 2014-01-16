@@ -132,11 +132,11 @@ public class RestaurantInfo extends ActionBarActivity {
 					}
                           
 				} else {
-					Log.d("NO_RESTAURANT_ADDRESS", "No restaurant address found");
+					Log.i("NO_RESTAURANT_ADDRESS", "No restaurant address found");
 				}
 			} catch (IOException e) {
 				formatted_restaurant_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
-				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
+				Log.i("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {
@@ -150,7 +150,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		// Also display restaurant website url in TextView, if it exists.
 		if (restaurant_url.equals("")) {
 			// Do nothing
-			Log.d("NO_RESTAURANT_URL", "Restaurant url does not exist");
+			Log.i("NO_RESTAURANT_URL", "Restaurant url does not exist");
 		} else {
 			StringBuilder restaurant_address_and_url = formatted_restaurant_address.append("\n").append("Website:").append("\n").append(restaurant_url);
 			restaurant_address_website_info.setText(restaurant_address_and_url);

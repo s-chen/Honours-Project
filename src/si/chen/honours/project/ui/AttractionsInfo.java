@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import si.chen.honours.project.*;
 import si.chen.honours.project.location.GPSListener;
+import si.chen.honours.project.utility.UserSessionManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /** Details of the particular attraction - called when the name is selected in the ListView **/
@@ -40,6 +42,7 @@ public class AttractionsInfo extends ActionBarActivity {
 	private double attractions_latitude;
 	private double attractions_longitude;
 	private String attractions_url;
+	private int attraction_item_position;
 
 	private GPSListener gps;
 	private Location user_location;
@@ -50,6 +53,7 @@ public class AttractionsInfo extends ActionBarActivity {
 	private int distance;
 	private StringBuilder formatted_attractions_address;
 	
+	private UserSessionManager user_session;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,13 @@ public class AttractionsInfo extends ActionBarActivity {
 		
 		setTitle("View information");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		
+		// Instantiates UserSessionManager to manage user preferences
+		user_session = new UserSessionManager(this, "ATTRACTION_PREFS");
+		//user_session.deleteItineraryItems();
+		user_session.getAllPlacesData();
+		
 		
 		
 		// Get attractions data passed from Attractions.java class
@@ -69,6 +80,7 @@ public class AttractionsInfo extends ActionBarActivity {
 		attractions_latitude = attractionsIntent.getDoubleExtra("KEY_LATITUDE", 0);
         attractions_longitude = attractionsIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		attractions_url = attractionsIntent.getStringExtra("KEY_CONTENT_URL");
+		attraction_item_position = attractionsIntent.getIntExtra("KEY_ATTRACTION_ITEM_POSITION", 0);
 		
 		
 
@@ -131,11 +143,11 @@ public class AttractionsInfo extends ActionBarActivity {
 					}
                           
 				} else {
-					Log.d("NO_ATTRACTIONS_ADDRESS", "No attractions address found");
+					Log.i("NO_ATTRACTIONS_ADDRESS", "No attractions address found");
 				}
 			} catch (IOException e) {
 				formatted_attractions_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
-				Log.d("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
+				Log.i("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}
 		} else {
@@ -149,7 +161,7 @@ public class AttractionsInfo extends ActionBarActivity {
 		// Also display attractions website url in TextView, if it exists.
 		if (attractions_url.equals("")) {
 			// Do nothing
-			Log.d("NO_ATTRACTIONS_URL", "Attractions url does not exist");
+			Log.i("NO_ATTRACTIONS_URL", "Attractions url does not exist");
 		} else {
 			StringBuilder attractions_address_and_url = formatted_attractions_address.append("\n").append("Website:").append("\n").append(attractions_url);
 			attractions_address_website_info.setText(attractions_address_and_url);
@@ -255,5 +267,22 @@ public class AttractionsInfo extends ActionBarActivity {
 
    	    overridePendingTransition(0, 0);
    	    startActivity(intent);
-    }    
+    }
+    
+    // Called when 'Add to Itinerary' button is clicked
+    public void itineraryAttraction(View view) {
+    
+    	// Store position of attraction item clicked in ListView in SharedPrefs
+    	user_session.storeItemPosition(attraction_item_position);
+    	
+    	// If item already added to itinerary display a message, otherwise store corresponding information in SharedPrefs
+    	if (user_session.existInItinerary()) {
+    		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
+    	} else { 		
+    		user_session.storePlaceData(attractions_name, attractions_latitude, attractions_longitude);
+    		Toast.makeText(getApplicationContext(), "Added Attraction to Itinerary", Toast.LENGTH_SHORT).show();
+    	}
+    	
+    	Log.i("SESSION", user_session.getPlaceData());
+    }
 }

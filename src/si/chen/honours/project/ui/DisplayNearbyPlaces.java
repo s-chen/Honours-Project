@@ -154,9 +154,9 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 								place_lng = place.getJSONObject(KEY_GEOMETRY).getJSONObject(KEY_LOCATION).getString(KEY_LNG);
 								place_reference = place.getString(KEY_REFERENCE);
 						
-								Log.d("NEARBY_PLACES_NAME", place_name);
-								Log.d("NEARBY_PLACES_LAT", place_lat);
-								Log.d("NEARBY_PLACES_LNG", place_lng);
+								Log.i("NEARBY_PLACES_NAME", place_name);
+								Log.i("NEARBY_PLACES_LAT", place_lat);
+								Log.i("NEARBY_PLACES_LNG", place_lng);
 						
 								// Add place name, latitude, longitude, reference to ArrayLists
 								place_name_list.add(place_name);
