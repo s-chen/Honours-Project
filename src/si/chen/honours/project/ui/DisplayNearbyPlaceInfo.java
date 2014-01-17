@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import si.chen.honours.project.R;
-import si.chen.honours.project.utility.NearbyPlaces;
+import si.chen.honours.project.utility.GoogleAPIHelper;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class DisplayNearbyPlaceInfo extends ActionBarActivity {
 
-	NearbyPlaces nearbyPlaceHelper;
+	GoogleAPIHelper nearbyPlaceHelper;
 	private JSONObject nearby_place_details;
 	
 	private String place_name;
@@ -77,7 +77,7 @@ public class DisplayNearbyPlaceInfo extends ActionBarActivity {
 		@Override
         protected JSONObject doInBackground(String... args) {
             
-            nearbyPlaceHelper = new NearbyPlaces(place_reference);
+            nearbyPlaceHelper = new GoogleAPIHelper(place_reference);
             
             nearby_place_details = nearbyPlaceHelper.getNearbyPlaceDetailsResponse();
             

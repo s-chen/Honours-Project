@@ -3,16 +3,19 @@ package si.chen.honours.project.ui;
 import java.util.ArrayList;
 
 import si.chen.honours.project.R;
-import si.chen.honours.project.utility.PointOfInterest;
 import si.chen.honours.project.utility.UserSessionManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 // Itinerary Planner showing all items added to the itinerary
 public class ItineraryPlanner extends ActionBarActivity {
@@ -69,14 +72,6 @@ public class ItineraryPlanner extends ActionBarActivity {
 			}
 		}
 		
-		
-/*		for (int i = 0; i < place_names.size(); i++) {
-			
-			System.out.println(place_names.get(i));
-		}*/
-		
-
-		
 
 		// Display Itinerary names in ListView
 		Log.i("ItineraryListView", "Adding itinerary items to list view.");
@@ -115,5 +110,65 @@ public class ItineraryPlanner extends ActionBarActivity {
     	Intent intent = new Intent(this, MainMenu.class);
     	startActivity(intent);
     	finish();
+    }
+    
+    // Delete all Itinerary Items from ListView
+    public void deleteAllItineraryItems(View view) {
+    	
+    	AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+    	
+        // Setting Dialog Title
+        alertDialog.setTitle("Confirm Deletion");
+        
+    	// Setting Dialog message 
+    	alertDialog.setMessage("Are you sure you want to delete all itinerary items listed?");
+    	
+    	// Set "Delete" button
+    	alertDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				
+				// Delete all SharedPrefs data
+				Log.i("SHARED_PREFS_DELETE", "Deleted all SharedPrefs data");
+				
+				// Loop over SharedPref for each category of data
+		    	for (String pref : USER_PREFS) {
+		    		
+					// Get current SharedPrefs category
+					user_session = new UserSessionManager(ItineraryPlanner.this, pref);
+					// Delete itinerary items for specific SharedPref
+					user_session.deleteItineraryItems();
+		    	}
+			
+				Toast.makeText(getApplicationContext(), "All Itinerary Items Deleted", Toast.LENGTH_SHORT).show();
+				
+				// Refresh ListView of current activity
+				refresh();
+			}
+		});
+    	
+    	// Set "Cancel" button 
+    	alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+    	
+    	// Show alert message 
+    	alertDialog.show();
+
+    }
+    
+    // Refresh - called when deleting itinerary items to update ListView of current activity 
+    public void refresh() {
+    	
+    	Intent intent = getIntent();
+    	overridePendingTransition(0, 0);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+
+   	    overridePendingTransition(0, 0);
+   	    startActivity(intent);
     }
 }

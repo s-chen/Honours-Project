@@ -119,7 +119,7 @@ public class UserSessionManager {
 		}
 	}
 	
-	// Remove all items added to the itinerary
+	// Delete itinerary items for specific SharedPref
 	public void deleteItineraryItems() {
 		mEditor.clear();
 		mEditor.commit();

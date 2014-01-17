@@ -11,8 +11,11 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-/** Helper Class which uses JSONParser class to get JSON response from Google Places URL **/
-public class NearbyPlaces {
+/** Helper Class which uses JSONParser class to get JSON response from: 
+ * Google Places API URL
+ * Google Directions API URL
+ *  **/
+public class GoogleAPIHelper {
 
 	// Google API Key
 	private static final String API_KEY = "AIzaSyB_Lb3cBA2ex0x0BxYpc0YfSwXLXNZConI";
@@ -30,7 +33,7 @@ public class NearbyPlaces {
 	JSONParser jParser = new JSONParser();
 	
 	// Constructor for Nearby Places Search
-	public NearbyPlaces(double latitude, double longitude, double radius, String types) {
+	public GoogleAPIHelper(double latitude, double longitude, double radius, String types) {
 		
 		this.mLatitude = latitude;
 		this.mLongitude = longitude;
@@ -39,7 +42,7 @@ public class NearbyPlaces {
 	}
 	
 	// Constructor for requesting additional information of a nearby place using reference id
-	public NearbyPlaces(String reference) {
+	public GoogleAPIHelper(String reference) {
 		
 		this.mReference = reference;
 	}

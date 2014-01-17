@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
-import si.chen.honours.project.utility.NearbyPlaces;
+import si.chen.honours.project.utility.GoogleAPIHelper;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -26,9 +26,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
-
-// Display a list of nearby point of interests to the user, ranked by the distance to the user
+// Display a list of nearby point of interests to the user
 public class DisplayNearbyPlaces extends ActionBarActivity {
 
 	private GPSListener gps;
@@ -39,7 +37,7 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 			+ "|establishment|food|grocery_or_supermarket|movie_theater|museum|night_club|park|restaurant|shopping_mall|zoo";
 
 	
-	private NearbyPlaces nearbyPlaceHelper;
+	private GoogleAPIHelper nearbyPlaceHelper;
 	private JSONObject nearby_places;
 	private String KEY_STATUS = "status";
 	private String KEY_RESULTS = "results";
@@ -119,7 +117,7 @@ public class DisplayNearbyPlaces extends ActionBarActivity {
 		@Override
 		protected JSONObject doInBackground(String... args) {
 			
-			nearbyPlaceHelper = new NearbyPlaces(user_latitude, user_longitude, radius, types);
+			nearbyPlaceHelper = new GoogleAPIHelper(user_latitude, user_longitude, radius, types);
 			
 			nearby_places = nearbyPlaceHelper.getNearbyPlacesResponse();
 			
