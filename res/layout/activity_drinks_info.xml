@@ -37,7 +37,8 @@
 	    android:textColor="@color/Black"
 	    android:background="@drawable/custom_button"
 	    android:textStyle="bold"
-	    android:layout_alignParentBottom="true" />
+	    android:layout_alignParentBottom="true"
+	    android:onClick="itineraryDrinks" />
   	
   	<Button
 	    android:id="@+id/button_search_drinks_info_online"

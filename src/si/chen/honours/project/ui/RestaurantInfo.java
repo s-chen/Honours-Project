@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import si.chen.honours.project.*;
 import si.chen.honours.project.location.GPSListener;
+import si.chen.honours.project.utility.UserSessionManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.location.Address;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,6 +40,8 @@ public class RestaurantInfo extends ActionBarActivity {
 	private double restaurant_latitude;
 	private double restaurant_longitude;
 	private String restaurant_url;
+	private int restaurant_item_position;
+	private String restaurant_type;
 
 	private GPSListener gps;
 	private Location user_location;
@@ -47,7 +51,6 @@ public class RestaurantInfo extends ActionBarActivity {
 	private LatLng user_lat_lng;
 	private int distance;
 	private StringBuilder formatted_restaurant_address;
-	
 
 	
 	@Override
@@ -59,6 +62,7 @@ public class RestaurantInfo extends ActionBarActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		
+		
 		// Get restaurant data passed from Restaurants.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected restaurant data.");
 		restaurantIntent = getIntent();
@@ -68,6 +72,8 @@ public class RestaurantInfo extends ActionBarActivity {
         restaurant_latitude = restaurantIntent.getDoubleExtra("KEY_LATITUDE", 0);
         restaurant_longitude = restaurantIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		restaurant_url = restaurantIntent.getStringExtra("KEY_CONTENT_URL");
+		restaurant_item_position = restaurantIntent.getIntExtra("KEY_RESTAURANT_ITEM_POSITION", 0);
+		restaurant_type = restaurantIntent.getStringExtra("KEY_TYPE");
 		
 		
 		
@@ -261,4 +267,22 @@ public class RestaurantInfo extends ActionBarActivity {
    	    overridePendingTransition(0, 0);
    	    startActivity(intent);
     }    
+    
+    // Called when 'Add to Itinerary' button is clicked
+    public void itineraryRestaurant(View view) {
+    	 	
+    	UserSessionManager user_session = new UserSessionManager(this, "RESTAURANT_PREFS");
+    	
+    	// Store position of restaurant item clicked in ListView in SharedPrefs
+    	user_session.storeItemPosition(restaurant_item_position);
+    	
+    	// If item already added to itinerary display a message, otherwise store corresponding information in SharedPrefs
+    	if (user_session.existInItinerary()) {
+    		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
+    	} else { 		
+    		user_session.storePlaceData(restaurant_name, restaurant_type, restaurant_latitude, restaurant_longitude);
+    		Toast.makeText(getApplicationContext(), "Added Restaurant to Itinerary", Toast.LENGTH_SHORT).show();
+    	}
+    	
+    }
 }

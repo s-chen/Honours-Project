@@ -3,8 +3,6 @@ package si.chen.honours.project.utility;
 import java.util.ArrayList;
 import java.util.Map;
 
-import org.json.JSONArray;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -32,35 +30,31 @@ public class UserSessionManager {
 	}
 		
 	// Store place data in SharedPrefs
-	public void storePlaceData(String name, double latitude, double longitude) {
+	public void storePlaceData(String name, String type, double latitude, double longitude) {
 		
 		ArrayList<String> place_data = new ArrayList<String>();
 		
 		int position = mPref.getInt("KEY_DATA_POSITION", 0);
 
+		// Store name, type, latitude, longitude to ArrayList
 		place_data.add(name);
+		place_data.add(type);
 		place_data.add(String.valueOf(latitude));
 		place_data.add(String.valueOf(longitude));
+		
 			
+		// Store key = position of selected ListView item, value = [name, type, latitude, longitude] in SharedPrefs
 		mEditor.putString("USER_DATA_" + position, place_data.toString());
 		mEditor.commit();
 	}
 	
-	// Get a single place data from SharedPrefs
-	public String getPlaceData() {
+	// Get all place data from a specific SharedPref (Attractions, Food, Drinks, Accommodation, Shopping etc.)
+	public ArrayList<String> getAllPlacesData() {
 		
-		int position = mPref.getInt("KEY_DATA_POSITION", 0);
+		ArrayList<String> place_data = new ArrayList<String>();
 		
-		return mPref.getString("USER_DATA_" + position, null);
-	}
-	
-	// Get all place data from SharedPrefs
-	public void getAllPlacesData() {
-		
-		// String array for {place name, place latitude, place longitude}
-		String[] parsed_place_value = new String[3];
-		
-		ArrayList<String> place_name = new ArrayList<String>();
+		// String array for [place name, place type, place latitude, place longitude]
+		String[] parsed_place_value = new String[4];
 				
 		// Get SharedPref map
 		Map<String,?> prefsMap = mPref.getAll();
@@ -68,30 +62,42 @@ public class UserSessionManager {
 		// Iterate over SharedPref map and get key, value pairs
 		for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
 			
-			// Don't add position to ArrayList of place names
+			// Ignore position data for clicked ListView item
 			if (entry.getKey().equals("KEY_DATA_POSITION")) {
 				continue;
 			}
 			
-			// Store place name, place latitude, place longitude from values obtained in SharedPref map
+			// Store place name, place type, place latitude, place longitude from values obtained in SharedPref map
 			parsed_place_value = entry.getValue().toString().split(",");
-			
-			// Obtain place name and remove all occurrences of '[' and ']'
+	
+			// Obtain place name and remove all occurrences of '[' and ']' and leading/trailing whitespace
 			String name = parsed_place_value[0];
 			name = name.replaceAll("\\[|\\]", "");
+			name = name.trim();
 			
+			// Obtain place type and remove all occurrences of '[' and ']' and leading/trailing whitespace
+			String type = parsed_place_value[1];
+			type = type.replaceAll("\\[|\\]", "");
+			type = type.trim();
 			
-			// Add place name to ArrayList
-			place_name.add(name);
+			// Obtain place latitude and remove all occurrences of '[' and ']' and leading/trailing whitespace
+			String latitude = parsed_place_value[2];
+			latitude = latitude.replaceAll("\\[|\\]", "");
+			latitude = latitude.trim();
+					
+			// Obtain place longitude and remove all occurrences of '[' and ']' and leading/trailing whitespace
+			String longitude = parsed_place_value[3];
+			longitude = longitude.replaceAll("\\[|\\]", "");
+			longitude = longitude.trim();
 			
+			// Add place name, type, latitude, longitude to ArrayList (separated by ## symbol)
+			place_data.add(name + "##" + type + "##" + latitude + "##" + longitude);
 			
 			
 			Log.i("SHARED_PREFS_DATA", entry.getKey() + ": " + entry.getValue().toString());
 		}
 		
-		for (int i = 0; i < place_name.size(); i++) {
-			System.out.println(place_name.get(i));
-		}
+		return place_data;
 	}
 	
 	// Store the position of the point of interest item that was clicked in the ListView 

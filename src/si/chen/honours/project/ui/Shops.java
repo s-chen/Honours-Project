@@ -137,6 +137,8 @@ public class Shops extends ActionBarActivity {
 				shopsIntent.putExtra("KEY_LATITUDE", shops_latitude[position]);
 				shopsIntent.putExtra("KEY_LONGITUDE", shops_longitude[position]);
 				shopsIntent.putExtra("KEY_CONTENT_URL", shops_url[position]);
+				shopsIntent.putExtra("KEY_SHOP_ITEM_POSITION", position);
+				shopsIntent.putExtra("KEY_TYPE", "Shop");
 						
 				startActivity(shopsIntent);
 				finish();

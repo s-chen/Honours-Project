@@ -36,7 +36,8 @@
 	    android:text="@string/button_add_to_itinerary_planner"
 	    android:background="@drawable/custom_button"
 	    android:textStyle="bold"
-	    android:layout_alignParentBottom="true" />
+	    android:layout_alignParentBottom="true"
+	    android:onClick="itineraryRestaurant" />
 
 	<Button
 	    android:id="@+id/button_search_restaurant_info_online"

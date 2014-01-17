@@ -138,6 +138,7 @@ public class Accommodation extends ActionBarActivity {
 				accommodationIntent.putExtra("KEY_LONGITUDE", accommodation_longitude[position]);
 				accommodationIntent.putExtra("KEY_CONTENT_URL", accommodation_url[position]);
 				accommodationIntent.putExtra("KEY_ACCOMMODATION_ITEM_POSITION", position);
+				accommodationIntent.putExtra("KEY_TYPE", "Accommodation");
 				
 				startActivity(accommodationIntent);
 				finish();

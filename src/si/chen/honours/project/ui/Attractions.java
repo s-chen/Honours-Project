@@ -141,6 +141,7 @@ public class Attractions extends ActionBarActivity {
 				attractionsIntent.putExtra("KEY_LONGITUDE", attractions_longitude[position]);
 				attractionsIntent.putExtra("KEY_CONTENT_URL", attractions_url[position]);
 				attractionsIntent.putExtra("KEY_ATTRACTION_ITEM_POSITION", position);
+				attractionsIntent.putExtra("KEY_TYPE", "Attraction");
 						
 				startActivity(attractionsIntent);
 				finish();

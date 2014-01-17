@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import si.chen.honours.project.*;
 import si.chen.honours.project.location.GPSListener;
+import si.chen.honours.project.utility.UserSessionManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /** Details of the particular drinks service - called when the service name is selected in the ListView **/
@@ -40,6 +42,8 @@ public class DrinksInfo extends ActionBarActivity {
 	private double drinks_latitude;
 	private double drinks_longitude;
 	private String drinks_url;
+	private int drinks_item_position;
+	private String drinks_type;
 
 	private GPSListener gps;
 	private Location user_location;
@@ -60,6 +64,7 @@ public class DrinksInfo extends ActionBarActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		
+		
 		// Get drinks data passed from Drinks.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected drinks data.");
 		drinksIntent = getIntent();
@@ -69,6 +74,8 @@ public class DrinksInfo extends ActionBarActivity {
 		drinks_latitude = drinksIntent.getDoubleExtra("KEY_LATITUDE", 0);
         drinks_longitude = drinksIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		drinks_url = drinksIntent.getStringExtra("KEY_CONTENT_URL");
+		drinks_item_position = drinksIntent.getIntExtra("KEY_DRINKS_ITEM_POSITION", 0);
+		drinks_type = drinksIntent.getStringExtra("KEY_TYPE");
 		
 		
 
@@ -255,4 +262,22 @@ public class DrinksInfo extends ActionBarActivity {
    	    overridePendingTransition(0, 0);
    	    startActivity(intent);
     }    
+    
+    // Called when 'Add to Itinerary' button is clicked
+    public void itineraryDrinks(View view) {
+    	 	
+    	UserSessionManager user_session = new UserSessionManager(this, "DRINK_PREFS");
+    	
+    	// Store position of drink item clicked in ListView in SharedPrefs
+    	user_session.storeItemPosition(drinks_item_position);
+    	
+    	// If item already added to itinerary display a message, otherwise store corresponding information in SharedPrefs
+    	if (user_session.existInItinerary()) {
+    		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
+    	} else { 		
+    		user_session.storePlaceData(drinks_name, drinks_type, drinks_latitude, drinks_longitude);
+    		Toast.makeText(getApplicationContext(), "Added Drink location to Itinerary", Toast.LENGTH_SHORT).show();
+    	}
+    	
+    }
 }

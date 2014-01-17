@@ -42,6 +42,7 @@ public class AccommodationInfo extends ActionBarActivity {
 	private double accommodation_longitude;
 	private String accommodation_url;
 	private int accommodation_item_position;
+	private String accommodation_type;
 
 	private GPSListener gps;
 	private Location user_location;
@@ -51,8 +52,7 @@ public class AccommodationInfo extends ActionBarActivity {
 	private LatLng user_lat_lng;
 	private int distance;
 	private StringBuilder formatted_accommodation_address;
-	
-	private UserSessionManager user_session;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +62,7 @@ public class AccommodationInfo extends ActionBarActivity {
 		setTitle("View information");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		
-		// Instantiates UserSessionManager to manage user preferences
-		user_session = new UserSessionManager(this, "ACCOMMODATION_PREFS");
-		//user_session.deleteItineraryItems();
-		user_session.getAllPlacesData();
-		
-		
+
 		
 		// Get accommodation data passed from Accommodation.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected accommodation data.");
@@ -80,6 +74,7 @@ public class AccommodationInfo extends ActionBarActivity {
         accommodation_longitude = accommodationIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		accommodation_url = accommodationIntent.getStringExtra("KEY_CONTENT_URL");
 		accommodation_item_position = accommodationIntent.getIntExtra("KEY_ACCOMMODATION_ITEM_POSITION", 0);
+		accommodation_type = accommodationIntent.getStringExtra("KEY_TYPE");
 		
 
 		// Create instance of GPSListener
@@ -271,6 +266,8 @@ public class AccommodationInfo extends ActionBarActivity {
     // Called when 'Add to Itinerary' button is clicked
     public void itineraryAccommodation(View view) {
     	 	
+    	UserSessionManager user_session = new UserSessionManager(this, "ACCOMMODATION_PREFS");
+    	
     	// Store position of accommodation item clicked in ListView in SharedPrefs
     	user_session.storeItemPosition(accommodation_item_position);
     	
@@ -278,10 +275,9 @@ public class AccommodationInfo extends ActionBarActivity {
     	if (user_session.existInItinerary()) {
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
-    		user_session.storePlaceData(accommodation_name, accommodation_latitude, accommodation_longitude);
+    		user_session.storePlaceData(accommodation_name, accommodation_type, accommodation_latitude, accommodation_longitude);
     		Toast.makeText(getApplicationContext(), "Added Accommodation to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	
-    	Log.i("SESSION", user_session.getPlaceData());
     }
 }

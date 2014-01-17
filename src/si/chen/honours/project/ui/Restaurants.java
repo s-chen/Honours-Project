@@ -140,6 +140,8 @@ public class Restaurants extends ActionBarActivity {
 				restaurantIntent.putExtra("KEY_LATITUDE", restaurant_latitude[position]);
 				restaurantIntent.putExtra("KEY_LONGITUDE", restaurant_longitude[position]);
 				restaurantIntent.putExtra("KEY_CONTENT_URL", restaurant_url[position]);
+				restaurantIntent.putExtra("KEY_RESTAURANT_ITEM_POSITION", position);
+				restaurantIntent.putExtra("KEY_TYPE", "Food");
 				
 				startActivity(restaurantIntent);
 				finish();

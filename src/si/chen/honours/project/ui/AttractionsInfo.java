@@ -43,6 +43,7 @@ public class AttractionsInfo extends ActionBarActivity {
 	private double attractions_longitude;
 	private String attractions_url;
 	private int attraction_item_position;
+	private String attractions_type;
 
 	private GPSListener gps;
 	private Location user_location;
@@ -53,8 +54,6 @@ public class AttractionsInfo extends ActionBarActivity {
 	private int distance;
 	private StringBuilder formatted_attractions_address;
 	
-	private UserSessionManager user_session;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,13 +61,7 @@ public class AttractionsInfo extends ActionBarActivity {
 		
 		setTitle("View information");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		
-		// Instantiates UserSessionManager to manage user preferences
-		user_session = new UserSessionManager(this, "ATTRACTION_PREFS");
-		//user_session.deleteItineraryItems();
-		user_session.getAllPlacesData();
-		
+
 		
 		
 		// Get attractions data passed from Attractions.java class
@@ -81,7 +74,7 @@ public class AttractionsInfo extends ActionBarActivity {
         attractions_longitude = attractionsIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		attractions_url = attractionsIntent.getStringExtra("KEY_CONTENT_URL");
 		attraction_item_position = attractionsIntent.getIntExtra("KEY_ATTRACTION_ITEM_POSITION", 0);
-		
+		attractions_type = attractionsIntent.getStringExtra("KEY_TYPE");
 		
 
 		// Create instance of GPSListener
@@ -271,7 +264,9 @@ public class AttractionsInfo extends ActionBarActivity {
     
     // Called when 'Add to Itinerary' button is clicked
     public void itineraryAttraction(View view) {
-    
+    	
+    	UserSessionManager user_session = new UserSessionManager(this, "ATTRACTION_PREFS");
+    	
     	// Store position of attraction item clicked in ListView in SharedPrefs
     	user_session.storeItemPosition(attraction_item_position);
     	
@@ -279,10 +274,9 @@ public class AttractionsInfo extends ActionBarActivity {
     	if (user_session.existInItinerary()) {
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
-    		user_session.storePlaceData(attractions_name, attractions_latitude, attractions_longitude);
+    		user_session.storePlaceData(attractions_name, attractions_type, attractions_latitude, attractions_longitude);
     		Toast.makeText(getApplicationContext(), "Added Attraction to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	
-    	Log.i("SESSION", user_session.getPlaceData());
     }
 }

@@ -141,6 +141,8 @@ public class Drinks extends ActionBarActivity {
 				drinksIntent.putExtra("KEY_LATITUDE", drinks_latitude[position]);
 				drinksIntent.putExtra("KEY_LONGITUDE", drinks_longitude[position]);
 				drinksIntent.putExtra("KEY_CONTENT_URL", drinks_url[position]);
+				drinksIntent.putExtra("KEY_DRINKS_ITEM_POSITION", position);
+				drinksIntent.putExtra("KEY_TYPE", "Drink");
 						
 				startActivity(drinksIntent);
 				finish();

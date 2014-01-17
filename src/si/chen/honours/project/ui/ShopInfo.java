@@ -9,6 +9,7 @@ import si.chen.honours.project.R.id;
 import si.chen.honours.project.R.layout;
 import si.chen.honours.project.R.menu;
 import si.chen.honours.project.location.GPSListener;
+import si.chen.honours.project.utility.UserSessionManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,6 +45,8 @@ public class ShopInfo extends ActionBarActivity {
 	private double shop_latitude;
 	private double shop_longitude;
 	private String shop_url;
+	private int shop_item_position;
+	private String shop_type;
 
 	private GPSListener gps;
 	private Location user_location;
@@ -64,6 +67,7 @@ public class ShopInfo extends ActionBarActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		
+		
 		// Get shop data passed from Shops.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected shop data.");
 		shopIntent = getIntent();
@@ -73,7 +77,8 @@ public class ShopInfo extends ActionBarActivity {
 		shop_latitude = shopIntent.getDoubleExtra("KEY_LATITUDE", 0);
         shop_longitude = shopIntent.getDoubleExtra("KEY_LONGITUDE", 0);
 		shop_url = shopIntent.getStringExtra("KEY_CONTENT_URL");
-		
+		shop_item_position = shopIntent.getIntExtra("KEY_SHOP_ITEM_POSITION", 0);
+		shop_type = shopIntent.getStringExtra("KEY_TYPE");
 		
 
 		// Create instance of GPSListener
@@ -259,4 +264,22 @@ public class ShopInfo extends ActionBarActivity {
    	    overridePendingTransition(0, 0);
    	    startActivity(intent);
     }    
+    
+    // Called when 'Add to Itinerary' button is clicked
+    public void itineraryShop(View view) {
+    	 	
+    	UserSessionManager user_session = new UserSessionManager(this, "SHOP_PREFS");
+    	
+    	// Store position of shop item clicked in ListView in SharedPrefs
+    	user_session.storeItemPosition(shop_item_position);
+    	
+    	// If item already added to itinerary display a message, otherwise store corresponding information in SharedPrefs
+    	if (user_session.existInItinerary()) {
+    		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
+    	} else { 		
+    		user_session.storePlaceData(shop_name, shop_type, shop_latitude, shop_longitude);
+    		Toast.makeText(getApplicationContext(), "Added Shop to Itinerary", Toast.LENGTH_SHORT).show();
+    	}
+    	
+    }
 }
