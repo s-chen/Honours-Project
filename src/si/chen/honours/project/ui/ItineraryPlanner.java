@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -67,7 +69,7 @@ public class ItineraryPlanner extends ActionBarActivity {
 				place_latitudes.add(places_data.get(i).split("##")[2]);
 				place_longitudes.add(places_data.get(i).split("##")[3]);
 				
-				// Store place name followed by place type
+				// Store place name followed by place type (formatting ListView UI)
 				place_names_types.add(places_data.get(i).split("##")[0] + " - " + "(" + places_data.get(i).split("##")[1] + ")");
 			}
 		}
@@ -79,6 +81,22 @@ public class ItineraryPlanner extends ActionBarActivity {
 		lv_itinerary.setAdapter(itinerary_adapter);
 		
 		
+		// Display direction information for selected itinerary item by starting ItineraryItemDirection activity
+		lv_itinerary.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			
+				// Store relevant data into intent
+				Intent intent = new Intent(getApplicationContext(), ItineraryItemDirection.class);
+				intent.putExtra("KEY_NAME", place_names.get(position));
+				intent.putExtra("KEY_TYPE", place_types.get(position));
+				intent.putExtra("KEY_LATITUDE", place_latitudes.get(position));
+				intent.putExtra("KEY_LONGITUDE", place_longitudes.get(position));
+				
+				startActivity(intent);
+				finish();
+			}
+			
+		});
 	}
 
 	@Override

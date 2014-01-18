@@ -19,10 +19,14 @@ public class GoogleAPIHelper {
 
 	// Google API Key
 	private static final String API_KEY = "AIzaSyB_Lb3cBA2ex0x0BxYpc0YfSwXLXNZConI";
+	
 	// Google Nearby Places search URL
 	private String NEARBY_PLACE_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
 	// Nearby Place details search using reference id
 	private String NEARBY_PLACE_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json?reference=";
+	
+	// Google Directions URL
+	private String DIRECTIONS_URL = "https://maps.googleapis.com/maps/api/directions/json?origin=";
 	
 	
 	private double mLatitude;

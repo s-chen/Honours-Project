@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <permission
         android:name="si.chen.honours.project.permission.MAPS_RECEIVE"
@@ -140,6 +140,11 @@
         <activity
             android:name="si.chen.honours.project.ui.ItineraryPlanner"
             android:label="@string/title_activity_itinerary_planner"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.ItineraryItemDirection"
+            android:label="@string/title_activity_itinerary_item_direction"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
     </application>

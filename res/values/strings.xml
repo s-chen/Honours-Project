@@ -49,5 +49,6 @@
     <string name="title_activity_itinerary_planner">ItineraryPlanner</string>
     <string name="title_activity_itinerary_list">ItineraryList</string>
     <string name="button_delete_all_itinerary_items">Delete Itinerary Items</string>
+    <string name="title_activity_itinerary_item_direction">ItineraryItemDirection</string>
 
 </resources>
