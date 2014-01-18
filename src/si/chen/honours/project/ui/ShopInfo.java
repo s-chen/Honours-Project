@@ -5,27 +5,16 @@ import java.util.List;
 import java.util.Locale;
 
 import si.chen.honours.project.R;
-import si.chen.honours.project.R.id;
-import si.chen.honours.project.R.layout;
-import si.chen.honours.project.R.menu;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.UserSessionManager;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,9 +22,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 
 /** Details of the particular shop - called when the name is selected in the ListView **/
-public class ShopInfo extends ActionBarActivity {
+public class ShopInfo extends FragmentActivity {
 
 	private GoogleMap shop_map;
 	private Intent shopIntent;
@@ -63,8 +60,10 @@ public class ShopInfo extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shop_info);
 		
-		setTitle("View information");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("View information");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		
 		
@@ -166,7 +165,7 @@ public class ShopInfo extends ActionBarActivity {
 		
 		
 		// Display map fragment, with marker of shop location given by lat, lng coordinates
-     	shop_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.shop_map)).getMap();
+     	shop_map = ((MapFragment) getFragmentManager().findFragmentById(R.id.shop_map)).getMap();
      	LatLng shop_lat_lng = new LatLng(shop_latitude, shop_longitude);
      	Marker location = shop_map.addMarker(new MarkerOptions()
      				.position(shop_lat_lng).snippet(formatted_shop_address.toString())

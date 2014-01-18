@@ -3,12 +3,13 @@ package si.chen.honours.project.ui;
 import java.util.Collections;
 import java.util.List;
 
-import si.chen.honours.project.*;
+import si.chen.honours.project.R;
 import si.chen.honours.project.utility.DatabaseHelper;
 import si.chen.honours.project.utility.PointOfInterest;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,7 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 // Display list of shops
-public class Shops extends ActionBarActivity {
+public class Shops extends Activity {
 
 	private List<PointOfInterest> shops_list;
 	private int[] shops_id;
@@ -43,8 +44,10 @@ public class Shops extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shops);
 		
-		setTitle("Shops");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Shops");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		
 		lv_shops = (ListView) findViewById(R.id.listView_shops);

@@ -4,16 +4,17 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import si.chen.honours.project.*;
+import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.UserSessionManager;
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -30,7 +32,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /** Details of the particular restaurant - called when a restaurant is selected in the ListView **/
-public class RestaurantInfo extends ActionBarActivity {
+public class RestaurantInfo extends FragmentActivity {
 
 	private GoogleMap restaurant_map;
 	private Intent restaurantIntent;
@@ -58,8 +60,10 @@ public class RestaurantInfo extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_restaurant_info);
 		
-		setTitle("View information");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("View information");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		
 		
@@ -166,7 +170,7 @@ public class RestaurantInfo extends ActionBarActivity {
         
 		
      	// Display map fragment, with marker of restaurant location given by lat, lng coordinates
-     	restaurant_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.restaurant_map)).getMap();
+     	restaurant_map = ((MapFragment) getFragmentManager().findFragmentById(R.id.restaurant_map)).getMap();
      	LatLng restaurant_lat_lng = new LatLng(restaurant_latitude, restaurant_longitude);
      	Marker location = restaurant_map.addMarker(new MarkerOptions()
      				.position(restaurant_lat_lng).snippet(formatted_restaurant_address.toString())

@@ -1,26 +1,24 @@
 package si.chen.honours.project.ui;
 
 import si.chen.honours.project.R;
-import si.chen.honours.project.R.id;
-import si.chen.honours.project.R.layout;
-import si.chen.honours.project.R.menu;
 import si.chen.honours.project.location.GPSListener;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 // Display Google Maps with current user location
-public class MapActivity extends ActionBarActivity {
+public class MapActivity extends FragmentActivity {
 
 	private GoogleMap map;
 	private GPSListener gps;
@@ -35,11 +33,13 @@ public class MapActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		
-		setTitle("Map");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Map");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		// Open Google Maps 
-		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		
 		// Create instance of GPSListener
 		gps = new GPSListener(this);
@@ -101,6 +101,9 @@ public class MapActivity extends ActionBarActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 			return true;
+		case R.id.action_refresh:
+			refresh();
+			return true;
 		default:
 		      return super.onOptionsItemSelected(item);
 		}
@@ -113,4 +116,16 @@ public class MapActivity extends ActionBarActivity {
     	startActivity(intent);
     	finish();
     }
+    
+    // Refresh activity - called when 'Refresh' action button clicked
+    public void refresh() {
+    	
+    	Intent intent = getIntent();
+    	overridePendingTransition(0, 0);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+
+   	    overridePendingTransition(0, 0);
+   	    startActivity(intent);
+    }  
 }

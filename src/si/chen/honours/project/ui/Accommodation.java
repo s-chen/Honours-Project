@@ -3,12 +3,13 @@ package si.chen.honours.project.ui;
 import java.util.Collections;
 import java.util.List;
 
-import si.chen.honours.project.*;
+import si.chen.honours.project.R;
 import si.chen.honours.project.utility.DatabaseHelper;
 import si.chen.honours.project.utility.PointOfInterest;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,7 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 // Display list of Accommodation
-public class Accommodation extends ActionBarActivity {
+public class Accommodation extends Activity {
 
 	private List<PointOfInterest> accommodation_list;
 	private int[] accommodation_id;
@@ -43,8 +44,10 @@ public class Accommodation extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_accommodation);
 		
-		setTitle("Accommodation");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Accommodation");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		
 		lv_accommodation = (ListView) findViewById(R.id.listView_accommodation);

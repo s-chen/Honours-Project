@@ -17,7 +17,7 @@
         	android:text="@string/tourist_attraction"
         	android:textColor="@color/Black"
         	android:textStyle="bold"
-        	android:textSize="30sp"
+        	android:textSize="35sp"
         	android:onClick="touristAttractions" />
 
     	<Button
@@ -30,7 +30,7 @@
         	android:text="@string/button_restaurants"
         	android:textColor="@color/Black"
         	android:textStyle="bold"
-        	android:textSize="30sp" />
+        	android:textSize="35sp" />
 
     	<Button
         	android:id="@+id/button_drinks"
@@ -41,7 +41,7 @@
         	android:text="@string/button_drinks"
         	android:textColor="@color/Black"
         	android:textStyle="bold"
-        	android:textSize="30sp"
+        	android:textSize="35sp"
         	android:onClick="drinks" />
     
     
@@ -54,7 +54,7 @@
         	android:text="@string/button_accommodation"
         	android:textColor="@color/Black"
         	android:textStyle="bold"
-        	android:textSize="30sp"
+        	android:textSize="35sp"
         	android:onClick="accommodation" />
   	
   		<Button
@@ -66,7 +66,7 @@
         	android:text="@string/button_shops"
         	android:textColor="@color/Black"
         	android:textStyle="bold"
-        	android:textSize="30sp"
+        	android:textSize="35sp"
         	android:onClick="shops" />
   	
   		<Button
@@ -78,7 +78,7 @@
         	android:text="@string/button_nearby_places"
         	android:textColor="@color/Black"
         	android:textStyle="bold"
-        	android:textSize="30sp"
+        	android:textSize="35sp"
         	android:onClick="nearbyPlaces" />
   		
   		<Button
@@ -90,7 +90,7 @@
         	android:text="@string/button_itinerary_planner"
         	android:textColor="@color/Black"
         	android:textStyle="bold"
-        	android:textSize="30sp"
+        	android:textSize="35sp"
         	android:onClick="itineraryPlanner" />
 	    
   

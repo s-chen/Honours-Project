@@ -3,16 +3,16 @@ package si.chen.honours.project.ui;
 import java.util.ArrayList;
 
 import si.chen.honours.project.R;
+import android.app.ActionBar;
+import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.OnNavigationListener;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
-public class ItineraryItemDirection extends ActionBarActivity implements OnNavigationListener {
+public class ItineraryItemDirection extends FragmentActivity implements OnNavigationListener {
 
 	ArrayList<String> transportList = new ArrayList<String>();
 	ArrayAdapter<String> transportAdapter;
@@ -23,10 +23,13 @@ public class ItineraryItemDirection extends ActionBarActivity implements OnNavig
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_itinerary_item_direction);
 		
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 		// Drop down list to select mode of transport: driving, walking; bicycling
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		
 		// Add modes of transport and bind to adapter
 		transportList.add("Driving Directions");
@@ -34,12 +37,12 @@ public class ItineraryItemDirection extends ActionBarActivity implements OnNavig
 		transportList.add("Cycling Directions");
 		
 		// Bind ArrayList to adapter
-		transportAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.spinner_list, R.id.spinner_list_item, transportList);
+		transportAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), R.layout.spinner_list, R.id.spinner_list_item, transportList);
 		// Populate spinner drop down list
 		transportAdapter.setDropDownViewResource(R.layout.spinner_list);
 
 		// Assign adapter to ActionBar
-		getSupportActionBar().setListNavigationCallbacks(transportAdapter, this);
+		actionBar.setListNavigationCallbacks(transportAdapter, this);
 		
 	}
 	

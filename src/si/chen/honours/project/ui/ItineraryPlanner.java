@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.utility.UserSessionManager;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 // Itinerary Planner showing all items added to the itinerary
-public class ItineraryPlanner extends ActionBarActivity {
+public class ItineraryPlanner extends Activity {
 
 	private ListView lv_itinerary;
 	private ArrayAdapter<String> itinerary_adapter;
@@ -46,8 +47,11 @@ public class ItineraryPlanner extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_itinerary_planner);
 		
-		setTitle("Itinerary Planner");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Itinerary Planner");
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 		
 		lv_itinerary = (ListView) findViewById(R.id.listView_itinerary);
 		

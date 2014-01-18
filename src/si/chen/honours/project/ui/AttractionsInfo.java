@@ -4,25 +4,17 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import si.chen.honours.project.*;
+import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.UserSessionManager;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,9 +22,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 
 /** Details of the particular attraction - called when the name is selected in the ListView **/
-public class AttractionsInfo extends ActionBarActivity {
+public class AttractionsInfo extends FragmentActivity {
 
 	private GoogleMap attractions_map;
 	private Intent attractionsIntent;
@@ -59,8 +59,10 @@ public class AttractionsInfo extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_attractions_info);
 		
-		setTitle("View information");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("View information");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		
 		
@@ -163,7 +165,7 @@ public class AttractionsInfo extends ActionBarActivity {
 		
 		
 		// Display map fragment, with marker of attractions location given by lat, lng coordinates
-     	attractions_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.attractions_map)).getMap();
+     	attractions_map = ((MapFragment) getFragmentManager().findFragmentById(R.id.attractions_map)).getMap();
      	LatLng attractions_lat_lng = new LatLng(attractions_latitude, attractions_longitude);
      	Marker location = attractions_map.addMarker(new MarkerOptions()
      				.position(attractions_lat_lng).snippet(formatted_attractions_address.toString())

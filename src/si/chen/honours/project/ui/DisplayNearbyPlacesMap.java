@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -14,7 +15,7 @@ import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -22,7 +23,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 // Show Nearby Places markers on Google Maps
-public class DisplayNearbyPlacesMap extends ActionBarActivity {
+public class DisplayNearbyPlacesMap extends FragmentActivity {
 
 	private GoogleMap nearby_places_map;
 	private GPSListener gps;
@@ -35,8 +36,10 @@ public class DisplayNearbyPlacesMap extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_nearby_places_map);
 		
-		setTitle("Showing Nearby Places on map");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Showing Nearby Places");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		// Create instance of GPSListener
 		gps = new GPSListener(this);
@@ -54,7 +57,7 @@ public class DisplayNearbyPlacesMap extends ActionBarActivity {
 		}
 		
 		// Open Google Maps 
-		nearby_places_map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.nearby_places_map)).getMap();
+		nearby_places_map = ((MapFragment) getFragmentManager().findFragmentById(R.id.nearby_places_map)).getMap();
 		
 		// Add user location marker
 		Marker user_location_marker = nearby_places_map.addMarker(new MarkerOptions()
@@ -137,6 +140,9 @@ public class DisplayNearbyPlacesMap extends ActionBarActivity {
             startActivity(intent);
             finish();
 			return true;
+		case R.id.action_refresh:
+			refresh();
+			return true;
 		default:
 		      return super.onOptionsItemSelected(item);
 		}
@@ -149,4 +155,16 @@ public class DisplayNearbyPlacesMap extends ActionBarActivity {
     	startActivity(intent);
     	finish();
     }
+    
+    // Refresh activity - called when 'Refresh' action button clicked
+    public void refresh() {
+    	
+    	Intent intent = getIntent();
+    	overridePendingTransition(0, 0);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+
+   	    overridePendingTransition(0, 0);
+   	    startActivity(intent);
+    }  
 }

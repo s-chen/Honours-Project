@@ -2,30 +2,25 @@ package si.chen.honours.project.ui;
 
 import java.io.IOException;
 
-import si.chen.honours.project.*;
+import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.DatabaseHelper;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-
-
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 // Main Menu of app
-public class MainMenu extends ActionBarActivity {
+public class MainMenu extends Activity {
 	
 	private GPSListener gps;
 	
@@ -33,6 +28,10 @@ public class MainMenu extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        
+        // Show action bar
+        ActionBar actionBar = getActionBar();
+        actionBar.show();
         
         /** Populate Edinburgh POI database on Android System
         using database file from assets folder **/

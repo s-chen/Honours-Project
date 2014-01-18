@@ -3,12 +3,13 @@ package si.chen.honours.project.ui;
 import java.util.Collections;
 import java.util.List;
 
-import si.chen.honours.project.*;
+import si.chen.honours.project.R;
 import si.chen.honours.project.utility.DatabaseHelper;
 import si.chen.honours.project.utility.PointOfInterest;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,13 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 
 // Display list of Pubs/Bars/Clubs/Cafes
-public class Drinks extends ActionBarActivity {
+public class Drinks extends Activity {
 
 	private List<PointOfInterest> drinks_list;
 	private int[] drinks_id;
@@ -44,8 +45,10 @@ public class Drinks extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_drinks);
 		
-		setTitle("Drinks");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Drinks");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		
 		lv_drinks = (ListView) findViewById(R.id.listView_drinks);

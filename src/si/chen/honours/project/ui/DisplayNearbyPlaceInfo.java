@@ -1,21 +1,21 @@
 package si.chen.honours.project.ui;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.utility.GoogleAPIHelper;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class DisplayNearbyPlaceInfo extends ActionBarActivity {
+public class DisplayNearbyPlaceInfo extends Activity {
 
 	GoogleAPIHelper nearbyPlaceHelper;
 	private JSONObject nearby_place_details;
@@ -34,8 +34,10 @@ public class DisplayNearbyPlaceInfo extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_nearby_place_info);
 		
-		setTitle("View Nearby Place Information");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("View Nearby Place information");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		
 		// Get place name, reference passed from DisplayNearbyPlaces

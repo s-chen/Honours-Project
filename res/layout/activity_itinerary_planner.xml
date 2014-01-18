@@ -10,7 +10,8 @@
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:text="@string/button_delete_all_itinerary_items" 
-        android:onClick="deleteAllItineraryItems" />
+        android:onClick="deleteAllItineraryItems"
+        android:textSize="20sp" />
         
     <ListView
         android:id="@+id/listView_itinerary"
