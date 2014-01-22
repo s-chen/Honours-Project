@@ -26,8 +26,7 @@ public class DisplayNearbyPlaceInfo extends Activity {
 	private TextView textView_place_address;
 	private TextView textView_place_phone_number;
  	
-	private String KEY_STATUS = "status";
-	private String KEY_RESULTS = "results";
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

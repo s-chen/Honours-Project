@@ -6,7 +6,83 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ItineraryItemDirection" >
+    tools:context=".ItineraryItemDirection"
+    android:background="@drawable/background_colour" >
+
+    
+  	<fragment
+	    android:id="@+id/directions_map"
+	    android:layout_width="match_parent"
+	    android:layout_height="250dp"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    class="com.google.android.gms.maps.MapFragment" />
 
 
+	<ScrollView
+	    android:id="@+id/scrollView_directions" 
+  		android:layout_width="fill_parent"
+  		android:layout_height="fill_parent"
+  		android:layout_below="@+id/directions_map" >
+        
+		<LinearLayout
+	  	  android:layout_width="fill_parent"
+	  	  android:layout_height="wrap_content"
+	  	  android:orientation="vertical" >
+
+
+   	 		<TextView
+      			android:id="@+id/textView_current_location"
+     			android:layout_width="match_parent"
+    			android:layout_height="wrap_content"
+      	  		android:textSize="20sp"
+       	 		android:textColor="@color/White"
+       	 		android:textStyle="bold" />
+    
+   			<TextView
+        		android:id="@+id/textView_destination_location"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:textSize="20sp"
+        		android:textColor="@color/White"
+        		android:textStyle="bold" />
+    
+   			<TextView
+        		android:id="@+id/textView_total_distance"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:textSize="20sp"
+        		android:textColor="@color/White"
+        		android:textStyle="bold" />
+   			
+   			<TextView
+        		android:id="@+id/textView_total_duration"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:textSize="20sp"
+        		android:textColor="@color/White"
+        		android:textStyle="bold" />
+   			
+  
+   			<TextView 
+   			    android:id="@+id/textView_direction_instructions"
+   			   	android:layout_width="match_parent"
+   			    android:layout_height="wrap_content"
+   			    android:textSize="20sp"
+        		android:textColor="@color/White"
+        		android:textStyle="bold" />
+   		
+   			
+   			<TextView
+        		android:id="@+id/textView_warning_message"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:textSize="30sp"
+        		android:textColor="@color/White"
+        		android:textStyle="bold" />
+    
+		</LinearLayout>
+
+	</ScrollView>
+	
 </RelativeLayout>
