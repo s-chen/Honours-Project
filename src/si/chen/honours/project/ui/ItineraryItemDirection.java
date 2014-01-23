@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.GoogleAPIHelper;
+import si.chen.honours.project.utility.UserSessionManager;
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.AlertDialog;
@@ -23,8 +24,10 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,6 +45,8 @@ public class ItineraryItemDirection extends FragmentActivity implements OnNaviga
 	ArrayList<String> transportList = new ArrayList<String>();
 	ArrayAdapter<String> transportAdapter;
 	
+	private UserSessionManager user_session;
+	
 	private GoogleAPIHelper directionsHelper;
 	private GoogleMap directions_map;
 	
@@ -53,6 +58,7 @@ public class ItineraryItemDirection extends FragmentActivity implements OnNaviga
 	private String place_type;
 	private double place_latitude;
 	private double place_longitude;
+	private String sharedPref_key;
 	
 	private JSONObject direction_information;
 	private JSONArray warnings;
@@ -117,6 +123,7 @@ public class ItineraryItemDirection extends FragmentActivity implements OnNaviga
 		place_type = intent.getStringExtra("KEY_TYPE");
 		place_latitude = Double.valueOf(intent.getStringExtra("KEY_LATITUDE"));
 		place_longitude = Double.valueOf(intent.getStringExtra("KEY_LONGITUDE"));
+		sharedPref_key = intent.getStringExtra("SHARED_PREF_KEY");
 		
 	}
 	
@@ -394,6 +401,64 @@ public class ItineraryItemDirection extends FragmentActivity implements OnNaviga
 		}
 	}
 	
+	
+    // Delete a specific itinerary item by SharedPref key
+    public void deleteItineraryItem(View view) {
+    	
+    	AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+    	
+        // Setting Dialog Title
+        alertDialog.setTitle("Confirm Deletion");
+        
+    	// Setting Dialog message 
+    	alertDialog.setMessage("Are you sure you want to delete this itinerary item?");
+    	
+    	// Set "Delete" button
+    	alertDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				
+				Log.i("SHARED_PREFS_DELETED_ITEM", "Deleted item with SharedPref key: " + sharedPref_key);
+				
+				// Instantiate user_session to category of SharedPrefs based on place type
+				if (place_type.equals("Attraction")) {
+					user_session = new UserSessionManager(ItineraryItemDirection.this, "ATTRACTION_PREFS");
+				} else if (place_type.equals("Food")) {
+					user_session = new UserSessionManager(ItineraryItemDirection.this, "RESTAURANT_PREFS");
+				} else if (place_type.equals("Drink")) {
+					user_session = new UserSessionManager(ItineraryItemDirection.this, "DRINK_PREFS");
+				} else if (place_type.equals("Accommodation")) {
+					user_session = new UserSessionManager(ItineraryItemDirection.this, "ACCOMMODATION_PREFS");
+				} else if (place_type.equals("Shop")) {
+					user_session = new UserSessionManager(ItineraryItemDirection.this, "SHOP_PREFS");
+				}
+					
+				// Delete itinerary item by SharedPref key
+				user_session.deleteItineraryItem(sharedPref_key);
+		    	
+				Toast.makeText(getApplicationContext(), "Itinerary Item Deleted", Toast.LENGTH_SHORT).show();
+				
+				// Go back to ItineraryPlanner class
+				Intent intent = new Intent(ItineraryItemDirection.this, ItineraryPlanner.class);
+				startActivity(intent);
+				finish();
+			}
+		});
+    	
+    	// Set "Cancel" button 
+    	alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+    	
+    	// Show alert message 
+    	alertDialog.show();
+
+    }
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -412,11 +477,17 @@ public class ItineraryItemDirection extends FragmentActivity implements OnNaviga
             startActivity(intent);
             finish();
 			return true;
+        case R.id.action_home:
+        	// Go to Main Menu
+            Intent homeIntent = new Intent(this, MainMenu.class);
+            homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
+            finish();
 		default:
 		      return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
     @Override
     public void onBackPressed() {
     	

@@ -28,7 +28,8 @@ public class UserSessionManager {
 		mPref = context.getSharedPreferences(pref_name, PRIVATE_MODE);
 		mEditor = mPref.edit();
 	}
-		
+
+	
 	// Store place data in SharedPrefs
 	public void storePlaceData(String name, String type, double latitude, double longitude) {
 		
@@ -90,8 +91,11 @@ public class UserSessionManager {
 			longitude = longitude.replaceAll("\\[|\\]", "");
 			longitude = longitude.trim();
 			
-			// Add place name, type, latitude, longitude to ArrayList (separated by ## symbol)
-			place_data.add(name + "##" + type + "##" + latitude + "##" + longitude);
+			// Obtain SharedPref key for place
+			String sharedPref_key = entry.getKey();
+			
+			// Add place name, type, latitude, longitude, SharedPref key to ArrayList (separated by ## symbol)
+			place_data.add(name + "##" + type + "##" + latitude + "##" + longitude + "##" + sharedPref_key);
 			
 			
 			Log.i("SHARED_PREFS_DATA", entry.getKey() + ": " + entry.getValue().toString());
@@ -119,9 +123,15 @@ public class UserSessionManager {
 		}
 	}
 	
-	// Delete itinerary items for specific SharedPref
-	public void deleteItineraryItems() {
+	// Delete all itinerary items from a SharedPref
+	public void deleteAllItineraryItems() {
 		mEditor.clear();
+		mEditor.commit();
+	}
+	
+	// Delete a specific itinerary item
+	public void deleteItineraryItem(String key) {
+		mEditor.remove(key);
 		mEditor.commit();
 	}
 

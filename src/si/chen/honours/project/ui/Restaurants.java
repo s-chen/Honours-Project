@@ -174,6 +174,12 @@ public class Restaurants extends Activity {
             startActivity(intent);
             finish();
 			return true;
+        case R.id.action_home:
+        	// Go to Main Menu
+            Intent homeIntent = new Intent(this, MainMenu.class);
+            homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
+            finish();
 		default:
 		      return super.onOptionsItemSelected(item);
 		}

@@ -70,6 +70,12 @@ public class MainMenu extends Activity {
             	Intent intentMap = new Intent(this, MapActivity.class);
             	startActivity(intentMap);
             	return true;
+            case R.id.action_log_in:
+            	return true;
+            case R.id.action_help:
+            	return true;
+            case R.id.action_about_app:
+            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -80,6 +80,15 @@
         		android:textSize="30sp"
         		android:textColor="@color/White"
         		android:textStyle="bold" />
+   			
+   			
+   			<Button 
+   			    android:id="@+id/button_deleteItineraryItem"
+   			    android:layout_width="fill_parent"
+   			    android:layout_height="wrap_content"
+   			    android:text="@string/button_delete_itinerary_item"
+   			    android:onClick="deleteItineraryItem"
+   			    android:textSize="20sp" />"
     
 		</LinearLayout>
 

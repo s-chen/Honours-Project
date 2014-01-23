@@ -48,7 +48,13 @@
     <string name="button_itinerary_planner">Itinerary Planner</string>
     <string name="title_activity_itinerary_planner">ItineraryPlanner</string>
     <string name="title_activity_itinerary_list">ItineraryList</string>
-    <string name="button_delete_all_itinerary_items">Delete Itinerary Items</string>
+    <string name="button_delete_all_itinerary_items">Delete All Itinerary Items</string>
     <string name="title_activity_itinerary_item_direction">ItineraryItemDirection</string>
+    <string name="button_delete_itinerary_item">Delete Itinerary Item</string>
+    <string name="action_overflow">Overflow</string>
+    <string name="action_home">Home</string>
+    <string name="action_log_in">Log In</string>
+    <string name="action_help">Help</string>
+    <string name="action_about_app">About</string>
 
 </resources>

@@ -32,11 +32,12 @@ public class ItineraryPlanner extends Activity {
 
 	private ArrayList<String> places_data = new ArrayList<String>();
 	
-	// ArrayLists for place name, place type, place latitude, place longitude
+	// ArrayLists for place name, place type, place latitude, place longitude, SharedPref keys
 	private ArrayList<String> place_names = new ArrayList<String>();
 	private ArrayList<String> place_types = new ArrayList<String>();
 	private ArrayList<String> place_latitudes = new ArrayList<String>();
 	private ArrayList<String> place_longitudes = new ArrayList<String>();
+	private ArrayList<String> sharedPref_keys = new ArrayList<String>();
 	
 	// For formatting ListView UI (e.g. name - type)
 	private ArrayList<String> place_names_types = new ArrayList<String>();
@@ -62,16 +63,17 @@ public class ItineraryPlanner extends Activity {
 			// Get current SharedPrefs category
 			user_session = new UserSessionManager(this, pref);
 			
-			// ArrayList with data in the form: name##type##latitude##longitude
+			// ArrayList with data in the form: name##type##latitude##longitude##sharedPrefKey
 			places_data = user_session.getAllPlacesData();
 			
 			for (int i = 0; i < places_data.size(); i++) {
 				
-				// Store place name, type, latitude, longitude to ArrayLists
+				// Store place name, type, latitude, longitude, SharedPref key to ArrayLists
 				place_names.add(places_data.get(i).split("##")[0]);
 				place_types.add(places_data.get(i).split("##")[1]);
 				place_latitudes.add(places_data.get(i).split("##")[2]);
 				place_longitudes.add(places_data.get(i).split("##")[3]);
+				sharedPref_keys.add(places_data.get(i).split("##")[4]);
 				
 				// Store place name followed by place type (formatting ListView UI)
 				place_names_types.add(places_data.get(i).split("##")[0] + " - " + "(" + places_data.get(i).split("##")[1] + ")");
@@ -95,7 +97,8 @@ public class ItineraryPlanner extends Activity {
 				intent.putExtra("KEY_TYPE", place_types.get(position));
 				intent.putExtra("KEY_LATITUDE", place_latitudes.get(position));
 				intent.putExtra("KEY_LONGITUDE", place_longitudes.get(position));
-				
+				intent.putExtra("SHARED_PREF_KEY", sharedPref_keys.get(position));
+			
 				startActivity(intent);
 				finish();
 			}
@@ -121,6 +124,12 @@ public class ItineraryPlanner extends Activity {
             startActivity(intent);
             finish();
 			return true;
+        case R.id.action_home:
+        	// Go to Main Menu
+            Intent homeIntent = new Intent(this, MainMenu.class);
+            homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
+            finish();
 		default:
 		      return super.onOptionsItemSelected(item);
 		}
@@ -158,8 +167,8 @@ public class ItineraryPlanner extends Activity {
 		    		
 					// Get current SharedPrefs category
 					user_session = new UserSessionManager(ItineraryPlanner.this, pref);
-					// Delete itinerary items for specific SharedPref
-					user_session.deleteItineraryItems();
+					// Delete all itinerary items for specific SharedPref
+					user_session.deleteAllItineraryItems();
 		    	}
 			
 				Toast.makeText(getApplicationContext(), "All Itinerary Items Deleted", Toast.LENGTH_SHORT).show();
