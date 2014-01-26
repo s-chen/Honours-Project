@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.GoogleAPIHelper;
+import si.chen.honours.project.utility.aws.AWSHelper;
+import si.chen.honours.project.utility.aws.User;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -119,6 +121,13 @@ public class DisplayNearbyPlaces extends Activity {
 		// Get JSON object from URL 
 		@Override
 		protected JSONObject doInBackground(String... args) {
+			
+			
+		/*	AWSHelper aws = new AWSHelper();
+			User u = new User("662", "TEST", "3");
+			aws.addUserInfo(u);
+	 		System.out.println(aws.getUserInfo().toString());*/
+			
 			
 			nearbyPlaceHelper = new GoogleAPIHelper(user_latitude, user_longitude, radius, types);
 			

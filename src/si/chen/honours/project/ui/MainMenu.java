@@ -33,6 +33,7 @@ public class MainMenu extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.show();
         
+        
         /** Populate Edinburgh POI database on Android System
         using database file from assets folder **/
 		DatabaseHelper dbHelper = new DatabaseHelper(this);
