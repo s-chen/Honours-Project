@@ -147,6 +147,12 @@
             android:label="@string/title_activity_itinerary_item_direction"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.utility.Login"
+            android:label="@string/title_activity_login"
+            android:theme="@style/CustomActionBarTheme"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
     </application>
 
 </manifest>

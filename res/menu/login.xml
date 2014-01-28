@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_forgot_password"
+        android:showAsAction="never"
+        android:title="@string/action_forgot_password"/>
+    
+  	<item android:id="@+id/action_home" 
+       android:icon="@drawable/ic_action_home" 
+       android:title="@string/action_home"
+       android:showAsAction="always" />
+
+</menu>

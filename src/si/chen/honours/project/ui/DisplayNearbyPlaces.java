@@ -122,13 +122,6 @@ public class DisplayNearbyPlaces extends Activity {
 		@Override
 		protected JSONObject doInBackground(String... args) {
 			
-			
-		/*	AWSHelper aws = new AWSHelper();
-			User u = new User("662", "TEST", "3");
-			aws.addUserInfo(u);
-	 		System.out.println(aws.getUserInfo().toString());*/
-			
-			
 			nearbyPlaceHelper = new GoogleAPIHelper(user_latitude, user_longitude, radius, types);
 			
 			nearby_places = nearbyPlaceHelper.getNearbyPlacesResponse();

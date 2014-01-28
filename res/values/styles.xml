@@ -1,15 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  	<color name="White">#FFFFFF</color>
-	<color name="Black">#000000</color>
-    
-    <style name="AppTheme" parent="android:Theme.Light" >
-		<item name="android:windowNoTitle">true</item>
+    <color name="White">#FFFFFF</color>
+    <color name="Black">#000000</color>
+
+    <style name="AppTheme" parent="android:Theme.Light">
+        <item name="android:windowNoTitle">true</item>
     </style>
-    
-    <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar" >
-		<item name="android:actionBarSize">65dp</item>
+
+    <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarSize">65dp</item>
     </style>
-    
+
+    <style name="LoginFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
 
 </resources>
