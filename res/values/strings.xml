@@ -56,5 +56,10 @@
     <string name="action_log_in">Log In</string>
     <string name="action_help">Help</string>
     <string name="action_about_app">About</string>
+    <string name="title_activity_login_splash_fragment">LoginSplashFragment</string>
+    <string name="app_id">1460003874222865</string>
+    <string name="title_facebook_login">Facebook Login</string>
+    <string name="get_started">To get started, log in using Facebook</string>
+    <string name="title_activity_logged_in_fragment">LoggedInFragment</string>
 
 </resources>

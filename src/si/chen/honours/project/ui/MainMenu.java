@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
+import si.chen.honours.project.login.Login;
 import si.chen.honours.project.utility.DatabaseHelper;
-import si.chen.honours.project.utility.Login;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
