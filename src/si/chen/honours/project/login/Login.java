@@ -1,29 +1,20 @@
 package si.chen.honours.project.login;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import si.chen.honours.project.R;
 import si.chen.honours.project.ui.MainMenu;
+import android.app.ActionBar;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.android.Facebook;
 
 
 // Login Activity, allow users to Log In to Facebook (using non-authenticated and authenticated fragments)
@@ -32,17 +23,14 @@ public class Login extends FragmentActivity {
 	
 	private static final int LOGIN_SPLASH_FRAGMENT = 0;
 	private static final int LOGGED_IN_FRAGMENT = 1;
-	private static final int FRAGMENT_COUNT = LOGGED_IN_FRAGMENT + 1;
+	private static final int LOGOUT_FRAGMENT = 2;
+	private static final int FRAGMENT_COUNT = LOGOUT_FRAGMENT + 1;
 
 	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
 
 	private boolean isResumed = false;
-	private UiLifecycleHelper uiHelper;
-	private String APP_ID = "583768655037747";
-	
-	@SuppressWarnings("deprecation")
-	Facebook facebook = new Facebook(APP_ID);
-	
+	private UiLifecycleHelper uiHelper;	
+	private MenuItem logout;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,9 +38,12 @@ public class Login extends FragmentActivity {
 
 	    setContentView(R.layout.activity_login);
 	    
+		// Set up action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Log In");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	    
-	    
-	    
+		
 	    uiHelper = new UiLifecycleHelper(this, callback);
 	    uiHelper.onCreate(savedInstanceState);
 
@@ -60,6 +51,9 @@ public class Login extends FragmentActivity {
 	    FragmentManager fm = getSupportFragmentManager();
 	    fragments[LOGIN_SPLASH_FRAGMENT] = fm.findFragmentById(R.id.loginSplashFragment);
 	    fragments[LOGGED_IN_FRAGMENT] = fm.findFragmentById(R.id.loggedInFragment);
+	    
+	    // Logout fragment
+	    fragments[LOGOUT_FRAGMENT] = fm.findFragmentById(R.id.userSettingsFragment);
 
 	    // Initially hide fragments
 	    FragmentTransaction transaction = fm.beginTransaction();
@@ -67,33 +61,9 @@ public class Login extends FragmentActivity {
 	        transaction.hide(fragments[i]);
 	    }
 	    transaction.commit();
-	    
-	    printHashKey();
-	    
+
 	}
-	
-	  public void printHashKey() {
 
-	        try {
-	            PackageInfo info = getPackageManager().getPackageInfo("si.chen.honours.project",
-	                    PackageManager.GET_SIGNATURES);
-	            for (Signature signature : info.signatures) {
-	                MessageDigest md = MessageDigest.getInstance("SHA");
-	                md.update(signature.toByteArray());
-	                Log.d("TEMPTAGHASH KEY:",
-	                        Base64.encodeToString(md.digest(), Base64.DEFAULT));
-	            }
-	        } catch (NameNotFoundException e) {
-
-	        } catch (NoSuchAlgorithmException e) {
-
-	        }
-
-	    }
-	
-	
-
-	
 	// Show given fragment and hide other fragments
 	private void showFragment(int fragmentIndex, boolean addToBackStack) {
 		
@@ -157,8 +127,6 @@ public class Login extends FragmentActivity {
 	    }
 	}
 	
-
-	
 	@Override
 	public void onResume() {
 	    super.onResume();
@@ -178,14 +146,6 @@ public class Login extends FragmentActivity {
 	    super.onActivityResult(requestCode, resultCode, data);
 	    uiHelper.onActivityResult(requestCode, resultCode, data);
 	    
-	   // facebook.authorizeCallback(requestCode, resultCode, data);
-	    
-	    
-	    Session.getActiveSession()
-        .onActivityResult(this, requestCode, resultCode, data);
-	    
-/*	    Session.OpenRequest openRequest = new Session.OpenRequest(getParent());
-	    openRequest.setLoginBehavior(SessionLoginBehavior.SUPPRESS_SSO);*/
 	}
 
 	@Override
@@ -199,7 +159,7 @@ public class Login extends FragmentActivity {
 	    super.onSaveInstanceState(outState);
 	    uiHelper.onSaveInstanceState(outState);
 	}
-	
+		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -208,7 +168,7 @@ public class Login extends FragmentActivity {
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {		
 		// Handle presses on the action bar items
 		switch(item.getItemId()) {
 		case android.R.id.home:
@@ -224,6 +184,10 @@ public class Login extends FragmentActivity {
             homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(homeIntent);
             finish();
+        case R.id.action_logout:
+        	// Log out
+        	showFragment(LOGOUT_FRAGMENT, true);
+        	return true;
 		default:
 		      return super.onOptionsItemSelected(item);
 		}

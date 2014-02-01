@@ -23,7 +23,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 
-// Set up non-authenticated UI fragment for Facebook 
+// Set up non-authenticated UI fragment for Facebook to show user when not authenticated
 public class LoginSplashFragment extends Fragment {
 	
 	private static final String TAG = "LoginSplashFragment";
@@ -79,21 +79,14 @@ public class LoginSplashFragment extends Fragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, 
-	        ViewGroup container, 
-	        Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    View view = inflater.inflate(R.layout.activity_login_splash_fragment, container, false);
 	    
-	/*    LoginButton authButton = (LoginButton) view.findViewById(R.id.authButton);
-	    authButton.setFragment(this);
-	    authButton.setReadPermissions(Arrays.asList("user_likes", "user_status"));*/
-	    
-//	    LoginButton authButton = (LoginButton) view.findViewById(R.id.authButton);
-//	    authButton.setFragment(this);
-
+	    Log.i(TAG, "Showing non-authenticated fragment..");
 	    return view;
 	}
 	
+	// Check session state
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
 	    if (state.isOpened()) {
 	        Log.i(TAG, "Logged in...");
