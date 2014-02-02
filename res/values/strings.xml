@@ -61,6 +61,6 @@
     <string name="title_facebook_login">Facebook Login</string>
     <string name="get_started">To get started, log in using Facebook</string>
     <string name="title_activity_logged_in_fragment">LoggedInFragment</string>
-    <string name="action_logout">Log Out</string>
+    <string name="action_logout">Logout</string>
 
 </resources>

@@ -12,6 +12,8 @@ public class User implements Serializable {
 	private String user_password;
 	
 	private String user_rating;
+	
+	private String user_name;
 
 
 	
@@ -22,9 +24,18 @@ public class User implements Serializable {
 		this.user_password = user_password;
 	}
 	
+	public User(String user_id, String user_name) {
+		this.user_id = user_id;
+		this.user_name = user_name;
+	}
+	
 		
 	public String getUserId() {
 		return this.user_id;
+	}
+	
+	public String getUserName() {
+		return this.user_name;
 	}
 		
 	public String getUserEmail() {

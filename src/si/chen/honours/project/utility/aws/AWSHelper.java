@@ -73,7 +73,7 @@ public class AWSHelper {
 	}
 	
 	// Get user information using USER_EMAIL as key
-	public List<Item> getUserInfo(String user_email) {
+	public List<Item> getUserInfoFromEmail(String user_email) {
 		
 		String test = "select user_email, user_password from " + USERS_DOMAIN + " where user_email = " + "'" + user_email + "'";
 		System.out.println(test);

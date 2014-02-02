@@ -81,8 +81,6 @@ public class LoginSplashFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    View view = inflater.inflate(R.layout.activity_login_splash_fragment, container, false);
-	    
-	    Log.i(TAG, "Showing non-authenticated fragment..");
 	    return view;
 	}
 	
