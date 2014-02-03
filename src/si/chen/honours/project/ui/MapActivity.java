@@ -3,9 +3,9 @@ package si.chen.honours.project.ui;
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 // Display Google Maps with current user location
-public class MapActivity extends FragmentActivity {
+public class MapActivity extends Activity {
 
 	private GoogleMap map;
 	private GPSListener gps;

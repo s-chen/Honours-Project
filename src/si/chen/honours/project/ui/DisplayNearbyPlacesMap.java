@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 // Show Nearby Places markers on Google Maps
-public class DisplayNearbyPlacesMap extends FragmentActivity {
+public class DisplayNearbyPlacesMap extends Activity {
 
 	private GoogleMap nearby_places_map;
 	private GPSListener gps;

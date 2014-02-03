@@ -3,6 +3,8 @@
 
     <color name="White">#FFFFFF</color>
     <color name="Black">#000000</color>
+    <color name="LightCyan">#cfebfe</color>
+    <color name="DarkBlue">#303060</color>
 
     <style name="AppTheme" parent="android:Theme.Light">
         <item name="android:windowNoTitle">true</item>

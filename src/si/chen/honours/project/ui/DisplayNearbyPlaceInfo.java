@@ -44,7 +44,7 @@ public class DisplayNearbyPlaceInfo extends Activity {
 		place_name = intent.getStringExtra("KEY_NAME");
 		place_reference = intent.getStringExtra("KEY_REFERENCE");
 		
-		
+		// Set nearby place address and phone number in TextView
 		textView_place_address = (TextView) findViewById(R.id.textView_nearby_place_address);
 		textView_place_phone_number = (TextView) findViewById(R.id.textView_nearby_place_phone_number);
 		

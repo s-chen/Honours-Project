@@ -12,6 +12,7 @@ import si.chen.honours.project.utility.GoogleAPIHelper;
 import si.chen.honours.project.utility.UserSessionManager;
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -19,7 +20,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -40,7 +40,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class ItineraryItemDirection extends FragmentActivity implements OnNavigationListener {
+public class ItineraryItemDirection extends Activity implements OnNavigationListener {
 
 	ArrayList<String> transportList = new ArrayList<String>();
 	ArrayAdapter<String> transportAdapter;
@@ -142,8 +142,20 @@ public class ItineraryItemDirection extends FragmentActivity implements OnNaviga
 		Log.i("TRANSPORT_MODE", transport_mode);
 
 		
-		// Reset warning message TextView when new transport mode selected
+		// Reset polyline points on transport mode change
+		overview_polyline_points = "";
+		// Reset TextView messages on transport mode change
+		textView_current_location.setText("");;
+		textView_destination_location.setText("");
+		textView_total_distance.setText("");
+		textView_total_duration.setText("");
+		textView_direction_instructions.setText("");
 		textView_warning_message.setText("");
+		
+		// Clear map on transport mode change
+		directions_map = ((MapFragment) getFragmentManager().findFragmentById(R.id.directions_map)).getMap();
+		directions_map.clear();
+		
 		
 		
 		

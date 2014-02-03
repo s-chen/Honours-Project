@@ -8,13 +8,13 @@ import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.UserSessionManager;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +32,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /** Details of the particular accommodation - called when the name is selected in the ListView **/
-public class AccommodationInfo extends FragmentActivity {
+public class AccommodationInfo extends Activity {
 
 	private GoogleMap accommodation_map;
 	private Intent accommodationIntent;

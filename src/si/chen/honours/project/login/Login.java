@@ -2,8 +2,6 @@ package si.chen.honours.project.login;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.ui.MainMenu;
-import si.chen.honours.project.utility.aws.AWSHelper;
-import si.chen.honours.project.utility.aws.User;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,8 +49,8 @@ public class Login extends FragmentActivity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Log In");
 		actionBar.setDisplayHomeAsUpEnabled(true);
-	    
 		
+
 	    uiHelper = new UiLifecycleHelper(this, callback);
 	    uiHelper.onCreate(savedInstanceState);
 
@@ -104,11 +102,13 @@ public class Login extends FragmentActivity {
 	        if (state.isOpened()) {
 	            // If the session state is open:
 	            // Show the authenticated fragment
-	            showFragment(LOGGED_IN_FRAGMENT, false);	            
+	            showFragment(LOGGED_IN_FRAGMENT, false);
+	            Log.i("LOGGED_IN_FRAGMENT", "Showing authenticated fragment");
 	        } else if (state.isClosed()) {
 	            // If the session state is closed:
 	            // Show the login fragment
 	            showFragment(LOGIN_SPLASH_FRAGMENT, false);
+	            Log.i("LOGIN_SPLASH_FRAGMENT", "Showing non-authenticated fragment");
 	        }
 	    }
 	}
@@ -154,10 +154,12 @@ public class Login extends FragmentActivity {
 	        // if the session is already open,
 	        // try to show the authenticated fragment
 	        showFragment(LOGGED_IN_FRAGMENT, false);
+	        Log.i("LOGGED_IN_FRAGMENT", "Showing authenticated fragment");
 	    } else {
 	        // otherwise present the splash screen
 	        // and ask the person to login.
 	        showFragment(LOGIN_SPLASH_FRAGMENT, false);
+	        Log.i("LOGIN_SPLASH_FRAGMENT", "Showing non-authenticated fragment");
 	    }
 	}
 	
@@ -218,9 +220,11 @@ public class Login extends FragmentActivity {
             homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(homeIntent);
             finish();
+            return true;
         case R.id.action_logout:
         	// Log out from Facebook
         	showFragment(LOGOUT_FRAGMENT, true);
+        	Log.i("LOGOUT_FRAGMENT", "Showing logout fragment");
         	return true;
 		default:
 		      return super.onOptionsItemSelected(item);

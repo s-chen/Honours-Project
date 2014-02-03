@@ -1,27 +1,18 @@
 package si.chen.honours.project.login;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-
 import si.chen.honours.project.R;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.LoginButton;
 
 // Set up non-authenticated UI fragment for Facebook to show user when not authenticated
 public class LoginSplashFragment extends Fragment {
@@ -81,9 +72,13 @@ public class LoginSplashFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    View view = inflater.inflate(R.layout.activity_login_splash_fragment, container, false);
+
+	    // Set text for 'get started'
+	    TextView textView_get_started = (TextView) view.findViewById(R.id.textView_get_started);
+	    textView_get_started.setText(R.string.get_started);
 	    return view;
 	}
-	
+		
 	// Check session state
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
 	    if (state.isOpened()) {
