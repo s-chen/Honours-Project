@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ItineraryItemDirection"
-    android:background="@drawable/background_colour" >
+    android:background="@color/DarkBlue" >
 
     
   	<fragment
@@ -88,6 +88,10 @@
    			    android:layout_height="wrap_content"
    			    android:text="@string/button_delete_itinerary_item"
    			    android:onClick="deleteItineraryItem"
+   			    android:background="@drawable/custom_button"
+   			    android:textColor="@color/DarkRed"
+        		android:typeface="serif"
+        		android:textStyle="italic"
    			    android:textSize="20sp" />"
     
 		</LinearLayout>

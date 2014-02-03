@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AccommodationInfo"
-    android:background="@drawable/background_colour" >
+    android:background="@color/DarkBlue" >
 
   	<fragment
 	    android:id="@+id/accommodation_map"
@@ -34,9 +34,10 @@
 	    android:layout_alignBottom="@+id/button_search_accommodation_info_online"
 	    android:layout_alignRight="@+id/accommodation_map"
 	    android:text="@string/button_add_to_itinerary_planner"
-	    android:textColor="@color/Black"
 	    android:background="@drawable/custom_button"
-	    android:textStyle="bold"
+       	android:textColor="@color/DarkRed"
+        android:typeface="serif"
+        android:textStyle="italic"
 	    android:layout_alignParentBottom="true" 
 	    android:onClick="itineraryAccommodation" />
 
@@ -49,8 +50,9 @@
 	    android:background="@drawable/custom_button"
 	    android:onClick="searchAccommodationOnline"
 	    android:text="@string/button_search_info_online"
-	    android:textColor="@color/Black"
-	    android:textStyle="bold"
+        android:textColor="@color/DarkRed"
+        android:typeface="serif"
+        android:textStyle="italic"
 	    android:layout_alignParentBottom="true" />
    	
 	 <TextView

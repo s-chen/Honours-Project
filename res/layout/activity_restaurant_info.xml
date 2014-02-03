@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RestaurantInfo" 
-    android:background="@drawable/background_colour" >
+    android:background="@color/DarkBlue" >
 
     <fragment
 	    android:id="@+id/restaurant_map"
@@ -35,7 +35,9 @@
 	    android:layout_alignRight="@+id/restaurant_map"
 	    android:text="@string/button_add_to_itinerary_planner"
 	    android:background="@drawable/custom_button"
-	    android:textStyle="bold"
+       	android:textColor="@color/DarkRed"
+        android:typeface="serif"
+        android:textStyle="italic"
 	    android:layout_alignParentBottom="true"
 	    android:onClick="itineraryRestaurant" />
 
@@ -48,7 +50,9 @@
 	    android:background="@drawable/custom_button"
 	    android:onClick="searchRestaurantOnline"
 	    android:text="@string/button_search_info_online"
-	    android:textStyle="bold"
+       	android:textColor="@color/DarkRed"
+        android:typeface="serif"
+        android:textStyle="italic"
 	    android:layout_alignParentBottom="true" />
 
 	<TextView

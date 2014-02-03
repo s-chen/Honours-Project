@@ -1,7 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   		android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/background_colour" >
+        android:background="@color/DarkBlue" >
         
 	<LinearLayout
 	    android:layout_width="fill_parent"
@@ -15,8 +15,9 @@
         	android:layout_marginTop="30dp"
         	android:background="@drawable/custom_button"
         	android:text="@string/tourist_attraction"
-        	android:textColor="@color/Black"
-        	android:textStyle="bold"
+        	android:textColor="@color/DarkRed"
+        	android:typeface="serif"
+            android:textStyle="italic"
         	android:textSize="35sp"
         	android:onClick="touristAttractions" />
 
@@ -28,8 +29,9 @@
         	android:background="@drawable/custom_button"
         	android:onClick="restaurants"
         	android:text="@string/button_restaurants"
-        	android:textColor="@color/Black"
-        	android:textStyle="bold"
+        	android:textColor="@color/DarkRed"
+        	android:typeface="serif"
+            android:textStyle="italic"
         	android:textSize="35sp" />
 
     	<Button
@@ -39,8 +41,9 @@
         	android:layout_marginTop="34dp"
         	android:background="@drawable/custom_button"
         	android:text="@string/button_drinks"
-        	android:textColor="@color/Black"
-        	android:textStyle="bold"
+        	android:textColor="@color/DarkRed"
+        	android:typeface="serif"
+            android:textStyle="italic"
         	android:textSize="35sp"
         	android:onClick="drinks" />
     
@@ -52,8 +55,9 @@
         	android:layout_marginTop="36dp"
         	android:background="@drawable/custom_button"
         	android:text="@string/button_accommodation"
-        	android:textColor="@color/Black"
-        	android:textStyle="bold"
+        	android:textColor="@color/DarkRed"
+        	android:typeface="serif"
+            android:textStyle="italic"
         	android:textSize="35sp"
         	android:onClick="accommodation" />
   	
@@ -64,8 +68,9 @@
         	android:layout_marginTop="40dp"
         	android:background="@drawable/custom_button"
         	android:text="@string/button_shops"
-        	android:textColor="@color/Black"
-        	android:textStyle="bold"
+        	android:textColor="@color/DarkRed"
+        	android:typeface="serif"
+            android:textStyle="italic"
         	android:textSize="35sp"
         	android:onClick="shops" />
   	
@@ -76,8 +81,9 @@
         	android:layout_marginTop="42dp"
         	android:background="@drawable/custom_button"
         	android:text="@string/button_nearby_places"
-        	android:textColor="@color/Black"
-        	android:textStyle="bold"
+        	android:textColor="@color/DarkRed"
+        	android:typeface="serif"
+            android:textStyle="italic"
         	android:textSize="35sp"
         	android:onClick="nearbyPlaces" />
   		
@@ -88,8 +94,9 @@
         	android:layout_marginTop="44dp"
         	android:background="@drawable/custom_button"
         	android:text="@string/button_itinerary_planner"
-        	android:textColor="@color/Black"
-        	android:textStyle="bold"
+        	android:textColor="@color/DarkRed"
+        	android:typeface="serif"
+            android:textStyle="italic"
         	android:textSize="35sp"
         	android:onClick="itineraryPlanner" />
 	    

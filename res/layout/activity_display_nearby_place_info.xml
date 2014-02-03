@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/background_colour" >
+    android:background="@color/DarkBlue" >
 
     <TextView
         android:id="@+id/textView_nearby_place_name"

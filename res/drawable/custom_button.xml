@@ -8,12 +8,12 @@
          		android:topLeftRadius="10dp"
          		android:topRightRadius="10dp" />
              <stroke 
-                 android:width="2dp" 
-                 android:color="#e3ca49" />
+                 android:width="3dp" 
+                 android:color="@color/Gold" />
              <gradient 
                  android:angle="90"  
-                 android:startColor="#3e9004" 
-                 android:endColor="#3c7812" />            
+                 android:startColor="@color/LightEmerald" 
+                 android:endColor="@color/LightEmerald" />            
          </shape>
      </item>
      <item>
@@ -24,12 +24,12 @@
          		android:topLeftRadius="10dp"
          		android:topRightRadius="10dp" />
              <stroke 
-                android:width="2dp" 
-                android:color="#e3ca49" />
+                android:width="3dp" 
+                android:color="@color/LightYellow" />
              <gradient  
                 android:angle="90"  
-                android:startColor="#58c10f" 
-                android:endColor="#62d412" />            
+                android:startColor="@color/Emerald" 
+                android:endColor="@color/Emerald" />            
          </shape>
      </item>
 </selector>

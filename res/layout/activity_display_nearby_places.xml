@@ -8,7 +8,11 @@
         android:id="@+id/button_show_nearby_place_map"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_show_nearby_place_map"/>
+        android:textColor="@color/DarkRed"
+        android:typeface="serif"
+        android:textStyle="italic"
+        android:text="@string/button_show_nearby_place_map"
+        android:background="@drawable/custom_button" />
     
     <ListView
         android:id="@+id/listView_nearby_places"

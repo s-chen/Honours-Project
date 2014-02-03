@@ -11,7 +11,11 @@
         android:layout_height="wrap_content"
         android:text="@string/button_delete_all_itinerary_items" 
         android:onClick="deleteAllItineraryItems"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/DarkRed"
+        android:typeface="serif"
+        android:textStyle="italic"
+        android:background="@drawable/custom_button" />
         
     <ListView
         android:id="@+id/listView_itinerary"

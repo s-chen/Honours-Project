@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/LightCyan"
+                android:textColor="@color/White"
                 android:textSize="40sp"
                 android:typeface="serif"
                 android:textStyle="italic"
@@ -35,7 +35,7 @@
             android:text="@string/get_started"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:textColor="@color/LightCyan" />
+            android:textColor="@color/White" />
 
     <com.facebook.widget.LoginButton
             android:id="@+id/login_button"
