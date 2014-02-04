@@ -85,7 +85,7 @@ public class Restaurants extends Activity {
 		
 		// Store custom PointOfInterest object (name, services)
 		for (int i = 0; i < restaurant_list.size(); i++) {
-			restaurant_data[i] = new PointOfInterest(i+1, restaurant_name[i], services[i]);
+			restaurant_data[i] = new PointOfInterest(restaurant_id[i], restaurant_name[i], services[i]);
 		}
 
 		

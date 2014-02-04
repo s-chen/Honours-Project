@@ -83,7 +83,7 @@ public class Accommodation extends Activity {
 				
 		// Store custom PointOfInterest object (name, services)
 		for (int i = 0; i < accommodation_list.size(); i++) {
-			accommodation_data[i] = new PointOfInterest(i+1, accommodation_name[i], services[i]);
+			accommodation_data[i] = new PointOfInterest(accommodation_id[i], accommodation_name[i], services[i]);
 		}
 			
 

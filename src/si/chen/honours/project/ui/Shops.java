@@ -83,7 +83,7 @@ public class Shops extends Activity {
 				
 		// Store custom PointOfInterest object (name, services)
 		for (int i = 0; i < shops_list.size(); i++) {
-			shops_data[i] = new PointOfInterest(i+1, shops_name[i], services[i]);
+			shops_data[i] = new PointOfInterest(shops_id[i], shops_name[i], services[i]);
 		}
 			
 

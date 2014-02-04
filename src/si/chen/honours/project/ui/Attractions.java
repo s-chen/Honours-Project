@@ -84,7 +84,7 @@ public class Attractions extends Activity {
 				
 		// Store custom PointOfInterest object (name, services)
 		for (int i = 0; i < attractions_list.size(); i++) {
-			attractions_data[i] = new PointOfInterest(i+1, attractions_name[i], services[i]);
+			attractions_data[i] = new PointOfInterest(attractions_id[i], attractions_name[i], services[i]);
 		}
 			
 
