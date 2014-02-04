@@ -148,7 +148,7 @@
             android:theme="@style/CustomActionBarTheme" >
         </activity>
         <activity
-            android:name="si.chen.honours.project.login.Login"
+            android:name="si.chen.honours.project.login.FacebookLogin"
             android:label="@string/title_activity_login"
             android:theme="@style/CustomActionBarTheme"
             android:windowSoftInputMode="stateHidden" >

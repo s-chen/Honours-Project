@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
-import si.chen.honours.project.login.Login;
+import si.chen.honours.project.login.FacebookLogin;
 import si.chen.honours.project.utility.DatabaseHelper;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -73,7 +73,7 @@ public class MainMenu extends Activity {
             	startActivity(intentMap);
             	return true;
             case R.id.action_log_in:
-            	Intent intent = new Intent(this, Login.class);
+            	Intent intent = new Intent(this, FacebookLogin.class);
             	startActivity(intent);
             	return true;
             case R.id.action_help:

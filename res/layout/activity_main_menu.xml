@@ -17,7 +17,7 @@
         	android:text="@string/tourist_attraction"
         	android:textColor="@color/DarkRed"
         	android:typeface="serif"
-            android:textStyle="italic"
+            android:textStyle="italic|bold"
         	android:textSize="35sp"
         	android:onClick="touristAttractions" />
 
@@ -31,7 +31,7 @@
         	android:text="@string/button_restaurants"
         	android:textColor="@color/DarkRed"
         	android:typeface="serif"
-            android:textStyle="italic"
+            android:textStyle="italic|bold"
         	android:textSize="35sp" />
 
     	<Button
@@ -43,7 +43,7 @@
         	android:text="@string/button_drinks"
         	android:textColor="@color/DarkRed"
         	android:typeface="serif"
-            android:textStyle="italic"
+            android:textStyle="italic|bold"
         	android:textSize="35sp"
         	android:onClick="drinks" />
     
@@ -57,7 +57,7 @@
         	android:text="@string/button_accommodation"
         	android:textColor="@color/DarkRed"
         	android:typeface="serif"
-            android:textStyle="italic"
+            android:textStyle="italic|bold"
         	android:textSize="35sp"
         	android:onClick="accommodation" />
   	
@@ -70,7 +70,7 @@
         	android:text="@string/button_shops"
         	android:textColor="@color/DarkRed"
         	android:typeface="serif"
-            android:textStyle="italic"
+            android:textStyle="italic|bold"
         	android:textSize="35sp"
         	android:onClick="shops" />
   	
@@ -83,7 +83,7 @@
         	android:text="@string/button_nearby_places"
         	android:textColor="@color/DarkRed"
         	android:typeface="serif"
-            android:textStyle="italic"
+            android:textStyle="italic|bold"
         	android:textSize="35sp"
         	android:onClick="nearbyPlaces" />
   		
@@ -96,7 +96,7 @@
         	android:text="@string/button_itinerary_planner"
         	android:textColor="@color/DarkRed"
         	android:typeface="serif"
-            android:textStyle="italic"
+            android:textStyle="italic|bold"
         	android:textSize="35sp"
         	android:onClick="itineraryPlanner" />
 	    

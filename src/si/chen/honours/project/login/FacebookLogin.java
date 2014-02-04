@@ -22,7 +22,7 @@ import com.facebook.model.GraphUser;
 
 
 // Login Activity, allow users to Log In to Facebook (using non-authenticated and authenticated fragments)
-public class Login extends FragmentActivity {
+public class FacebookLogin extends FragmentActivity {
 
 	
 	private static final int LOGIN_SPLASH_FRAGMENT = 0;
@@ -43,7 +43,7 @@ public class Login extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 
-	    setContentView(R.layout.activity_login);
+	    setContentView(R.layout.activity_facebook_login);
 	    
 		// Set up action bar
 		ActionBar actionBar = getActionBar();

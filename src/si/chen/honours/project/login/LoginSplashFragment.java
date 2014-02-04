@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.Session;
@@ -76,6 +77,7 @@ public class LoginSplashFragment extends Fragment {
 	    // Set text for 'get started'
 	    TextView textView_get_started = (TextView) view.findViewById(R.id.textView_get_started);
 	    textView_get_started.setText(R.string.get_started);
+	    	    
 	    return view;
 	}
 		
