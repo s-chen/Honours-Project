@@ -26,7 +26,7 @@ import android.widget.ListView;
 public class Shops extends Activity {
 
 	private List<PointOfInterest> shops_list;
-	private int[] shops_id;
+	private String[] shops_id;
 	private String[] shops_name;
 	private String[] services;
 	private double[] shops_latitude;
@@ -62,7 +62,7 @@ public class Shops extends Activity {
 
 		
 		// Initialise arrays for storing shops data
-		shops_id = new int[shops_list.size()];
+		shops_id = new String[shops_list.size()];
 		shops_name = new String[shops_list.size()];
 		services = new String[shops_list.size()];
 		shops_latitude = new double[shops_list.size()];
@@ -135,6 +135,7 @@ public class Shops extends Activity {
 				}
 								
 				Intent shopsIntent = new Intent(getApplicationContext(), ShopInfo.class);
+				shopsIntent.putExtra("KEY_ID", shops_id[position]);
 				shopsIntent.putExtra("KEY_NAME", shops_name[position]);
 				shopsIntent.putExtra("KEY_SERVICES", services[position]);
 				shopsIntent.putExtra("KEY_LATITUDE", shops_latitude[position]);

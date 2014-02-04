@@ -36,7 +36,7 @@ public class ShopInfo extends Activity {
 
 	private GoogleMap shop_map;
 	private Intent shopIntent;
-	private int shop_id;
+	private String shop_id;
 	private String shop_name;
 	private String services;
 	private double shop_latitude;
@@ -70,7 +70,7 @@ public class ShopInfo extends Activity {
 		// Get shop data passed from Shops.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected shop data.");
 		shopIntent = getIntent();
-		shop_id = shopIntent.getIntExtra("KEY_ID", 0);
+		shop_id = shopIntent.getStringExtra("KEY_ID");
 		shop_name = shopIntent.getStringExtra("KEY_NAME");
 		services = shopIntent.getStringExtra("KEY_SERVICES");
 		shop_latitude = shopIntent.getDoubleExtra("KEY_LATITUDE", 0);
@@ -282,7 +282,7 @@ public class ShopInfo extends Activity {
     	if (user_session.existInItinerary()) {
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
-    		user_session.storePlaceData(shop_name, shop_type, shop_latitude, shop_longitude);
+    		user_session.storePlaceData(shop_id, shop_name, shop_type, shop_latitude, shop_longitude);
     		Toast.makeText(getApplicationContext(), "Added Shop to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	

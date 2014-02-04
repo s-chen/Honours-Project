@@ -26,7 +26,7 @@ import android.widget.ListView;
 public class Accommodation extends Activity {
 
 	private List<PointOfInterest> accommodation_list;
-	private int[] accommodation_id;
+	private String[] accommodation_id;
 	private String[] accommodation_name;
 	private String[] services;
 	private double[] accommodation_latitude;
@@ -62,7 +62,7 @@ public class Accommodation extends Activity {
 
 		
 		// Initialise arrays for storing accommodation data
-		accommodation_id = new int[accommodation_list.size()];
+		accommodation_id = new String[accommodation_list.size()];
 		accommodation_name = new String[accommodation_list.size()];
 		services = new String[accommodation_list.size()];
 		accommodation_latitude = new double[accommodation_list.size()];
@@ -74,6 +74,9 @@ public class Accommodation extends Activity {
 		// Store accommodation data in arrays
 		for (int i = 0; i < accommodation_list.size(); i++) {
 			accommodation_id[i] = accommodation_list.get(i).getID();
+			
+			System.out.println("ID " + accommodation_id[i]);
+			
 			accommodation_name[i] = accommodation_list.get(i).getName();
 			services[i] = accommodation_list.get(i).getServices();
 			accommodation_latitude[i] = accommodation_list.get(i).getLatitude();
@@ -135,6 +138,7 @@ public class Accommodation extends Activity {
 				}
 								
 				Intent accommodationIntent = new Intent(getApplicationContext(), AccommodationInfo.class);
+				accommodationIntent.putExtra("KEY_ID", accommodation_id[position]);
 				accommodationIntent.putExtra("KEY_NAME", accommodation_name[position]);
 				accommodationIntent.putExtra("KEY_SERVICES", services[position]);
 				accommodationIntent.putExtra("KEY_LATITUDE", accommodation_latitude[position]);

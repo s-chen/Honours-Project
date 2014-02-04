@@ -26,7 +26,7 @@ import android.widget.ListView;
 public class Restaurants extends Activity {
 	
 	private List<PointOfInterest> restaurant_list;
-	private int[] restaurant_id;
+	private String[] restaurant_id;
 	private String[] restaurant_name;
 	private String[] services;
 	private double[] restaurant_latitude;
@@ -63,7 +63,7 @@ public class Restaurants extends Activity {
 		Collections.sort(restaurant_list);
 
 		// Initialise arrays for storing restaurant data
-		restaurant_id = new int[restaurant_list.size()];
+		restaurant_id = new String[restaurant_list.size()];
 		restaurant_name = new String[restaurant_list.size()];
 		services = new String[restaurant_list.size()];
 		restaurant_latitude = new double[restaurant_list.size()];

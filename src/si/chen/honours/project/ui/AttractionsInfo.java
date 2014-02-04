@@ -36,7 +36,7 @@ public class AttractionsInfo extends Activity {
 
 	private GoogleMap attractions_map;
 	private Intent attractionsIntent;
-	private int attractions_id;
+	private String attractions_id;
 	private String attractions_name;
 	private String services;
 	private double attractions_latitude;
@@ -69,7 +69,7 @@ public class AttractionsInfo extends Activity {
 		// Get attractions data passed from Attractions.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected attractions data.");
 		attractionsIntent = getIntent();
-		attractions_id = attractionsIntent.getIntExtra("KEY_ID", 0);
+		attractions_id = attractionsIntent.getStringExtra("KEY_ID");
 		attractions_name = attractionsIntent.getStringExtra("KEY_NAME");
 		services = attractionsIntent.getStringExtra("KEY_SERVICES");
 		attractions_latitude = attractionsIntent.getDoubleExtra("KEY_LATITUDE", 0);
@@ -282,7 +282,7 @@ public class AttractionsInfo extends Activity {
     	if (user_session.existInItinerary()) {
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
-    		user_session.storePlaceData(attractions_name, attractions_type, attractions_latitude, attractions_longitude);
+    		user_session.storePlaceData(attractions_id, attractions_name, attractions_type, attractions_latitude, attractions_longitude);
     		Toast.makeText(getApplicationContext(), "Added Attraction to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	

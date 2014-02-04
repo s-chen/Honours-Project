@@ -36,7 +36,7 @@ public class DrinksInfo extends Activity {
 
 	private GoogleMap drinks_map;
 	private Intent drinksIntent;
-	private int drinks_id;
+	private String drinks_id;
 	private String drinks_name;
 	private String services;
 	private double drinks_latitude;
@@ -70,7 +70,7 @@ public class DrinksInfo extends Activity {
 		// Get drinks data passed from Drinks.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected drinks data.");
 		drinksIntent = getIntent();
-		drinks_id = drinksIntent.getIntExtra("KEY_ID", 0);
+		drinks_id = drinksIntent.getStringExtra("KEY_ID");
 		drinks_name = drinksIntent.getStringExtra("KEY_NAME");
 		services = drinksIntent.getStringExtra("KEY_SERVICES");
 		drinks_latitude = drinksIntent.getDoubleExtra("KEY_LATITUDE", 0);
@@ -283,7 +283,7 @@ public class DrinksInfo extends Activity {
     	if (user_session.existInItinerary()) {
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
-    		user_session.storePlaceData(drinks_name, drinks_type, drinks_latitude, drinks_longitude);
+    		user_session.storePlaceData(drinks_id, drinks_name, drinks_type, drinks_latitude, drinks_longitude);
     		Toast.makeText(getApplicationContext(), "Added Drink location to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	

@@ -26,7 +26,7 @@ import android.widget.ListView;
 public class Attractions extends Activity {
 
 	private List<PointOfInterest> attractions_list;
-	private int[] attractions_id;
+	private String[] attractions_id;
 	private String[] attractions_name;
 	private String[] services;
 	private double[] attractions_latitude;
@@ -63,7 +63,7 @@ public class Attractions extends Activity {
 
 		
 		// Initialise arrays for storing attractions data
-		attractions_id = new int[attractions_list.size()];
+		attractions_id = new String[attractions_list.size()];
 		attractions_name = new String[attractions_list.size()];
 		services = new String[attractions_list.size()];
 		attractions_latitude = new double[attractions_list.size()];

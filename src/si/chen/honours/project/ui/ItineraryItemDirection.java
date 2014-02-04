@@ -54,6 +54,7 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 	private double user_latitude;
 	private double user_longitude;
 	private String transport_mode;
+	private String place_id;
 	private String place_name;
 	private String place_type;
 	private double place_latitude;
@@ -119,6 +120,7 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 		
 		// Get data from intent passed by ItineraryPlanner
 		Intent intent = getIntent();
+		place_id = intent.getStringExtra("KEY_ID");
 		place_name = intent.getStringExtra("KEY_NAME");
 		place_type = intent.getStringExtra("KEY_TYPE");
 		place_latitude = Double.valueOf(intent.getStringExtra("KEY_LATITUDE"));

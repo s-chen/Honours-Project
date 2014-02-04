@@ -35,7 +35,7 @@ public class RestaurantInfo extends Activity {
 
 	private GoogleMap restaurant_map;
 	private Intent restaurantIntent;
-	private int restaurant_id;
+	private String restaurant_id;
 	private String restaurant_name;
 	private String services;
 	private double restaurant_latitude;
@@ -69,7 +69,7 @@ public class RestaurantInfo extends Activity {
 		// Get restaurant data passed from Restaurants.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected restaurant data.");
 		restaurantIntent = getIntent();
-		restaurant_id = restaurantIntent.getIntExtra("KEY_ID", 0);
+		restaurant_id = restaurantIntent.getStringExtra("KEY_ID");
         restaurant_name = restaurantIntent.getStringExtra("KEY_NAME");
         services = restaurantIntent.getStringExtra("KEY_SERVICES");
         restaurant_latitude = restaurantIntent.getDoubleExtra("KEY_LATITUDE", 0);
@@ -289,7 +289,7 @@ public class RestaurantInfo extends Activity {
     	if (user_session.existInItinerary()) {
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
-    		user_session.storePlaceData(restaurant_name, restaurant_type, restaurant_latitude, restaurant_longitude);
+    		user_session.storePlaceData(restaurant_id, restaurant_name, restaurant_type, restaurant_latitude, restaurant_longitude);
     		Toast.makeText(getApplicationContext(), "Added Restaurant to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	

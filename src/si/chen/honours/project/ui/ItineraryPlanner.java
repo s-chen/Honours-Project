@@ -32,15 +32,16 @@ public class ItineraryPlanner extends Activity {
 
 	private ArrayList<String> places_data = new ArrayList<String>();
 	
-	// ArrayLists for place name, place type, place latitude, place longitude, SharedPref keys
+	// ArrayLists for place id, place name, place type, place latitude, place longitude, SharedPref keys
+	private ArrayList<String> place_ids = new ArrayList<String>();
 	private ArrayList<String> place_names = new ArrayList<String>();
 	private ArrayList<String> place_types = new ArrayList<String>();
 	private ArrayList<String> place_latitudes = new ArrayList<String>();
 	private ArrayList<String> place_longitudes = new ArrayList<String>();
 	private ArrayList<String> sharedPref_keys = new ArrayList<String>();
 	
-	// For formatting ListView UI (e.g. name - type)
-	private ArrayList<String> place_names_types = new ArrayList<String>();
+	// For formatting ListView UI (id. name - type)
+	private ArrayList<String> place_ids_names_types = new ArrayList<String>();
 	
 	
 	@Override
@@ -63,27 +64,28 @@ public class ItineraryPlanner extends Activity {
 			// Get current SharedPrefs category
 			user_session = new UserSessionManager(this, pref);
 			
-			// ArrayList with data in the form: name##type##latitude##longitude##sharedPrefKey
+			// ArrayList with data in the form: id##name##type##latitude##longitude##sharedPrefKey
 			places_data = user_session.getAllPlacesData();
 			
 			for (int i = 0; i < places_data.size(); i++) {
 				
 				// Store place name, type, latitude, longitude, SharedPref key to ArrayLists
-				place_names.add(places_data.get(i).split("##")[0]);
-				place_types.add(places_data.get(i).split("##")[1]);
-				place_latitudes.add(places_data.get(i).split("##")[2]);
-				place_longitudes.add(places_data.get(i).split("##")[3]);
-				sharedPref_keys.add(places_data.get(i).split("##")[4]);
+				place_ids.add(places_data.get(i).split("##")[0]);
+				place_names.add(places_data.get(i).split("##")[1]);
+				place_types.add(places_data.get(i).split("##")[2]);
+				place_latitudes.add(places_data.get(i).split("##")[3]);
+				place_longitudes.add(places_data.get(i).split("##")[4]);
+				sharedPref_keys.add(places_data.get(i).split("##")[5]);
 				
-				// Store place name followed by place type (formatting ListView UI)
-				place_names_types.add(places_data.get(i).split("##")[0] + " - " + "(" + places_data.get(i).split("##")[1] + ")");
+				// Store place id, place name followed by place type (formatting ListView UI)
+				place_ids_names_types.add(places_data.get(i).split("##")[0] + ". " + places_data.get(i).split("##")[1] + " - " + "(" + places_data.get(i).split("##")[2] + ")");
 			}
 		}
 		
 
 		// Display Itinerary names in ListView
 		Log.i("ItineraryListView", "Adding itinerary items to list view.");
-		itinerary_adapter = new ArrayAdapter<String>(this, R.layout.point_of_interest_list, R.id.list_item, place_names_types);
+		itinerary_adapter = new ArrayAdapter<String>(this, R.layout.point_of_interest_list, R.id.list_item, place_ids_names_types);
 		lv_itinerary.setAdapter(itinerary_adapter);
 		
 		
@@ -93,6 +95,7 @@ public class ItineraryPlanner extends Activity {
 			
 				// Store relevant data into intent
 				Intent intent = new Intent(getApplicationContext(), ItineraryItemDirection.class);
+				intent.putExtra("KEY_ID", place_ids.get(position));
 				intent.putExtra("KEY_NAME", place_names.get(position));
 				intent.putExtra("KEY_TYPE", place_types.get(position));
 				intent.putExtra("KEY_LATITUDE", place_latitudes.get(position));

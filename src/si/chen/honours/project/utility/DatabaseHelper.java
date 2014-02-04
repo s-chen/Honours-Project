@@ -139,7 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 				do {
 					PointOfInterest poi = new PointOfInterest();
-					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setID(cursor.getString(0));
 					poi.setName(cursor.getString(1));
 					poi.setServices(cursor.getString(2));
 					poi.setLatitude(cursor.getFloat(3));
@@ -178,7 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 				do {
 					PointOfInterest poi = new PointOfInterest();
-					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setID(cursor.getString(0));
 					poi.setName(cursor.getString(1));
 					poi.setServices(cursor.getString(2));
 					poi.setLatitude(cursor.getFloat(3));
@@ -222,7 +222,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 				do {
 					PointOfInterest poi = new PointOfInterest();
-					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setID(cursor.getString(0));
 					poi.setName(cursor.getString(1));
 					poi.setServices(cursor.getString(2));
 					poi.setLatitude(cursor.getFloat(3));
@@ -261,7 +261,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 				do {
 					PointOfInterest poi = new PointOfInterest();
-					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setID(cursor.getString(0));
 					poi.setName(cursor.getString(1));
 					poi.setServices(cursor.getString(2));
 					poi.setLatitude(cursor.getFloat(3));
@@ -304,7 +304,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 				do {
 					PointOfInterest poi = new PointOfInterest();
-					poi.setID(Integer.parseInt(cursor.getString(0)));
+					poi.setID(cursor.getString(0));
 					poi.setName(cursor.getString(1));
 					poi.setServices(cursor.getString(2));
 					poi.setLatitude(cursor.getFloat(3));

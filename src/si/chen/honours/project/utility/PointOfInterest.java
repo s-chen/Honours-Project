@@ -3,8 +3,7 @@ package si.chen.honours.project.utility;
 /** Model Object provides getter/setter methods for storing and retrieving Point of Interest data **/
 public class PointOfInterest implements Comparable<PointOfInterest> {
 
-	private int id;
-	private int num;
+	private String id;
 	private String name;
 	private String services;
 	private float latitude;
@@ -17,7 +16,7 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 	}
 	
 	// Constructor with all data
-	public PointOfInterest(int id, String name, String services, float latitude, float longitude, String content_url) {
+	public PointOfInterest(String id, String name, String services, float latitude, float longitude, String content_url) {
 		
 		this.id = id;
 		this.name = name;
@@ -34,18 +33,18 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 		this.services = services;
 	}
 	
-	// Constructor includes PointOfInterest no. to identify same POI data
-	public PointOfInterest(int num, String name, String services) {
-		this.num = num;
+	// Constructor includes PointOfInterest id to identify POI data
+	public PointOfInterest(String id, String name, String services) {
+		this.id = id;
 		this.name = name;
 		this.services = services;
 	}
 	
-	public int getID() {
+	public String getID() {
 		return this.id;
 	}
 	
-	public void setID(int id) {
+	public void setID(String id) {
 		this.id = id;
 	}
 	
@@ -91,7 +90,7 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 	
 	// Formats the look when displayed in ListView
 	public String toString() {
-		return this.num + ".  " + this.name + " - " + "(" + this.services + ")";
+		return this.id + ".  " + this.name + " - " + "(" + this.services + ")";
 	}
 	
 	// Comparator to compare and sort in alphabetical order

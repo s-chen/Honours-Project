@@ -31,20 +31,21 @@ public class UserSessionManager {
 
 	
 	// Store place data in SharedPrefs
-	public void storePlaceData(String name, String type, double latitude, double longitude) {
+	public void storePlaceData(String id, String name, String type, double latitude, double longitude) {
 		
 		ArrayList<String> place_data = new ArrayList<String>();
 		
 		int position = mPref.getInt("KEY_DATA_POSITION", 0);
 
-		// Store name, type, latitude, longitude to ArrayList
+		// Store id, name, type, latitude, longitude to ArrayList
+		place_data.add(id);
 		place_data.add(name);
 		place_data.add(type);
 		place_data.add(String.valueOf(latitude));
 		place_data.add(String.valueOf(longitude));
 		
 			
-		// Store key = position of selected ListView item, value = [name, type, latitude, longitude] in SharedPrefs
+		// Store key = position of selected ListView item, value = [id, name, type, latitude, longitude] in SharedPrefs
 		mEditor.putString("USER_DATA_" + position, place_data.toString());
 		mEditor.commit();
 	}
@@ -54,8 +55,8 @@ public class UserSessionManager {
 		
 		ArrayList<String> place_data = new ArrayList<String>();
 		
-		// String array for [place name, place type, place latitude, place longitude]
-		String[] parsed_place_value = new String[4];
+		// String array for [place id, place name, place type, place latitude, place longitude]
+		String[] parsed_place_value = new String[5];
 				
 		// Get SharedPref map
 		Map<String,?> prefsMap = mPref.getAll();
@@ -68,34 +69,39 @@ public class UserSessionManager {
 				continue;
 			}
 			
-			// Store place name, place type, place latitude, place longitude from values obtained in SharedPref map
+			// Store place id, place name, place type, place latitude, place longitude from values obtained in SharedPref map
 			parsed_place_value = entry.getValue().toString().split(",");
-	
+
+			// Obtain place id and remove all occurrences of '[' and ']' and leading/trailing whitespace
+			String id = parsed_place_value[0];
+			id = id.replaceAll("\\[|\\]", "");
+			id = id.trim();
+			
 			// Obtain place name and remove all occurrences of '[' and ']' and leading/trailing whitespace
-			String name = parsed_place_value[0];
+			String name = parsed_place_value[1];
 			name = name.replaceAll("\\[|\\]", "");
 			name = name.trim();
 			
 			// Obtain place type and remove all occurrences of '[' and ']' and leading/trailing whitespace
-			String type = parsed_place_value[1];
+			String type = parsed_place_value[2];
 			type = type.replaceAll("\\[|\\]", "");
 			type = type.trim();
 			
 			// Obtain place latitude and remove all occurrences of '[' and ']' and leading/trailing whitespace
-			String latitude = parsed_place_value[2];
+			String latitude = parsed_place_value[3];
 			latitude = latitude.replaceAll("\\[|\\]", "");
 			latitude = latitude.trim();
 					
 			// Obtain place longitude and remove all occurrences of '[' and ']' and leading/trailing whitespace
-			String longitude = parsed_place_value[3];
+			String longitude = parsed_place_value[4];
 			longitude = longitude.replaceAll("\\[|\\]", "");
 			longitude = longitude.trim();
 			
 			// Obtain SharedPref key for place
 			String sharedPref_key = entry.getKey();
 			
-			// Add place name, type, latitude, longitude, SharedPref key to ArrayList (separated by ## symbol)
-			place_data.add(name + "##" + type + "##" + latitude + "##" + longitude + "##" + sharedPref_key);
+			// Add place id, name, type, latitude, longitude, SharedPref key to ArrayList (separated by ## symbol)
+			place_data.add(id + "##" + name + "##" + type + "##" + latitude + "##" + longitude + "##" + sharedPref_key);
 			
 			
 			Log.i("SHARED_PREFS_DATA", entry.getKey() + ": " + entry.getValue().toString());

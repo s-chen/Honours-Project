@@ -36,7 +36,7 @@ public class AccommodationInfo extends Activity {
 
 	private GoogleMap accommodation_map;
 	private Intent accommodationIntent;
-	private int accommodation_id;
+	private String accommodation_id;
 	private String accommodation_name;
 	private String services;
 	private double accommodation_latitude;
@@ -70,7 +70,7 @@ public class AccommodationInfo extends Activity {
 		// Get accommodation data passed from Accommodation.java class
 		Log.i("RETRIEVE_DATA", "Retrieve selected accommodation data.");
 		accommodationIntent = getIntent();
-		accommodation_id = accommodationIntent.getIntExtra("KEY_ID", 0);
+		accommodation_id = accommodationIntent.getStringExtra("KEY_ID");
 		accommodation_name = accommodationIntent.getStringExtra("KEY_NAME");
 		services = accommodationIntent.getStringExtra("KEY_SERVICES");
 		accommodation_latitude = accommodationIntent.getDoubleExtra("KEY_LATITUDE", 0);
@@ -284,7 +284,7 @@ public class AccommodationInfo extends Activity {
     	if (user_session.existInItinerary()) {
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
-    		user_session.storePlaceData(accommodation_name, accommodation_type, accommodation_latitude, accommodation_longitude);
+    		user_session.storePlaceData(accommodation_id, accommodation_name, accommodation_type, accommodation_latitude, accommodation_longitude);
     		Toast.makeText(getApplicationContext(), "Added Accommodation to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	
