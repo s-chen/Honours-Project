@@ -2,8 +2,11 @@ package si.chen.honours.project.login;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.ui.MainMenu;
+import si.chen.honours.project.utility.aws.AWSHelper;
+import si.chen.honours.project.utility.aws.User;
 import android.app.ActionBar;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -35,9 +39,11 @@ public class FacebookLogin extends FragmentActivity {
 	private boolean isResumed = false;
 	private UiLifecycleHelper uiHelper;	
 	private MenuItem logout;
-	
+		
 	private String USER_ID;
 	private String USER_PROFILE_NAME;
+	private String USER_EMAIL;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,8 +55,8 @@ public class FacebookLogin extends FragmentActivity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Log In");
 		actionBar.setDisplayHomeAsUpEnabled(true);
+	
 		
-
 	    uiHelper = new UiLifecycleHelper(this, callback);
 	    uiHelper.onCreate(savedInstanceState);
 
@@ -117,33 +123,75 @@ public class FacebookLogin extends FragmentActivity {
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 		public void call(Session session, SessionState state, Exception exception) {
 	        onSessionStateChange(session, state, exception);
-	      
+	        
 	        // Check user login status and get user data when authenticated 
 		    if (session.isOpened()) {
+		    	
 		    	Log.i("LOGIN", "User logged in..");
+		    		
 		        // API call to get user data
 		        Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
 		        	public void onCompleted(GraphUser user, Response response) {     
 		                    if (user != null) {
+		                    	
 		                    	// User Facebook ID
 		                    	USER_ID = user.getId();
 		                    	// User Facebook Profile name
 		                        USER_PROFILE_NAME = user.getName();
+		                        // User email
+		                        USER_EMAIL = user.asMap().get("email").toString();
 		                        
-/*		                        AWSHelper aws = new AWSHelper();
-		                        User u = new User(USER_ID, USER_PROFILE_NAME);
-		                        aws.getUserInfo(user_email)*/
+		                        
 		            		    Log.i("FB_USER_ID", USER_ID);
 		            		    Log.i("FB_USER_PROFILE_NAME", USER_PROFILE_NAME);
+		            		    Log.i("FB_USER_EMAIL", USER_EMAIL);
+		            		    
+		            		    
+		                        // Start thread to connect to Amazon SimpleDB
+		                        new ConnectAWS().execute();
+		        
 		                    } 
 		            }   
 		        }); 
 		        request.executeAsync();
-		    } else if (session.isClosed()) {
-		    	Log.i("LOGIN", "User logged out..");
+		    } else if (session.isClosed()) {		        
+		    	Log.i("LOGIN", "User not logged in..");
 		    }  
 	    }
 	};
+	
+	public class ConnectAWS extends AsyncTask<Void, Void, Boolean> {
+		
+		/** Check whether Facebook user info are in Amazon SimpleDB **/
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			
+			AWSHelper aws = new AWSHelper();
+			
+			// User info NOT in SimpleDB, store user info
+			if (aws.getUserInfo(USER_ID).isEmpty()) {
+				User u = new User(USER_ID, USER_PROFILE_NAME, USER_EMAIL);
+				aws.addUserInfo(u);
+				return false;
+			}
+			
+			return true;
+
+		}
+		
+		@Override
+		protected void onPostExecute(final Boolean flag) {
+			if (flag) {
+				// User details already in SimpleDB
+				Log.i("SIMPLE_DB", "User details already in SimpleDB");
+				Toast.makeText(getApplicationContext(), "User information already in SimpleDB", Toast.LENGTH_SHORT).show();
+			} else {
+				// User details not in SimpleDB
+				Log.i("SIMPLE_DB", "Storing user details in SimpleDB");
+				Toast.makeText(getApplicationContext(), "Storing user information in SimpleDB", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
 	
 	@Override
 	protected void onResumeFragments() {

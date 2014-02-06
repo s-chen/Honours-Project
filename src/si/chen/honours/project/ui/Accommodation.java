@@ -73,10 +73,7 @@ public class Accommodation extends Activity {
 		
 		// Store accommodation data in arrays
 		for (int i = 0; i < accommodation_list.size(); i++) {
-			accommodation_id[i] = accommodation_list.get(i).getID();
-			
-			System.out.println("ID " + accommodation_id[i]);
-			
+			accommodation_id[i] = accommodation_list.get(i).getID();			
 			accommodation_name[i] = accommodation_list.get(i).getName();
 			services[i] = accommodation_list.get(i).getServices();
 			accommodation_latitude[i] = accommodation_list.get(i).getLatitude();

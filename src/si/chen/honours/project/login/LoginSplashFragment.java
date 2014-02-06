@@ -8,12 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.LoginButton;
 
 // Set up non-authenticated UI fragment for Facebook to show user when not authenticated
 public class LoginSplashFragment extends Fragment {
@@ -77,7 +77,12 @@ public class LoginSplashFragment extends Fragment {
 	    // Set text for 'get started'
 	    TextView textView_get_started = (TextView) view.findViewById(R.id.textView_get_started);
 	    textView_get_started.setText(R.string.get_started);
-	    	    
+	    
+	    // Set Login button and email permission
+	    LoginButton authButton = (LoginButton) view.findViewById(R.id.login_button);
+	    authButton.setFragment(this);	 
+	    authButton.setReadPermissions("email");
+	    
 	    return view;
 	}
 		
