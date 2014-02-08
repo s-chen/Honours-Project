@@ -13,58 +13,74 @@
 	    android:id="@+id/accommodation_map"
 	    android:layout_width="match_parent"
 	    android:layout_height="250dp"
-	    android:layout_alignParentTop="true"
+	   	android:layout_alignParentTop="true"
 	    android:layout_centerHorizontal="true"
 	    class="com.google.android.gms.maps.MapFragment" />
   	
-  	<TextView
-	    android:id="@+id/textView_distance_info_accommodation"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/accommodation_map"
-	    android:layout_below="@+id/accommodation_map"
-	    android:textColor="@color/White"
-	    android:textSize="20sp"
-	    android:textStyle="bold" />
-  	
-   	<Button
-	    android:id="@+id/button_add_to_itinerary_accommodation"
-	    android:layout_width="wrap_content"
-	    android:layout_height="55dp"
-	    android:layout_alignBottom="@+id/button_search_accommodation_info_online"
-	    android:layout_alignRight="@+id/accommodation_map"
-	    android:text="@string/button_add_to_itinerary_planner"
-	    android:background="@drawable/custom_button"
-       	android:textColor="@color/DarkRed"
-        android:typeface="serif"
-        android:textStyle="italic"
-	    android:layout_alignParentBottom="true" 
-	    android:onClick="itineraryAccommodation" />
+  	<ScrollView 
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="fill_parent"
+  	    android:layout_below="@+id/accommodation_map" >
+  	    
+  	    <RelativeLayout 
+  	        android:layout_width="fill_parent"
+  	        android:layout_height="wrap_content">
+  	        
+  	       	<TextView
+	    		android:id="@+id/textView_distance_info_accommodation"
+	    		android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:textColor="@color/White"
+	    		android:textSize="20sp"
+	    		android:textStyle="bold" />
+  	         	
+  	     	<TextView
+	    		android:id="@+id/textView_accommodation_address_website_info"
+	    		android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:layout_below="@+id/textView_distance_info_accommodation"
+	    		android:textSize="20sp"
+	    		android:textStyle="bold"
+	    		android:autoLink="web" 
+	    		android:textColorLink="@color/White"
+	    		android:textColor="@color/White" />
+  	         		 
+  	       	<RatingBar 
+  	      		android:id="@+id/rating_bar"
+  	       		android:layout_width="wrap_content"
+  	          	android:layout_height="wrap_content"
+  	         	android:layout_centerHorizontal="true"
+  	         	android:numStars="5"
+  	         	android:stepSize="1.0"
+  	        	android:layout_below="@+id/textView_accommodation_address_website_info"/>
 
-   	 <Button
-	    android:id="@+id/button_search_accommodation_info_online"
-	    android:layout_width="wrap_content"
-	    android:layout_height="55dp"
-	    android:layout_alignBottom="@+id/textView_distance_info_accommodation"
-	    android:layout_alignLeft="@+id/textView_distance_info_accommodation"
-	    android:background="@drawable/custom_button"
-	    android:onClick="searchAccommodationOnline"
-	    android:text="@string/button_search_info_online"
-        android:textColor="@color/DarkRed"
-        android:typeface="serif"
-        android:textStyle="italic"
-	    android:layout_alignParentBottom="true" />
-   	
-	 <TextView
-	    android:id="@+id/textView_accommodation_address_website_info"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/textView_distance_info_accommodation"
-	    android:layout_alignLeft="@+id/accommodation_map"
-	    android:textSize="20sp"
-	    android:textStyle="bold"
-	    android:autoLink="web" 
-	    android:textColorLink="@color/White"
-	    android:textColor="@color/White" />
+  	     	<Button
+  	        	android:id="@+id/button_add_to_itinerary_accommodation"
+  	        	android:layout_width="wrap_content"
+  	        	android:layout_height="55dp"
+  	        	android:layout_alignParentRight="true"
+  	         	android:layout_below="@+id/rating_bar"
+  	        	android:background="@drawable/custom_button"
+  	         	android:onClick="itineraryAccommodation"
+  	         	android:text="@string/button_add_to_itinerary_planner"
+  	         	android:textColor="@color/DarkRed"
+  	         	android:textStyle="italic"
+  	       	    android:typeface="serif" />
 
+  	      	<Button
+  	        	android:id="@+id/button_search_accommodation_info_online"
+  	         	android:layout_width="wrap_content"
+  	         	android:layout_height="55dp"
+  	         	android:layout_below="@+id/rating_bar"
+  	        	android:background="@drawable/custom_button"
+  	        	android:onClick="searchAccommodationOnline"
+  	         	android:text="@string/button_search_info_online"
+  	         	android:textColor="@color/DarkRed"
+  	        	android:textStyle="italic"
+  	         	android:typeface="serif" />
+  	        
+  	    </RelativeLayout>
+  	    	 
+	 </ScrollView>
+	 
 </RelativeLayout>

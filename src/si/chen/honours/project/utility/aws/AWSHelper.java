@@ -1,6 +1,7 @@
 package si.chen.honours.project.utility.aws;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -9,12 +10,10 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.simpledb.AmazonSimpleDBClient;
 import com.amazonaws.services.simpledb.model.Attribute;
-import com.amazonaws.services.simpledb.model.BatchPutAttributesRequest;
 import com.amazonaws.services.simpledb.model.DeleteAttributesRequest;
 import com.amazonaws.services.simpledb.model.Item;
 import com.amazonaws.services.simpledb.model.PutAttributesRequest;
 import com.amazonaws.services.simpledb.model.ReplaceableAttribute;
-import com.amazonaws.services.simpledb.model.ReplaceableItem;
 import com.amazonaws.services.simpledb.model.SelectRequest;
 import com.amazonaws.services.simpledb.model.SelectResult;
 
@@ -31,16 +30,11 @@ public class AWSHelper {
 	private static final String USER_ID_ATTRIBUTE = "user_id";
 	private static final String USER_EMAIL_ATTRIBUTE = "user_email";
 	private static final String USER_PROFILE_NAME_ATTRIBUTE = "user_profile_name";
-	
-	
-	private static final String USER_RATING_ATTRIBUTE = "user_rating";
+	private static final String USER_RATINGS_ATTRIBUTE = "user_ratings";
 	
 
 	
-	private String query = "select * from " + USERS_DOMAIN;
-
-	
-	
+	// Constructor
 	public AWSHelper() {
 	     // Initialise SimpleDB Client.
 		AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY_ID, SECRET_KEY);
@@ -50,9 +44,9 @@ public class AWSHelper {
 	
 	
     /*
-     * Creates a new User and adds it to the Users domain - Register using user ID from Facebook
+     * Creates a new User and store it to the Users domain - Register using user ID from Facebook
      */
-	public void addUserInfo(User user) {
+	public void storeUserInfo(User user) {
 		
 		ReplaceableAttribute userIdAttribute = new ReplaceableAttribute(USER_ID_ATTRIBUTE, user.getUserId(), Boolean.TRUE );
 		ReplaceableAttribute userEmailAttribute = new ReplaceableAttribute(USER_EMAIL_ATTRIBUTE, user.getUserEmail(), Boolean.TRUE );
@@ -72,17 +66,51 @@ public class AWSHelper {
 		}
 	}
 	
-	// Get user information using (Facebook user_id) as key
-	public List<Item> getUserInfo(String fb_user_id) {
+	// Get user information using from Facebook UserID
+	public List<Item> getUserInfo(User user) {
 		
-		String test = "select user_email, user_profile_name from " + USERS_DOMAIN + " where user_id = " + "'" + fb_user_id + "'";
-		System.out.println(test);
+		String getUserInfoQuery = "select user_email, user_profile_name from " + USERS_DOMAIN + " where user_id = " + "'" + user.getUserId() + "'";
+		System.out.println(getUserInfoQuery);
 		
-		SelectRequest selectRequest = new SelectRequest(test).withConsistentRead(true);
+		SelectRequest selectRequest = new SelectRequest(getUserInfoQuery).withConsistentRead(true);
 		SelectResult response = this.sdbClient.select(selectRequest);
 		
 		return response.getItems();
 	}
+	
+	// Store user place ratings to SimpleDB
+	public void storePlaceRatings(User user) {
+		
+		ReplaceableAttribute userRatingAttribute = new ReplaceableAttribute(USER_RATINGS_ATTRIBUTE, user.getUserRatings().toString(), Boolean.TRUE );
+		
+		List<ReplaceableAttribute> user_rating = new ArrayList<ReplaceableAttribute>(2);
+		user_rating.add(userRatingAttribute);
+		
+		PutAttributesRequest request = new PutAttributesRequest(USERS_DOMAIN, user.getUserId(), user_rating);		
+		try {
+			this.sdbClient.putAttributes(request);
+		}
+		catch ( Exception exception ) {
+			System.out.println( "EXCEPTION = " + exception );
+		}	
+	}
+	
+	// Get user place ratings from SimpleDB
+	public List<Item> getPlaceRatings(User user) {
+		
+		String getPlaceRatingsQuery = "select user_ratings from " + USERS_DOMAIN + " where user_id = " + "'" + user.getUserId() + "'";
+		
+		SelectRequest selectRequest = new SelectRequest(getPlaceRatingsQuery).withConsistentRead(true);
+		SelectResult response = this.sdbClient.select(selectRequest);
+		
+		return response.getItems();
+	}
+	
+	// Extracts "user_ratings" attribute from SimpleDB Item
+	public String getPlaceRatingsForItem(Item item) {
+		return this.getStringValueForAttributeFromList(USER_RATINGS_ATTRIBUTE, item.getAttributes());
+	}
+	
 	
 	/*
 	 * Extracts the "user_email" attribute from the SimpleDB Item.

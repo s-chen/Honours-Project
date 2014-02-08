@@ -1,6 +1,7 @@
 package si.chen.honours.project.ui;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;

@@ -2,6 +2,7 @@ package si.chen.honours.project.login;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.ui.MainMenu;
+import si.chen.honours.project.utility.UserSessionManager;
 import si.chen.honours.project.utility.aws.AWSHelper;
 import si.chen.honours.project.utility.aws.User;
 import android.app.ActionBar;
@@ -40,9 +41,10 @@ public class FacebookLogin extends FragmentActivity {
 	private UiLifecycleHelper uiHelper;	
 	private MenuItem logout;
 		
-	private String USER_ID;
+	public static String USER_ID;
 	private String USER_PROFILE_NAME;
 	private String USER_EMAIL;
+	
 	
 	
 	@Override
@@ -135,7 +137,7 @@ public class FacebookLogin extends FragmentActivity {
 		                    if (user != null) {
 		                    	
 		                    	// User Facebook ID
-		                    	USER_ID = user.getId();
+		                    	USER_ID = user.getId();	                    	
 		                    	// User Facebook Profile name
 		                        USER_PROFILE_NAME = user.getName();
 		                        // User email
@@ -149,7 +151,6 @@ public class FacebookLogin extends FragmentActivity {
 		            		    
 		                        // Start thread to connect to Amazon SimpleDB
 		                        new ConnectAWS().execute();
-		        
 		                    } 
 		            }   
 		        }); 
@@ -167,16 +168,15 @@ public class FacebookLogin extends FragmentActivity {
 		protected Boolean doInBackground(Void... params) {
 			
 			AWSHelper aws = new AWSHelper();
+			User user = new User(USER_ID, USER_PROFILE_NAME, USER_EMAIL);
 			
 			// User info NOT in SimpleDB, store user info
-			if (aws.getUserInfo(USER_ID).isEmpty()) {
-				User u = new User(USER_ID, USER_PROFILE_NAME, USER_EMAIL);
-				aws.addUserInfo(u);
+			if (aws.getUserInfo(user).isEmpty()) {
+				aws.storeUserInfo(user);
 				return false;
 			}
 			
 			return true;
-
 		}
 		
 		@Override
@@ -192,6 +192,7 @@ public class FacebookLogin extends FragmentActivity {
 			}
 		}
 	}
+
 	
 	@Override
 	protected void onResumeFragments() {

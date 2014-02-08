@@ -1,6 +1,7 @@
 package si.chen.honours.project.utility;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
@@ -15,7 +16,8 @@ public class UserSessionManager {
 	Editor mEditor;
 	Context mContext;
 	int PRIVATE_MODE = 0;	
-
+	String mPrefName;
+	
 	
 	/**
 	 * Constructor
@@ -25,9 +27,11 @@ public class UserSessionManager {
 	public UserSessionManager(Context context, final String pref_name) {
 		
 		this.mContext = context;
-		mPref = context.getSharedPreferences(pref_name, PRIVATE_MODE);
+		this.mPrefName = pref_name;
+		mPref = context.getSharedPreferences(mPrefName, PRIVATE_MODE);
 		mEditor = mPref.edit();
 	}
+	
 
 	
 	// Store place data in SharedPrefs
@@ -140,7 +144,5 @@ public class UserSessionManager {
 		mEditor.remove(key);
 		mEditor.commit();
 	}
-
-	
 
 }
