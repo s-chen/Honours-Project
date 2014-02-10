@@ -260,16 +260,20 @@ public class AccommodationInfo extends Activity implements OnRatingBarChangeList
 			User user = new User(FB_USER_ID);
 			List<Item> place_ratings = aws.getPlaceRatings(user);
 			
+			
 			// Try retrieving place ratings if they exist for a user
 			if (!place_ratings.isEmpty()) {
 				
+				// String format of HashMap of user place ratings
 				String ratings = aws.getPlaceRatingsForItem(place_ratings.get(0));
 				
-				// Convert String format of HashMap (from SimpleDB) to a HashMap
-				restored_user_place_ratings = user.convertToHashMap(ratings);
-				
-				// Set global place ratings HashMap to the previously saved ratings from SimpleDB
-				User.user_place_ratings = restored_user_place_ratings;
+				// Conversion to HashMap when we have existing ratings
+				if (!ratings.equals("")) {
+					// Convert String format of HashMap (from SimpleDB) to a HashMap
+					restored_user_place_ratings = user.convertToHashMap(ratings);
+					// Set global place ratings HashMap to the previously saved ratings from SimpleDB
+					User.user_place_ratings = restored_user_place_ratings;
+				}
 				
 				Log.i("GLOBAL_HASHMAP_USER_RATINGS", "Facebook UserID - " + FB_USER_ID + ": " + User.user_place_ratings.toString());
 				return true;
