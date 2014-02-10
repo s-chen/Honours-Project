@@ -127,6 +127,16 @@ public class AWSHelper {
 		DeleteAttributesRequest deleteRequest = new DeleteAttributesRequest(USERS_DOMAIN, user.getUserId());
 		this.sdbClient.deleteAttributes(deleteRequest);
 	}
+
+	
+	/*
+	 * Delete a value from an attribute 
+	 */
+/*	public void deleteAttributeValue() {
+		DeleteAttributesRequest deleteRequest = new DeleteAttributesRequest(USERS_DOMAIN, "0").withAttributes(new Attribute().withName("user_rating"));
+		this.sdbClient.deleteAttributes(deleteRequest);
+	}*/
+	
 	
     /*
      * Extracts the value for the given attribute from the list of attributes.

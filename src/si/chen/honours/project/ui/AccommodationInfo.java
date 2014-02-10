@@ -41,7 +41,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /** Details of the particular accommodation - called when the name is selected in the ListView **/
-public class AccommodationInfo extends Activity implements OnRatingBarChangeListener{
+public class AccommodationInfo extends Activity implements OnRatingBarChangeListener {
 	
 	private GoogleMap accommodation_map;
 	private Intent accommodationIntent;
@@ -65,7 +65,6 @@ public class AccommodationInfo extends Activity implements OnRatingBarChangeList
 
 	private RatingBar accommodation_rating;
 	private String FB_USER_ID;
-	private HashMap<String,String> user_place_ratings = new HashMap<String,String>();
 	
 	
 	@Override
@@ -305,8 +304,7 @@ public class AccommodationInfo extends Activity implements OnRatingBarChangeList
 			Log.i("RATINGS_STORED_IN_SIMPLE_DB", "Ratings now stored");
 			return null;
 		}
- 		
- 		
+ 	
  	}
 	
 	// Called when 'Search Web' button is clicked

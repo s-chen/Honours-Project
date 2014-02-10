@@ -1,12 +1,18 @@
 package si.chen.honours.project.ui;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
+import si.chen.honours.project.login.FacebookLogin;
+import si.chen.honours.project.ui.AccommodationInfo.RetrieveRatingsAWS;
+import si.chen.honours.project.ui.AccommodationInfo.SubmitRatingsAWS;
 import si.chen.honours.project.utility.UserSessionManager;
+import si.chen.honours.project.utility.aws.AWSHelper;
+import si.chen.honours.project.utility.aws.User;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
@@ -14,14 +20,19 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 
+import com.amazonaws.services.simpledb.model.Item;
+import com.facebook.Session;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -32,7 +43,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /** Details of the particular shop - called when the name is selected in the ListView **/
-public class ShopInfo extends Activity {
+public class ShopInfo extends Activity implements OnRatingBarChangeListener {
 
 	private GoogleMap shop_map;
 	private Intent shopIntent;
@@ -53,6 +64,9 @@ public class ShopInfo extends Activity {
 	private LatLng user_lat_lng;
 	private int distance;
 	private StringBuilder formatted_shop_address;
+	
+	private RatingBar shop_rating;
+	private String FB_USER_ID;
 	
 	
 	@Override
@@ -183,7 +197,114 @@ public class ShopInfo extends Activity {
      	}
      	shop_map.setMyLocationEnabled(true);
 		
+     	
+     	
+     	
+     	// RatingBar listener when ratings are changed by the user
+     	shop_rating = (RatingBar) findViewById(R.id.rating_bar);
+     	shop_rating.setOnRatingBarChangeListener(this);
+     	
+     	/**
+     	 * Check user login status
+     	 * If user logged in to Facebook, attempt to retrieve and restore existing user place ratings
+     	 */
+     	Session session = Session.getActiveSession();
+     	if (session != null && session.isOpened()) {
+  
+     		// Get User Facebook ID
+     		FB_USER_ID = FacebookLogin.USER_ID;
+     		
+         	// Start thread to try and retrieve existing user place ratings
+         	new RetrieveRatingsAWS().execute();
+     	}
 	}
+	
+	// Submits shop rating to AWS SimpleDB
+ 	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+ 		
+     	/**
+     	 * Check user login status
+     	 * If user logged in to Facebook, they can now add more place ratings
+     	 */
+     	Session session = Session.getActiveSession();
+     	if (session != null && session.isOpened()) {
+       		     		
+     		// Add additional shop rating to global HashMap
+     		User.user_place_ratings.put(shop_id, String.valueOf(shop_rating.getRating()));
+     		
+     		// Start thread to submit rating to SimpleDB
+         	new SubmitRatingsAWS().execute();
+         	Toast.makeText(getApplicationContext(), "Submitted rating", Toast.LENGTH_SHORT).show();
+     		
+     	} else {
+     		// User not logged in to Facebook/or logged out
+     		Toast.makeText(getApplicationContext(), "Please login to submit rating", Toast.LENGTH_SHORT).show();
+     		// Clear global HashMap user place ratings when user not logged in
+     		User.user_place_ratings.clear();
+     	}
+ 		
+ 	}
+ 	
+ 	// Retrieve existing place ratings for user from Amazon SimpleDB
+ 	public class RetrieveRatingsAWS extends AsyncTask<Void, Void, Boolean> {
+ 		
+		// Restore user's ratings
+		HashMap<String,String> restored_user_place_ratings = new HashMap<String,String>();
+		
+ 		@Override
+		protected Boolean doInBackground(Void... params) {
+ 			
+			AWSHelper aws = new AWSHelper();
+			User user = new User(FB_USER_ID);
+			List<Item> place_ratings = aws.getPlaceRatings(user);
+			
+			
+			// Try retrieving place ratings if they exist for a user
+			if (!place_ratings.isEmpty()) {
+				
+				// String format of HashMap of user place ratings
+				String ratings = aws.getPlaceRatingsForItem(place_ratings.get(0));
+				
+				// Conversion to HashMap when we have existing ratings
+				if (!ratings.equals("")) {
+					// Convert String format of HashMap (from SimpleDB) to a HashMap
+					restored_user_place_ratings = user.convertToHashMap(ratings);
+					// Set global place ratings HashMap to the previously saved ratings from SimpleDB
+					User.user_place_ratings = restored_user_place_ratings;
+				}
+				
+				Log.i("GLOBAL_HASHMAP_USER_RATINGS", "Facebook UserID - " + FB_USER_ID + ": " + User.user_place_ratings.toString());
+				return true;
+			} else {
+				return false;
+			}
+				
+		}
+ 		
+ 		@Override
+ 		protected void onPostExecute(final Boolean flag) {
+ 			if (flag) {
+ 				Log.i("RETRIEVING_RATINGS", "Retrieving place ratings from SimpleDB..");
+ 			} else {
+ 				Log.i("NO_RATINGS", "No place ratings for user");
+ 			}
+ 		}
+ 	}
+ 	
+ 	// Submit shop ratings to SimpleDB
+ 	public class SubmitRatingsAWS extends AsyncTask<Void, Void, Void> {
+ 		
+ 		@Override
+		protected Void doInBackground(Void... params) {
+ 			
+			AWSHelper aws = new AWSHelper();
+			User user = new User(FB_USER_ID, User.user_place_ratings);
+			aws.storePlaceRatings(user);
+			Log.i("RATINGS_STORED_IN_SIMPLE_DB", "Ratings now stored");
+			return null;
+		}
+ 	
+ 	}
 	
 	// Called when 'Search Web' button is clicked
 	public void searchShopOnline(View view) {
