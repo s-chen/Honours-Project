@@ -7,9 +7,7 @@ import java.util.Locale;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
-import si.chen.honours.project.login.FacebookLogin;
-import si.chen.honours.project.ui.AccommodationInfo.RetrieveRatingsAWS;
-import si.chen.honours.project.ui.AccommodationInfo.SubmitRatingsAWS;
+import si.chen.honours.project.login.LoggedInFragment;
 import si.chen.honours.project.utility.UserSessionManager;
 import si.chen.honours.project.utility.aws.AWSHelper;
 import si.chen.honours.project.utility.aws.User;
@@ -27,9 +25,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 
 import com.amazonaws.services.simpledb.model.Item;
 import com.facebook.Session;
@@ -213,7 +211,7 @@ public class DrinksInfo extends Activity implements OnRatingBarChangeListener {
      	if (session != null && session.isOpened()) {
   
      		// Get User Facebook ID
-     		FB_USER_ID = FacebookLogin.USER_ID;
+     		FB_USER_ID = LoggedInFragment.USER_ID;
      		
          	// Start thread to try and retrieve existing user place ratings
          	new RetrieveRatingsAWS().execute();

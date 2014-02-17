@@ -8,6 +8,7 @@ import java.util.Locale;
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.login.FacebookLogin;
+import si.chen.honours.project.login.LoggedInFragment;
 import si.chen.honours.project.utility.UserSessionManager;
 import si.chen.honours.project.utility.aws.AWSHelper;
 import si.chen.honours.project.utility.aws.User;
@@ -213,7 +214,7 @@ public class AccommodationInfo extends Activity implements OnRatingBarChangeList
      	if (session != null && session.isOpened()) {
   
      		// Get User Facebook ID
-     		FB_USER_ID = FacebookLogin.USER_ID;
+     		FB_USER_ID = LoggedInFragment.USER_ID;
      		
          	// Start thread to try and retrieve existing user place ratings
          	new RetrieveRatingsAWS().execute();
