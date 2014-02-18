@@ -36,6 +36,10 @@ public class User implements Serializable {
 		this.user_id = user_id;
 	}
 	
+	public User() {
+		
+	}
+	
 	
 	public String getUserId() {
 		return this.user_id;

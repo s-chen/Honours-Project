@@ -1,6 +1,9 @@
 package si.chen.honours.project.login;
 
+import java.util.List;
+
 import si.chen.honours.project.R;
+import si.chen.honours.project.ui.Recommendations;
 import si.chen.honours.project.utility.aws.AWSHelper;
 import si.chen.honours.project.utility.aws.User;
 import android.content.Intent;
@@ -10,10 +13,13 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.services.simpledb.model.Item;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -25,13 +31,14 @@ import com.facebook.widget.ProfilePictureView;
 /** 
  * - Set up authenticated UI fragment for Facebook to show user when authenticated
  * - Makes API call to retrieve user data from Facebook
- * - Connect to AWS to add user to SimpleDB if user details not in DB 
+ * - Connect to AWS to add user to SimpleDB if user details not already in DB 
  */
-public class LoggedInFragment extends Fragment {
+public class LoggedInFragment extends Fragment implements OnClickListener{
 
 	private UiLifecycleHelper uiHelper;
 	private ProfilePictureView profilePictureView;
 	private TextView userNameView;
+	private Button myRecommendations;
 	
 	public static String USER_ID;
 	private String USER_PROFILE_NAME;
@@ -60,6 +67,10 @@ public class LoggedInFragment extends Fragment {
 	    // Find the user's name view
 	    userNameView = (TextView) view.findViewById(R.id.profile_name);
 	    
+	    // Find user recommendations button view
+	    myRecommendations = (Button) view.findViewById(R.id.my_recommendations);
+	    myRecommendations.setOnClickListener(this);
+	    
 	    
 	    // Check for an open session
 	    Session session = Session.getActiveSession();
@@ -73,6 +84,16 @@ public class LoggedInFragment extends Fragment {
 	    
 	    return view;
 	    
+	}
+	
+	// Called when buttons are clicked
+	public void onClick(View view) {
+		switch (view.getId()) {
+		// "My Recommendations" button
+		case R.id.my_recommendations:
+			Intent intent = new Intent(getActivity(), Recommendations.class);
+			startActivity(intent);
+		}
 	}
 	
 	// Requests user data from Facebook
@@ -122,6 +143,7 @@ public class LoggedInFragment extends Fragment {
 			
 			AWSHelper aws = new AWSHelper();
 			User user = new User(USER_ID, USER_PROFILE_NAME, USER_EMAIL);
+			
 			
 			// User info NOT in SimpleDB, store user info
 			if (aws.getUserInfo(user).isEmpty()) {

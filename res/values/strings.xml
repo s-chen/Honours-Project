@@ -62,5 +62,7 @@
     <string name="get_started">To get started, Log in using Facebook:</string>
     <string name="title_activity_logged_in_fragment">LoggedInFragment</string>
     <string name="action_logout">Logout</string>
+    <string name="my_recommendations">My Recommendations</string>
+    <string name="title_activity_recommendations">Recommendations</string>
 
 </resources>

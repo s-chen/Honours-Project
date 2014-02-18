@@ -33,6 +33,9 @@ public class AWSHelper {
 	private static final String USER_RATINGS_ATTRIBUTE = "user_ratings";
 	
 
+	// To get number of users in domain
+	protected int count;
+	
 	
 	// Constructor
 	public AWSHelper() {
@@ -109,6 +112,40 @@ public class AWSHelper {
 	// Extracts "user_ratings" attribute from SimpleDB Item
 	public String getPlaceRatingsForItem(Item item) {
 		return this.getStringValueForAttributeFromList(USER_RATINGS_ATTRIBUTE, item.getAttributes());
+	}
+	
+	
+    /*
+     * Method returns the number of items in the Users Domain.
+     */
+	public int getCount() {
+	
+		String COUNT_QUERY = "select count(*) from Users";
+		
+		SelectRequest selectRequest = new SelectRequest(COUNT_QUERY).withConsistentRead( true );
+		List<Item> items = this.sdbClient.select(selectRequest).getItems();	
+			
+		Item countItem = (Item)items.get(0);
+		Attribute countAttribute = (Attribute)(((com.amazonaws.services.simpledb.model.Item) countItem).getAttributes().get(0));
+		this.count = Integer.parseInt( countAttribute.getValue() );
+		
+		return this.count;
+	}
+	
+	// Get UserIDs from SimpleDB
+	public List<Item> getUserIDs() {
+		
+		String USER_ID_QUERY = "select user_id from Users";
+		
+		SelectRequest selectRequest = new SelectRequest(USER_ID_QUERY).withConsistentRead( true );
+		SelectResult response = this.sdbClient.select(selectRequest);
+		
+		return response.getItems();
+	}
+	
+	// Extracts "user_id" attribute from SimpleDB Item
+	public String getUserIDForItem(Item item) {
+		return this.getStringValueForAttributeFromList(USER_ID_ATTRIBUTE, item.getAttributes());
 	}
 	
 	

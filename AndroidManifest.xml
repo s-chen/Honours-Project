@@ -170,6 +170,11 @@
             android:name="si.chen.honours.project.login.LoggedInFragment"
             android:label="@string/title_activity_logged_in_fragment" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.Recommendations"
+            android:label="@string/title_activity_recommendations"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
     </application>
 
 </manifest>
