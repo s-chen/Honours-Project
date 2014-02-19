@@ -71,6 +71,8 @@ public class LoggedInFragment extends Fragment implements OnClickListener{
 	    myRecommendations = (Button) view.findViewById(R.id.my_recommendations);
 	    myRecommendations.setOnClickListener(this);
 	    
+	    // Initially disable button press until AsyncTask finishes
+	    myRecommendations.setEnabled(false);
 	    
 	    // Check for an open session
 	    Session session = Session.getActiveSession();
@@ -165,6 +167,9 @@ public class LoggedInFragment extends Fragment implements OnClickListener{
 				Log.i("SIMPLE_DB", "Storing user details in SimpleDB");
 				Toast.makeText(getActivity(), "Storing user information in SimpleDB", Toast.LENGTH_SHORT).show();
 			}
+			
+			// Enable button press
+			myRecommendations.setEnabled(true);
 		}
 	}
 	

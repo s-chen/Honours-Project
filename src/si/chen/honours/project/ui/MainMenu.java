@@ -1,7 +1,6 @@
 package si.chen.honours.project.ui;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
@@ -76,10 +75,6 @@ public class MainMenu extends Activity {
             case R.id.action_log_in:
             	Intent intent = new Intent(this, FacebookLogin.class);
             	startActivity(intent);
-            	return true;
-            case R.id.action_help:
-            	return true;
-            case R.id.action_about_app:
             	return true;
             default:
                 return super.onOptionsItemSelected(item);

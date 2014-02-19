@@ -26,8 +26,8 @@ public class ItineraryPlanner extends Activity {
 	private ListView lv_itinerary;
 	private ArrayAdapter<String> itinerary_adapter;
 	
-	// User preferences from SharedPrefs for each category of data
-	private String[] USER_PREFS = new String[] {"ATTRACTION_PREFS", "RESTAURANT_PREFS", "DRINK_PREFS", "ACCOMMODATION_PREFS", "SHOP_PREFS"};
+	// User preferences from SharedPrefs for each category of data (including recommended place prefs)
+	private String[] USER_PREFS = new String[] {"ATTRACTION_PREFS", "RESTAURANT_PREFS", "DRINK_PREFS", "ACCOMMODATION_PREFS", "SHOP_PREFS", "RECOMMENDATION_PREFS"};
 	private UserSessionManager user_session;
 
 	private ArrayList<String> places_data = new ArrayList<String>();

@@ -41,7 +41,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class RecommendationPlaceInfo extends Activity implements OnRatingBarChangeListener {
+public class RecommendedPlaceInfo extends Activity implements OnRatingBarChangeListener {
 	
 	private GoogleMap recommended_place_map;
 	
@@ -71,7 +71,7 @@ public class RecommendationPlaceInfo extends Activity implements OnRatingBarChan
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_recommendation_place_info);
+		setContentView(R.layout.activity_recommended_place_info);
 		
 		// Set up action bar
 		ActionBar actionBar = getActionBar();
@@ -143,7 +143,7 @@ public class RecommendationPlaceInfo extends Activity implements OnRatingBarChan
 				if (addresses.size() > 0) {
             	
 					Address recommended_place_address = addresses.get(0);
-					formatted_recommended_place_address = new StringBuilder("Address:\n");
+					formatted_recommended_place_address = new StringBuilder("\n\nAddress:\n");
                 
 					// Adds each address line to the string
 					for (int i = 0; i < recommended_place_address.getMaxAddressLineIndex(); i++) {
@@ -316,7 +316,7 @@ public class RecommendationPlaceInfo extends Activity implements OnRatingBarChan
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.recommendation_place_info, menu);
+		getMenuInflater().inflate(R.menu.recommended_place_info, menu);
 		return true;
 	}
 	
@@ -350,7 +350,7 @@ public class RecommendationPlaceInfo extends Activity implements OnRatingBarChan
     	
     	gps.stopUsingGPS();
     	
-    	Intent intent = new Intent(this, Accommodation.class);
+    	Intent intent = new Intent(this, Recommendations.class);
     	startActivity(intent);
     	finish();
     }

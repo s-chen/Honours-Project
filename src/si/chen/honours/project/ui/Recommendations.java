@@ -214,16 +214,20 @@ public class Recommendations extends Activity {
 				// Store in list of points of interest
 				point_of_interest_data_list.add(point_of_interest_data);
 				
+				// Close database
+				dbHelper.close();
 			}
 			
+			// Add point of interest data to ListView
 			point_of_interest_data_adapter = new ArrayAdapter<PointOfInterest>(Recommendations.this, R.layout.recommendations_list, R.id.recommendations_list_item, point_of_interest_data_list);
 			lv_recommendations.setAdapter(point_of_interest_data_adapter);
 			
 			
+			// Handle clicks on specific recommended place (view more information)
 			lv_recommendations.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					
-					Intent intent = new Intent(Recommendations.this, RecommendationPlaceInfo.class);
+					Intent intent = new Intent(Recommendations.this, RecommendedPlaceInfo.class);
 					intent.putExtra("KEY_ID", point_of_interest_data_list.get(position).getID());
 					intent.putExtra("KEY_NAME", point_of_interest_data_list.get(position).getName());
 					intent.putExtra("KEY_SERVICE", point_of_interest_data_list.get(position).getServices());

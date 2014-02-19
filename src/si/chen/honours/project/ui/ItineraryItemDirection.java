@@ -445,6 +445,8 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 					user_session = new UserSessionManager(ItineraryItemDirection.this, "ACCOMMODATION_PREFS");
 				} else if (place_type.equals("Shop")) {
 					user_session = new UserSessionManager(ItineraryItemDirection.this, "SHOP_PREFS");
+				} else {
+					user_session = new UserSessionManager(ItineraryItemDirection.this, "RECOMMENDATION_PREFS");
 				}
 					
 				// Delete itinerary item by SharedPref key

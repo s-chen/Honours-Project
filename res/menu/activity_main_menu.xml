@@ -5,20 +5,9 @@
        android:title="@string/action_maps"
        android:showAsAction="always" />
    
-   <item android:id="@+id/action_overflow" 
-       android:icon="@drawable/ic_action_overflow" 
-       android:title="@string/action_overflow"
-       android:showAsAction="always" >
+
+   <item android:id="@+id/action_log_in"
+       android:title="@string/action_log_in"
+       android:showAsAction="always"/>
        
-       <menu>
-        	<item android:id="@+id/action_log_in"
-               android:title="@string/action_log_in" />
-        	<item android:id="@+id/action_help"
-               android:title="@string/action_help" />
-        	<item android:id="@+id/action_about_app"
-               android:title="@string/action_about_app" />
-       </menu>
-       
-   </item>
-   
 </menu>
