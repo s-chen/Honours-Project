@@ -320,6 +320,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return shopsList;	
 	}
 	
+	// Retrieve a Point Of Interest data specified by place_id
+	public PointOfInterest getPOIDataByID(String place_id) {
+		
+		PointOfInterest poi_data = new PointOfInterest();
+		
+		String sqlQuery = "SELECT * FROM edinburgh WHERE _id=" + place_id;
+		
+		// Open database for querying
+		try {
+			openDatabase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Cursor cursor = mDB.rawQuery(sqlQuery, null);
+		
+		// Loop through all rows and add to list
+		if (cursor.moveToFirst()) {
+				do {
+					poi_data.setID(cursor.getString(0));
+					poi_data.setName(cursor.getString(1));
+					poi_data.setServices(cursor.getString(2));
+					poi_data.setLatitude(cursor.getFloat(3));
+					poi_data.setLongitude(cursor.getFloat(4));
+					poi_data.setContentURL(cursor.getString(5));
+					
+						
+				} while (cursor.moveToNext());
+		}
+		return poi_data;	
+	}
+	
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {

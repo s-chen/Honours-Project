@@ -64,5 +64,6 @@
     <string name="action_logout">Logout</string>
     <string name="my_recommendations">My Recommendations</string>
     <string name="title_activity_recommendations">Recommendations</string>
+    <string name="title_activity_recommendation_place_info">RecommendationPlaceInfo</string>
 
 </resources>

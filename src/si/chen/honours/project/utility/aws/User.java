@@ -61,7 +61,7 @@ public class User implements Serializable {
 	 *  Converts String format of HashMap retrieved from Amazon SimpleDB into a HashMap
 	 *  (Since SimpleDB cannot store HashMap as an attribute directly)
 	**/ 
-	public HashMap<String,String> convertToHashMap(String hashMap) {
+	public static HashMap<String,String> convertToHashMap(String hashMap) {
 		
 		HashMap<String, String> restored_user_place_ratings = new HashMap<String,String>();
 		

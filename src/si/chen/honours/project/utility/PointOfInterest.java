@@ -6,8 +6,8 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 	private String id;
 	private String name;
 	private String services;
-	private float latitude;
-	private float longitude;
+	private double latitude;
+	private double longitude;
 	private String content_url;
 	
 	// Empty constructor
@@ -16,7 +16,7 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 	}
 	
 	// Constructor with all data
-	public PointOfInterest(String id, String name, String services, float latitude, float longitude, String content_url) {
+	public PointOfInterest(String id, String name, String services, double latitude, double longitude, String content_url) {
 		
 		this.id = id;
 		this.name = name;
@@ -64,19 +64,19 @@ public class PointOfInterest implements Comparable<PointOfInterest> {
 		this.services = services;
 	}
 	
-	public float getLatitude() {
+	public double getLatitude() {
 		return this.latitude;
 	}
 	
-	public void setLatitude(float latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 	
-	public float getLongitude() {
+	public double getLongitude() {
 		return this.longitude;
 	}
 	
-	public void setLongitude(float longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 	

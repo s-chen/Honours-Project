@@ -175,6 +175,11 @@
             android:label="@string/title_activity_recommendations"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
+        <activity
+            android:name="si.chen.honours.project.ui.RecommendationPlaceInfo"
+            android:label="@string/title_activity_recommendation_place_info"
+            android:theme="@style/CustomActionBarTheme" >
+        </activity>
     </application>
 
 </manifest>
