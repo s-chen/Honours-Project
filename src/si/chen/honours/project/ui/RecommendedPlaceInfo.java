@@ -268,7 +268,7 @@ public class RecommendedPlaceInfo extends Activity implements OnRatingBarChangeL
 				// Conversion to HashMap when we have existing ratings
 				if (!ratings.equals("")) {
 					// Convert String format of HashMap (from SimpleDB) to a HashMap
-					restored_user_place_ratings = user.convertToHashMap(ratings);
+					restored_user_place_ratings = User.convertToHashMap(ratings);
 					// Set global place ratings HashMap to the previously saved ratings from SimpleDB
 					User.user_place_ratings = restored_user_place_ratings;
 				}
