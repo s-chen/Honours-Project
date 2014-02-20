@@ -120,8 +120,6 @@ public class Recommendations extends Activity {
 			if (!FB_USER_RATINGS.isEmpty()) {
 				String current_user_ratings = aws.getPlaceRatingsForItem(FB_USER_RATINGS.get(0));
 				CURRENT_FB_USER_RATINGS = current_user_ratings;
-			} else {
-				Toast.makeText(getApplicationContext(), "Please submit some ratings in order to get recommendations!", Toast.LENGTH_SHORT).show();
 			}
 			
 			// Get all User IDs from AWS SimpleDB
@@ -182,8 +180,12 @@ public class Recommendations extends Activity {
 			String user_ratings = aws.getPlaceRatingsForItem(user_ratings_list_items.get(0));
 			
 			// Convert String to HashMap
-			user_ratings_map = User.convertToHashMap(user_ratings);
-			facebook_user_ratings_map = User.convertToHashMap(CURRENT_FB_USER_RATINGS);
+			if (!user_ratings.equals("")) {
+				user_ratings_map = User.convertToHashMap(user_ratings);
+			}
+			if (!CURRENT_FB_USER_RATINGS.equals("")) {
+				facebook_user_ratings_map = User.convertToHashMap(CURRENT_FB_USER_RATINGS);
+			}
 			
 			
 			// Loop over all place_id from user with highest similarity to Facebook user
@@ -208,6 +210,7 @@ public class Recommendations extends Activity {
 		protected void onPostExecute(HashMap<String,String> recommended_place_id_ratings) {
 			dialog.dismiss();
 			
+			
 			for (String place_id : recommended_place_id_ratings.keySet()) {
 				point_of_interest_data = dbHelper.getPOIDataByID(place_id);
 								
@@ -221,6 +224,13 @@ public class Recommendations extends Activity {
 			// Add point of interest data to ListView
 			point_of_interest_data_adapter = new ArrayAdapter<PointOfInterest>(Recommendations.this, R.layout.recommendations_list, R.id.recommendations_list_item, point_of_interest_data_list);
 			lv_recommendations.setAdapter(point_of_interest_data_adapter);
+			
+			
+			// Clear ListView when user current logged in to Facebook does not have any ratings (recommendations not accurate)
+			if (CURRENT_FB_USER_RATINGS.equals("")) {
+				lv_recommendations.setAdapter(null);
+				Toast.makeText(getApplicationContext(), "Please submit some ratings in order to get recommendations!", Toast.LENGTH_LONG).show();
+			}
 			
 			
 			// Handle clicks on specific recommended place (view more information)
@@ -263,8 +273,12 @@ public class Recommendations extends Activity {
 		
 		
 		// Convert String format to HashMap
-		temp_fb_user_ratings = User.convertToHashMap(CURRENT_FB_USER_RATINGS);
-		temp_user_ratings = User.convertToHashMap(another_user_ratings);
+		if (!CURRENT_FB_USER_RATINGS.equals("")) {
+			temp_fb_user_ratings = User.convertToHashMap(CURRENT_FB_USER_RATINGS);
+		}
+		if (!another_user_ratings.equals("")) {
+			temp_user_ratings = User.convertToHashMap(another_user_ratings);
+		}
 		
 		
 		// Loop over place_id for current user logged in to Facebook
