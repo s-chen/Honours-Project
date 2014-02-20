@@ -161,11 +161,15 @@ public class LoggedInFragment extends Fragment implements OnClickListener{
 			if (flag) {
 				// User details already in SimpleDB
 				Log.i("SIMPLE_DB", "User details already in SimpleDB");
-				Toast.makeText(getActivity(), "User information already in SimpleDB", Toast.LENGTH_SHORT).show();
+				if (getActivity() != null) {
+					Toast.makeText(getActivity(), "User information already in SimpleDB", Toast.LENGTH_SHORT).show();
+				}
 			} else {
 				// User details not in SimpleDB
 				Log.i("SIMPLE_DB", "Storing user details in SimpleDB");
-				Toast.makeText(getActivity(), "Storing user information in SimpleDB", Toast.LENGTH_SHORT).show();
+				if (getActivity() != null) {
+					Toast.makeText(getActivity(), "Storing user information in SimpleDB", Toast.LENGTH_SHORT).show();
+				}
 			}
 			
 			// Enable button press
