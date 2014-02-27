@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import si.chen.honours.project.R;
+import si.chen.honours.project.facebook.places.FacebookPlaceInfo;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.GoogleAPIHelper;
 import si.chen.honours.project.utility.UserSessionManager;
@@ -445,6 +446,8 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 					user_session = new UserSessionManager(ItineraryItemDirection.this, "ACCOMMODATION_PREFS");
 				} else if (place_type.equals("Shop")) {
 					user_session = new UserSessionManager(ItineraryItemDirection.this, "SHOP_PREFS");
+				} else if (place_type.equals("FACEBOOK")) {
+					user_session = new UserSessionManager(ItineraryItemDirection.this, "FACEBOOK_PLACE_PREFS");
 				} else {
 					user_session = new UserSessionManager(ItineraryItemDirection.this, "RECOMMENDATION_PREFS");
 				}

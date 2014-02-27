@@ -39,7 +39,7 @@ public class UserSessionManager {
 		
 		ArrayList<String> place_data = new ArrayList<String>();
 		
-		int position = mPref.getInt("KEY_DATA_POSITION", 0);
+		long position = mPref.getLong("KEY_DATA_POSITION", 0);
 
 		// Store id, name, type, latitude, longitude to ArrayList
 		place_data.add(id);
@@ -115,8 +115,8 @@ public class UserSessionManager {
 	}
 	
 	// Store the position of the point of interest item that was clicked in the ListView 
-	public void storeItemPosition(int position) {
-		mEditor.putInt("KEY_DATA_POSITION", position);
+	public void storeItemPosition(long position) {
+		mEditor.putLong("KEY_DATA_POSITION", position);
 		mEditor.commit();
 	}
 	
@@ -124,7 +124,7 @@ public class UserSessionManager {
 	// Checks whether a point of interest is already in the itinerary
 	public boolean existInItinerary() {
 		
-		int position = mPref.getInt("KEY_DATA_POSITION", 0);
+		long position = mPref.getLong("KEY_DATA_POSITION", 0);
 		
 		if (mPref.contains("USER_DATA_" + position)) {
 			return true;

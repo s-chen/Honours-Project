@@ -6,11 +6,91 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".FacebookPlaceInfo" >
+    tools:context=".FacebookPlaceInfo"
+    android:background="@color/DarkBlue" >
 
     <TextView
-        android:id="@+id/facebook_place_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/facebook_place_name_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+	    android:textSize="25sp"
+	   	android:textStyle="bold|italic"
+	   	android:layout_centerHorizontal="true" />
+    
+   	<fragment
+	    android:id="@+id/facebook_place_map"
+	    android:layout_width="match_parent"
+	    android:layout_height="250dp"
+	    android:layout_below="@+id/facebook_place_name_category"
+	    android:layout_centerHorizontal="true"
+	    class="com.google.android.gms.maps.MapFragment" />
+   	
+ 		<ScrollView 
+  	    	android:layout_width="fill_parent"
+  	    	android:layout_height="fill_parent"
+  	    	android:layout_below="@+id/facebook_place_map" >
+  	    
+  	    <RelativeLayout 
+  	        android:layout_width="fill_parent"
+  	        android:layout_height="wrap_content">
+  	         
+  	       	<TextView
+	    		android:id="@+id/textView_distance_info_facebook_place"
+	    		android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:textColor="@color/White"
+	    		android:textSize="20sp"
+	    		android:textStyle="bold" />
+  	         	
+  	     	<TextView
+	    		android:id="@+id/textView_facebook_place_address_phone_number"
+	    		android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:layout_below="@+id/textView_distance_info_facebook_place"
+	    		android:textSize="20sp"
+	    		android:textStyle="bold"
+	    		android:textColorLink="@color/White"
+	    		android:textColor="@color/White" />
+  	     	
+  	    	<TextView
+	    		android:id="@+id/textView_facebook_place_general_info"
+	    		android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:layout_below="@+id/textView_facebook_place_address_phone_number"
+	    		android:textSize="20sp"
+	    		android:textStyle="bold"
+	    		android:autoLink="web"
+	    		android:textColorLink="@color/White"
+	    		android:textColor="@color/White" />
+  	         		 
+  	     	<Button
+  	        	android:id="@+id/button_add_to_itinerary_facebook_place"
+  	        	android:layout_width="wrap_content"
+  	        	android:layout_height="55dp"
+  	        	android:layout_alignParentRight="true"
+  	         	android:layout_below="@+id/textView_facebook_place_general_info"
+  	        	android:background="@drawable/custom_button"
+  	         	android:onClick="itineraryFacebookPlace"
+  	         	android:text="@string/button_add_to_itinerary_planner"
+  	         	android:textColor="@color/DarkRed"
+  	         	android:textStyle="italic"
+  	       	    android:typeface="serif" />
+
+  	      	<Button
+  	        	android:id="@+id/button_search_facebook_place_info_online"
+  	         	android:layout_width="wrap_content"
+  	         	android:layout_height="55dp"
+  	         	android:layout_below="@+id/textView_facebook_place_general_info"
+  	        	android:background="@drawable/custom_button"
+  	        	android:onClick="searchFacebookPlaceOnline"
+  	         	android:text="@string/button_search_info_online"
+  	         	android:textColor="@color/DarkRed"
+  	        	android:textStyle="italic"
+  	         	android:typeface="serif" />
+  	        
+  	    </RelativeLayout>
+  	    	 
+	 </ScrollView>
 
 </RelativeLayout>

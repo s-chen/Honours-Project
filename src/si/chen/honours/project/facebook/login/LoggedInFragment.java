@@ -99,9 +99,11 @@ public class LoggedInFragment extends Fragment implements OnClickListener{
 		case R.id.my_recommendations:
 			Intent intent = new Intent(getActivity(), Recommendations.class);
 			startActivity(intent);
+			break;
 		case R.id.facebook_whats_near_here:
 			Intent fbNearbyPlaceIntent = new Intent(getActivity(), FacebookPlacePicker.class);
 			startActivity(fbNearbyPlaceIntent);
+			break;
 		}
 	}
 	

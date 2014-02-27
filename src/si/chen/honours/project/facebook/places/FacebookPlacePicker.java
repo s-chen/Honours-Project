@@ -57,6 +57,9 @@ public class FacebookPlacePicker extends FragmentActivity {
 			user_location = new Location("user_location");
 			user_location.setLatitude(user_latitude);
 			user_location.setLongitude(user_longitude);
+		} else {
+			// GPS or network not enabled, ask user to enable GPS/network in settings menu
+			gps.showGPSSettingsAlert();
 		}
 	        
 	        
@@ -86,9 +89,6 @@ public class FacebookPlacePicker extends FragmentActivity {
 	    			Intent intent = new Intent(FacebookPlacePicker.this, FacebookPlaceInfo.class);   
 					intent.putExtra("KEY_FACEBOOK_PLACE_GRAPH", selectedPlace.getInnerJSONObject().toString());
 	    			startActivity(intent);
-					
-					Log.i("FACEBOOK_PLACE_GRAPH", selectedPlace.getInnerJSONObject().toString());
-
 				}
 			}
 		});
@@ -199,7 +199,7 @@ public class FacebookPlacePicker extends FragmentActivity {
     	
     	gps.stopUsingGPS();
     	
-    	Intent intent = new Intent(this, Accommodation.class);
+    	Intent intent = new Intent(this, FacebookLogin.class);
     	startActivity(intent);
     	finish();
     }

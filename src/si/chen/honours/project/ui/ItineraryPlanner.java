@@ -27,7 +27,7 @@ public class ItineraryPlanner extends Activity {
 	private ArrayAdapter<String> itinerary_adapter;
 	
 	// User preferences from SharedPrefs for each category of data (including recommended place prefs)
-	private String[] USER_PREFS = new String[] {"ATTRACTION_PREFS", "RESTAURANT_PREFS", "DRINK_PREFS", "ACCOMMODATION_PREFS", "SHOP_PREFS", "RECOMMENDATION_PREFS"};
+	private String[] USER_PREFS = new String[] {"ATTRACTION_PREFS", "RESTAURANT_PREFS", "DRINK_PREFS", "ACCOMMODATION_PREFS", "SHOP_PREFS", "RECOMMENDATION_PREFS", "FACEBOOK_PLACE_PREFS"};
 	private UserSessionManager user_session;
 
 	private ArrayList<String> places_data = new ArrayList<String>();
@@ -69,16 +69,33 @@ public class ItineraryPlanner extends Activity {
 			
 			for (int i = 0; i < places_data.size(); i++) {
 				
-				// Store place name, type, latitude, longitude, SharedPref key to ArrayLists
+				// Store place id
 				place_ids.add(places_data.get(i).split("##")[0]);
+				// Store place name
 				place_names.add(places_data.get(i).split("##")[1]);
-				place_types.add(places_data.get(i).split("##")[2]);
+				
+				// If data is from Facebook place, store type as FACEBOOK
+				if (places_data.get(i).split("##")[2].contains("::FACEBOOK")) {
+					place_types.add(places_data.get(i).split("##")[2].split("::")[1]);
+				} else {
+					// Store type as normal
+					place_types.add(places_data.get(i).split("##")[2]);
+				}
+				
+				// Store place latitude
 				place_latitudes.add(places_data.get(i).split("##")[3]);
+				// Store place longitude
 				place_longitudes.add(places_data.get(i).split("##")[4]);
+				// Store SharedPref key
 				sharedPref_keys.add(places_data.get(i).split("##")[5]);
 				
-				// Store place id, place name followed by place type (formatting ListView UI)
-				place_ids_names_types.add(places_data.get(i).split("##")[0] + ". " + places_data.get(i).split("##")[1] + " - " + "(" + places_data.get(i).split("##")[2] + ")");
+				// Store place id, place name followed by place type (formatting ListView UI - taking into account of Facebook places)
+				if (places_data.get(i).split("##")[2].contains("::FACEBOOK")) {
+					place_ids_names_types.add(places_data.get(i).split("##")[0] + ". " + places_data.get(i).split("##")[1] + " - " + "(" + places_data.get(i).split("##")[2].split("::")[0] + ")");
+				} else {
+					place_ids_names_types.add(places_data.get(i).split("##")[0] + ". " + places_data.get(i).split("##")[1] + " - " + "(" + places_data.get(i).split("##")[2] + ")");
+				}
+				
 			}
 		}
 		
