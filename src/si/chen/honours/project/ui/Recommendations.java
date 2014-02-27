@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import si.chen.honours.project.R;
-import si.chen.honours.project.login.FacebookLogin;
-import si.chen.honours.project.login.LoggedInFragment;
+import si.chen.honours.project.facebook.login.FacebookLogin;
+import si.chen.honours.project.facebook.login.LoggedInFragment;
 import si.chen.honours.project.utility.DatabaseHelper;
 import si.chen.honours.project.utility.PointOfInterest;
 import si.chen.honours.project.utility.aws.AWSHelper;

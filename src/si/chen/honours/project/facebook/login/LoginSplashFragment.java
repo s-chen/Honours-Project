@@ -1,4 +1,4 @@
-package si.chen.honours.project.login;
+package si.chen.honours.project.facebook.login;
 
 import si.chen.honours.project.R;
 import android.content.Intent;

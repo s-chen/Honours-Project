@@ -5,11 +5,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <fragment android:name="si.chen.honours.project.login.LoggedInFragment"
+    <fragment android:name="si.chen.honours.project.facebook.login.LoggedInFragment"
           android:id="@+id/loggedInFragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />
-    <fragment android:name="si.chen.honours.project.login.LoginSplashFragment"
+    <fragment android:name="si.chen.honours.project.facebook.login.LoginSplashFragment"
           android:id="@+id/loginSplashFragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />

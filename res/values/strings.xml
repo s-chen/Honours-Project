@@ -65,5 +65,10 @@
     <string name="my_recommendations">My Recommendations</string>
     <string name="title_activity_recommendations">Recommendations</string>
     <string name="title_activity_recommended_place_info">RecommendedPlaceInfo</string>
+    <string name="no_location_error">Could not obtain your current location</string>
+    <string name="title_activity_facebook_place_picker">PlaceItemPicker</string>
+    <string name="title_activity_place_picker_fragment">PlacePickerFragment</string>
+    <string name="facebook_whats_near_here">What\'s Near Here</string>
+    <string name="title_activity_facebook_place_info">FacebookPlaceInfo</string>
 
 </resources>

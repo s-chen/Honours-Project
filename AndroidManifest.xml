@@ -148,13 +148,13 @@
             android:theme="@style/CustomActionBarTheme" >
         </activity>
         <activity
-            android:name="si.chen.honours.project.login.FacebookLogin"
+            android:name="si.chen.honours.project.facebook.login.FacebookLogin"
             android:label="@string/title_activity_login"
             android:theme="@style/CustomActionBarTheme"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="si.chen.honours.project.login.LoginSplashFragment"
+            android:name="si.chen.honours.project.facebook.login.LoginSplashFragment"
             android:label="@string/title_activity_login_splash_fragment" >
         </activity>
         <activity
@@ -167,7 +167,7 @@
             android:value="@string/app_id" />
 
         <activity
-            android:name="si.chen.honours.project.login.LoggedInFragment"
+            android:name="si.chen.honours.project.facebook.login.LoggedInFragment"
             android:label="@string/title_activity_logged_in_fragment" >
         </activity>
         <activity
@@ -179,6 +179,16 @@
             android:name="si.chen.honours.project.ui.RecommendedPlaceInfo"
             android:label="@string/title_activity_recommended_place_info"
             android:theme="@style/CustomActionBarTheme" >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.facebook.places.FacebookPlacePicker"
+            android:label="@string/title_activity_facebook_place_picker"
+            android:theme="@style/CustomActionBarTheme"  >
+        </activity>
+        <activity
+            android:name="si.chen.honours.project.facebook.places.FacebookPlaceInfo"
+            android:label="@string/title_activity_facebook_place_info"
+            android:theme="@style/CustomActionBarTheme"  >
         </activity>
     </application>
 

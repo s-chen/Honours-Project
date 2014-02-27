@@ -3,8 +3,8 @@ package si.chen.honours.project.ui;
 import java.io.IOException;
 
 import si.chen.honours.project.R;
+import si.chen.honours.project.facebook.login.FacebookLogin;
 import si.chen.honours.project.location.GPSListener;
-import si.chen.honours.project.login.FacebookLogin;
 import si.chen.honours.project.utility.DatabaseHelper;
 import android.app.ActionBar;
 import android.app.Activity;

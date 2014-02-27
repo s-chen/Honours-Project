@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Locale;
 
 import si.chen.honours.project.R;
+import si.chen.honours.project.facebook.login.FacebookLogin;
+import si.chen.honours.project.facebook.login.LoggedInFragment;
 import si.chen.honours.project.location.GPSListener;
-import si.chen.honours.project.login.FacebookLogin;
-import si.chen.honours.project.login.LoggedInFragment;
 import si.chen.honours.project.utility.UserSessionManager;
 import si.chen.honours.project.utility.aws.AWSHelper;
 import si.chen.honours.project.utility.aws.User;

@@ -27,12 +27,25 @@
             android:textStyle="italic"
             android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/my_recommendations"
+   	<Button
+        android:id="@+id/facebook_whats_near_here"
        	android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:background="@drawable/custom_button"
+        android:text="@string/facebook_whats_near_here"
+        android:textColor="@color/DarkRed"
+        android:textStyle="italic|bold"
+        android:typeface="serif"
+        android:textSize="25sp"
+        android:singleLine="true" />
+    
+    <Button
+        android:id="@+id/my_recommendations"
+       	android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_below="@+id/facebook_whats_near_here"
         android:background="@drawable/custom_button"
         android:text="@string/my_recommendations"
         android:textColor="@color/DarkRed"

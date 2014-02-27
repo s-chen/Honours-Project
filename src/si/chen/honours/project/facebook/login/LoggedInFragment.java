@@ -1,8 +1,7 @@
-package si.chen.honours.project.login;
-
-import java.util.List;
+package si.chen.honours.project.facebook.login;
 
 import si.chen.honours.project.R;
+import si.chen.honours.project.facebook.places.FacebookPlacePicker;
 import si.chen.honours.project.ui.Recommendations;
 import si.chen.honours.project.utility.aws.AWSHelper;
 import si.chen.honours.project.utility.aws.User;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.services.simpledb.model.Item;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -39,6 +37,7 @@ public class LoggedInFragment extends Fragment implements OnClickListener{
 	private ProfilePictureView profilePictureView;
 	private TextView userNameView;
 	private Button myRecommendations;
+	private Button fbNearbyPlaces;
 	
 	public static String USER_ID;
 	private String USER_PROFILE_NAME;
@@ -74,6 +73,11 @@ public class LoggedInFragment extends Fragment implements OnClickListener{
 	    // Initially disable button press until AsyncTask finishes
 	    myRecommendations.setEnabled(false);
 	    
+	    
+	    // Display places nearby using Facebook Graph
+	    fbNearbyPlaces = (Button) view.findViewById(R.id.facebook_whats_near_here);
+	    fbNearbyPlaces.setOnClickListener(this);
+	    
 	    // Check for an open session
 	    Session session = Session.getActiveSession();
 	    if (session != null && session.isOpened()) {
@@ -95,6 +99,9 @@ public class LoggedInFragment extends Fragment implements OnClickListener{
 		case R.id.my_recommendations:
 			Intent intent = new Intent(getActivity(), Recommendations.class);
 			startActivity(intent);
+		case R.id.facebook_whats_near_here:
+			Intent fbNearbyPlaceIntent = new Intent(getActivity(), FacebookPlacePicker.class);
+			startActivity(fbNearbyPlaceIntent);
 		}
 	}
 	
