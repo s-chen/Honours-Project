@@ -19,6 +19,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -91,6 +93,7 @@ public class Recommendations extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			lockScreenOrientation();
 
 			dialog = new ProgressDialog(Recommendations.this);
 	        dialog.setMessage("Retrieving recommendations..");
@@ -209,7 +212,7 @@ public class Recommendations extends Activity {
 		@Override
 		protected void onPostExecute(HashMap<String,String> recommended_place_id_ratings) {
 			dialog.dismiss();
-			
+			unlockScreenOrientation();
 			
 			for (String place_id : recommended_place_id_ratings.keySet()) {
 				point_of_interest_data = dbHelper.getPOIDataByID(place_id);
@@ -384,4 +387,18 @@ public class Recommendations extends Activity {
 			      return super.onOptionsItemSelected(item);
 		}
 	}
+	
+    // Lock screen orientation when AsyncTack is active
+    private void lockScreenOrientation() {
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+     
+    private void unlockScreenOrientation() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+    }
 }

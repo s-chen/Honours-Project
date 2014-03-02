@@ -190,6 +190,9 @@
             android:label="@string/title_activity_facebook_place_info"
             android:theme="@style/CustomActionBarTheme"  >
         </activity>
+        
+      	<uses-library android:name="android.test.runner" />
     </application>
-
+    
+	<instrumentation android:targetPackage="si.chen.honours.project" android:name="android.test.InstrumentationTestRunner" />
 </manifest>

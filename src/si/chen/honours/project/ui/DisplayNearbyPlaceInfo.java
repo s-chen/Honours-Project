@@ -8,6 +8,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,7 +68,8 @@ public class DisplayNearbyPlaceInfo extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-
+			lockScreenOrientation();
+			
 			dialog = new ProgressDialog(DisplayNearbyPlaceInfo.this);
 	        dialog.setMessage("Retrieving information..");
 	        dialog.setIndeterminate(false);
@@ -88,6 +91,7 @@ public class DisplayNearbyPlaceInfo extends Activity {
 		@Override
 		protected void onPostExecute(JSONObject json) {
 			dialog.dismiss();
+			unlockScreenOrientation();
 			
 			runOnUiThread(new Runnable(){
 				public void run() {
@@ -159,5 +163,19 @@ public class DisplayNearbyPlaceInfo extends Activity {
     	Intent intent = new Intent(this, DisplayNearbyPlaces.class);
     	startActivity(intent);
     	finish();
+    }
+    
+    // Lock screen orientation when AsyncTack is active
+    private void lockScreenOrientation() {
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+     
+    private void unlockScreenOrientation() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 }

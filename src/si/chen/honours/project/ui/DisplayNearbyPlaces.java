@@ -8,14 +8,14 @@ import org.json.JSONObject;
 import si.chen.honours.project.R;
 import si.chen.honours.project.location.GPSListener;
 import si.chen.honours.project.utility.GoogleAPIHelper;
-import si.chen.honours.project.utility.aws.AWSHelper;
-import si.chen.honours.project.utility.aws.User;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +30,7 @@ import android.widget.ListView;
 
 // Display a list of nearby point of interests to the user
 public class DisplayNearbyPlaces extends Activity {
-
+	
 	private GPSListener gps;
 	private double user_latitude;
 	private double user_longitude;
@@ -110,6 +110,7 @@ public class DisplayNearbyPlaces extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			lockScreenOrientation();
 
 			dialog = new ProgressDialog(DisplayNearbyPlaces.this);
 	        dialog.setMessage("Retrieving Nearby Places..");
@@ -133,6 +134,7 @@ public class DisplayNearbyPlaces extends Activity {
 		@Override
 		protected void onPostExecute(JSONObject json) {
 			dialog.dismiss();
+			unlockScreenOrientation();
 			
 			runOnUiThread(new Runnable() {
 				public void run() {
@@ -335,5 +337,18 @@ public class DisplayNearbyPlaces extends Activity {
    	    overridePendingTransition(0, 0);
    	    startActivity(intent);
     }  
-
+    
+    // Lock screen orientation when AsyncTack is active
+    private void lockScreenOrientation() {
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+     
+    private void unlockScreenOrientation() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+    }
 }
