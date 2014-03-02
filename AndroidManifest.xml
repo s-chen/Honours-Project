@@ -71,7 +71,8 @@
         <activity
             android:name="si.chen.honours.project.ui.RestaurantInfo"
             android:label="@string/title_activity_restaurant_info"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="si.chen.honours.project.location.GPSListener"
@@ -87,7 +88,8 @@
         <activity
             android:name="si.chen.honours.project.ui.DrinksInfo"
             android:label="@string/title_activity_drinks_info"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="si.chen.honours.project.ui.Attractions"
@@ -98,7 +100,8 @@
         <activity
             android:name="si.chen.honours.project.ui.AttractionsInfo"
             android:label="@string/title_activity_attractions_info"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="si.chen.honours.project.ui.Accommodation"
@@ -109,7 +112,8 @@
         <activity
             android:name="si.chen.honours.project.ui.AccommodationInfo"
             android:label="@string/title_activity_accommodation_info"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="si.chen.honours.project.ui.DisplayNearbyPlaces"
@@ -135,7 +139,8 @@
         <activity
             android:name="si.chen.honours.project.ui.ShopInfo"
             android:label="@string/title_activity_shop_info"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="si.chen.honours.project.ui.ItineraryPlanner"
@@ -145,7 +150,8 @@
         <activity
             android:name="si.chen.honours.project.ui.ItineraryItemDirection"
             android:label="@string/title_activity_itinerary_item_direction"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="si.chen.honours.project.facebook.login.FacebookLogin"
@@ -178,7 +184,8 @@
         <activity
             android:name="si.chen.honours.project.ui.RecommendedPlaceInfo"
             android:label="@string/title_activity_recommended_place_info"
-            android:theme="@style/CustomActionBarTheme" >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="si.chen.honours.project.facebook.places.FacebookPlacePicker"
@@ -188,7 +195,8 @@
         <activity
             android:name="si.chen.honours.project.facebook.places.FacebookPlaceInfo"
             android:label="@string/title_activity_facebook_place_info"
-            android:theme="@style/CustomActionBarTheme"  >
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait"  >
         </activity>
         
       	<uses-library android:name="android.test.runner" />

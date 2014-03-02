@@ -154,7 +154,7 @@ public class RecommendedPlaceInfo extends Activity implements OnRatingBarChangeL
 					Log.i("NO_RECOMMENDED_PLACE_ADDRESS", "No recommended place address found");
 				}
 			} catch (IOException e) {
-				formatted_recommended_place_address = new StringBuilder("Geocoder service not available - please try rebooting device\n");
+				formatted_recommended_place_address = new StringBuilder("\n\nGeocoder service not available - please try rebooting device\n");
 				Log.i("GEOCODER_FAILED", "Geocoder Service not available - reboot device or use Google Geocoding API");
 				e.printStackTrace();
 			}

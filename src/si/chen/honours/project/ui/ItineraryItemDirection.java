@@ -195,7 +195,6 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			lockScreenOrientation();
 
 			dialog = new ProgressDialog(ItineraryItemDirection.this);
 	        dialog.setMessage("Retrieving Direction information..");
@@ -218,7 +217,6 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 		@Override
 		protected void onPostExecute(JSONObject json) {
 			dialog.dismiss();
-			unlockScreenOrientation();
 			
 			runOnUiThread(new Runnable() {
 				public void run() {
@@ -518,19 +516,5 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
     	startActivity(intent);
     	finish();
     }
-    
-    // Lock screen orientation when AsyncTack is active
-    private void lockScreenOrientation() {
-        int currentOrientation = getResources().getConfiguration().orientation;
-        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-    }
-     
-    private void unlockScreenOrientation() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-    }
-
+   
 }
