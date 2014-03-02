@@ -2,6 +2,7 @@ package si.chen.honours.project.tests;
 
 import com.robotium.solo.Solo;
 
+import si.chen.honours.project.R;
 import si.chen.honours.project.ui.MainMenu;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -76,5 +77,18 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2<MainMenu> {
 		//Assert that ItineraryPlanner activity is opened
 		solo.assertCurrentActivity("Expected ItineraryPlanner activity", "ItineraryPlanner"); 
 	}
+	
+	public void testClickMap() {
+		solo.clickOnActionBarItem(R.id.action_maps);
+		//Assert that Map activity is opened
+		solo.assertCurrentActivity("Expected Map activity", "MapActivity"); 
+	}
+	
+	public void testClickLogin() {
+		solo.clickOnActionBarItem(R.id.action_log_in);
+		//Assert that FacebookLogin activity is opened
+		solo.assertCurrentActivity("Expected Facebook Login activity", "FacebookLogin"); 
+	}
+	
 
 }

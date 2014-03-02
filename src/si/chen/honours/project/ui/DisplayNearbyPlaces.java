@@ -65,7 +65,7 @@ public class DisplayNearbyPlaces extends Activity {
 	private Button button_show_nearby_places;
 	private ArrayAdapter<String> nearby_places_adapter;
 	
-	
+	private ProgressDialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +103,7 @@ public class DisplayNearbyPlaces extends Activity {
 	
 	// Starts AsyncTask to request Nearby Place search using Google Places API
 	private class getNearbyPlaces extends AsyncTask<String, String, JSONObject> {
-		
-		private ProgressDialog dialog;
-		
+				
 		// Show Progress Dialog
 		@Override
 		protected void onPreExecute() {
@@ -324,6 +322,26 @@ public class DisplayNearbyPlaces extends Activity {
     	Intent intent = new Intent(this, MainMenu.class);
     	startActivity(intent);
     	finish();
+    }
+    
+    @Override
+    public void onStop() {
+    	super.onStop();
+    	if (dialog != null) {
+    		if (dialog.isShowing()) {
+    			dialog.dismiss();
+    		}
+    	}
+    }
+    
+    @Override
+    public void onDestroy() {
+    	super.onDestroy();
+    	if (dialog != null) {
+    		if (dialog.isShowing()) {
+    			dialog.dismiss();
+    		}
+    	}
     }
     
     // Refresh activity - called when 'Refresh' action button clicked
