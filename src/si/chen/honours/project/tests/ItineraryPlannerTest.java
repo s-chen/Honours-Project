@@ -2,6 +2,7 @@ package si.chen.honours.project.tests;
 
 import si.chen.honours.project.R;
 import si.chen.honours.project.ui.ItineraryPlanner;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ListView;
 
@@ -15,7 +16,7 @@ import com.robotium.solo.Solo;
 public class ItineraryPlannerTest extends ActivityInstrumentationTestCase2<ItineraryPlanner> {
 	
 	private Solo solo;
-	
+
 	
 	public ItineraryPlannerTest() {
 		super(ItineraryPlanner.class);
@@ -42,34 +43,29 @@ public class ItineraryPlannerTest extends ActivityInstrumentationTestCase2<Itine
 		
 		// Click delete button
 		solo.clickOnButton("Delete All Itinerary Items");
-		// Initially cancel deletion
+		// Confirm deletion
 		solo.clickOnButton("Delete");
-		// Check adapter used for ListView is not null
-		//assertTrue(lv_itinerary_items.getAdapter() != null || !lv_itinerary_items.getAdapter().isEmpty());
-		assertNull(lv_itinerary_items.getAdapter());
-		
+		// Go back to refresh activity
 		solo.goBack();
-		// Now confirm deletion of itinerary items
-		//solo.clickOnButton("Delete All Itinerary Items");
-		//solo.clickOnButton("Delete");
-		// Check adapter used for ListView is now set to Null (cleared)
-		//assertTrue(lv_itinerary_items.getAdapter() == null || lv_itinerary_items.getAdapter().isEmpty());
-		//assertNull(lv_itinerary_items.getAdapter());
+		
+		// Assert 0 list items in ListView (all itinerary items deleted)
+		assertTrue(lv_itinerary_items.getCount() == 0);
+	
 	}
 	
-	// Test for cancellation of deletion (when button is enabled)
+	// Test for cancel deletion of itinerary items (when button is enabled)
 	public void testCancelDeleteAllItineraryItems() {
 		
 		ListView lv_itinerary_items = (ListView) solo.getView(R.id.listView_itinerary);
-		// Now confirm deletion of itinerary items
+		
+		// Click delete button
 		solo.clickOnButton("Delete All Itinerary Items");
+		// Cancel deletion
 		solo.clickOnButton("Cancel");
-		// Check adapter used for ListView is now set to Null (cleared)
-				//assertTrue(lv_itinerary_items.getAdapter() == null || lv_itinerary_items.getAdapter().isEmpty());
-		assertNotNull(lv_itinerary_items.getAdapter());
+		
+		assertTrue(lv_itinerary_items.getCount() > 0);
 		solo.goBack();
 		
 	}
-	
 
 }

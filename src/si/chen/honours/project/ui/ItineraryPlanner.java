@@ -110,6 +110,7 @@ public class ItineraryPlanner extends Activity {
 		lv_itinerary.setAdapter(itinerary_adapter);
 		
 		
+		
 		// Enable button press when itinerary items are available, disable otherwise
 		if (lv_itinerary.getAdapter().isEmpty()) {
 			delete_all_itinerary_items.setEnabled(false);
