@@ -51,43 +51,50 @@ public class MainMenuTest extends ActivityInstrumentationTestCase2<MainMenu> {
 	public void testClickDrinks() {
 		solo.clickOnMenuItem("Drinks");
 		//Assert that Drinks activity is opened
-		solo.assertCurrentActivity("Expected Drinks activity", "Drinks"); 
+		solo.assertCurrentActivity("Expected Drinks activity", "Drinks");
+		solo.goBack();
 	}
 	
 	public void testClickAccommodation() {
 		solo.clickOnMenuItem("Accommodation");
 		//Assert that Drinks activity is opened
 		solo.assertCurrentActivity("Expected Accommodation activity", "Accommodation"); 
+		solo.goBack();
 	}
 	
 	public void testClickShopping() {
 		solo.clickOnMenuItem("Shopping");
 		//Assert that Shops activity is opened
 		solo.assertCurrentActivity("Expected Shops activity", "Shops"); 
+		solo.goBack();
 	}
 	
 	public void testClickNearbyPlaces() {
 		solo.clickOnMenuItem("Nearby Places");
 		//Assert that DisplayNearbyPlaces activity is opened
 		solo.assertCurrentActivity("Expected DisplayNearbyPlaces activity", "DisplayNearbyPlaces"); 
+		solo.goBack();
 	}
 	
 	public void testClickItineraryPlanner() {
 		solo.clickOnMenuItem("Itinerary Planner");
 		//Assert that ItineraryPlanner activity is opened
 		solo.assertCurrentActivity("Expected ItineraryPlanner activity", "ItineraryPlanner"); 
+		solo.goBack();
 	}
 	
 	public void testClickMap() {
 		solo.clickOnActionBarItem(R.id.action_maps);
 		//Assert that Map activity is opened
 		solo.assertCurrentActivity("Expected Map activity", "MapActivity"); 
+		solo.goBack();
 	}
 	
 	public void testClickLogin() {
 		solo.clickOnActionBarItem(R.id.action_log_in);
 		//Assert that FacebookLogin activity is opened
 		solo.assertCurrentActivity("Expected Facebook Login activity", "FacebookLogin"); 
+		solo.goBack();
 	}
 	
 

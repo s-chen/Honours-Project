@@ -90,7 +90,12 @@ public class AttractionsInfo extends Activity implements OnRatingBarChangeListen
 		attraction_item_position = attractionsIntent.getIntExtra("KEY_ATTRACTION_ITEM_POSITION", 0);
 		attractions_type = attractionsIntent.getStringExtra("KEY_TYPE");
 		
+		
+		// Set Attractions name as title
+		TextView textView_attractions_name = (TextView) findViewById(R.id.attractions_name);
+		textView_attractions_name.setText(attractions_name);
 
+		
 		// Create instance of GPSListener
 		gps = new GPSListener(this);
 		

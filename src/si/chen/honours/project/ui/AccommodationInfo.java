@@ -95,6 +95,10 @@ public class AccommodationInfo extends Activity implements OnRatingBarChangeList
 		accommodation_type = accommodationIntent.getStringExtra("KEY_TYPE");
 		
 
+		// Set Accommodation name as title
+		TextView textView_accommodation_name = (TextView) findViewById(R.id.accommodation_name);
+		textView_accommodation_name.setText(accommodation_name);
+		
 		// Create instance of GPSListener
 		gps = new GPSListener(this);
 		

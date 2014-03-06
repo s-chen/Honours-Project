@@ -9,11 +9,22 @@
     tools:context=".DrinksInfo"
     android:background="@color/DarkBlue" >
 
+    
+   	<TextView
+        android:id="@+id/drinks_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+	    android:textSize="25sp"
+	   	android:textStyle="bold|italic"
+	   	android:gravity="center"
+	   	android:layout_centerHorizontal="true" />
+    
   	<fragment
 	    android:id="@+id/drinks_map"
 	    android:layout_width="match_parent"
 	    android:layout_height="250dp"
-	   	android:layout_alignParentTop="true"
+		android:layout_below="@+id/drinks_name"
 	    android:layout_centerHorizontal="true"
 	    class="com.google.android.gms.maps.MapFragment" />
   	

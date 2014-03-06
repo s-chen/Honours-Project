@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import android.widget.Toast;
 public class ItineraryPlanner extends Activity {
 
 	private ListView lv_itinerary;
+	private Button delete_all_itinerary_items;
 	private ArrayAdapter<String> itinerary_adapter;
 	
 	// User preferences from SharedPrefs for each category of data (including recommended place prefs)
@@ -44,6 +46,7 @@ public class ItineraryPlanner extends Activity {
 	private ArrayList<String> place_ids_names_types = new ArrayList<String>();
 	
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,8 +59,9 @@ public class ItineraryPlanner extends Activity {
 		
 		
 		lv_itinerary = (ListView) findViewById(R.id.listView_itinerary);
+		delete_all_itinerary_items = (Button) findViewById(R.id.button_deleteAllItineraryItems);
 		
-		
+				
 		// Loop over SharedPref for each category of data
 		for (String pref : USER_PREFS) {
 			
@@ -104,6 +108,15 @@ public class ItineraryPlanner extends Activity {
 		Log.i("ItineraryListView", "Adding itinerary items to list view.");
 		itinerary_adapter = new ArrayAdapter<String>(this, R.layout.point_of_interest_list, R.id.list_item, place_ids_names_types);
 		lv_itinerary.setAdapter(itinerary_adapter);
+		
+		
+		// Enable button press when itinerary items are available, disable otherwise
+		if (lv_itinerary.getAdapter().isEmpty()) {
+			delete_all_itinerary_items.setEnabled(false);
+		} else {
+			delete_all_itinerary_items.setEnabled(true);
+		}
+		
 		
 		
 		// Display direction information for selected itinerary item by starting ItineraryItemDirection activity
@@ -193,6 +206,11 @@ public class ItineraryPlanner extends Activity {
 			
 				Toast.makeText(getApplicationContext(), "All Itinerary Items Deleted", Toast.LENGTH_SHORT).show();
 				
+				
+				// Reset (clear) adapter for ListView
+				lv_itinerary.setAdapter(null);
+				// Disable button press for deleting itinerary items
+				delete_all_itinerary_items.setEnabled(false);
 				// Refresh ListView of current activity
 				refresh();
 			}

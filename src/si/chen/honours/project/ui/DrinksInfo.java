@@ -92,6 +92,10 @@ public class DrinksInfo extends Activity implements OnRatingBarChangeListener {
 		drinks_type = drinksIntent.getStringExtra("KEY_TYPE");
 		
 		
+		// Set Drinks name as title
+		TextView textView_drinks_name = (TextView) findViewById(R.id.drinks_name);
+		textView_drinks_name.setText(drinks_name);
+		
 
 		// Create instance of GPSListener
 		gps = new GPSListener(this);

@@ -91,6 +91,10 @@ public class RestaurantInfo extends Activity implements OnRatingBarChangeListene
 		restaurant_type = restaurantIntent.getStringExtra("KEY_TYPE");
 		
 		
+		// Set Restaurant name as title
+		TextView textView_restaurant_name = (TextView) findViewById(R.id.restaurant_name);
+		textView_restaurant_name.setText(restaurant_name);
+		
 		
 		// Create instance of GPSListener
 		gps = new GPSListener(this);

@@ -91,6 +91,11 @@ public class ShopInfo extends Activity implements OnRatingBarChangeListener {
 		shop_item_position = shopIntent.getIntExtra("KEY_SHOP_ITEM_POSITION", 0);
 		shop_type = shopIntent.getStringExtra("KEY_TYPE");
 		
+		
+		// Set Shop name as title
+		TextView textView_shop_name = (TextView) findViewById(R.id.shop_name);
+		textView_shop_name.setText(shop_name);
+		
 
 		// Create instance of GPSListener
 		gps = new GPSListener(this);

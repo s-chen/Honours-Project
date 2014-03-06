@@ -16,6 +16,7 @@
         android:textColor="@color/White"
 	    android:textSize="25sp"
 	   	android:textStyle="bold|italic"
+	   	android:gravity="center"
 	   	android:layout_centerHorizontal="true" />
     
    	<fragment

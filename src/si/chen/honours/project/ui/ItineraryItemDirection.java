@@ -79,6 +79,7 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 	private List<LatLng> lat_lng_list;
 
 	private TextView textView_current_location;
+	private TextView textView_destination_name;
 	private TextView textView_destination_location;
 	private TextView textView_total_distance;
 	private TextView textView_total_duration;
@@ -97,6 +98,7 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		textView_current_location = (TextView) findViewById(R.id.textView_current_location);
+		textView_destination_name = (TextView) findViewById(R.id.textView_destination_name);
 		textView_destination_location = (TextView) findViewById(R.id.textView_destination_location);
 		textView_total_distance = (TextView) findViewById(R.id.textView_total_distance);
 		textView_total_duration = (TextView) findViewById(R.id.textView_total_duration);
@@ -130,6 +132,9 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 		place_longitude = Double.valueOf(intent.getStringExtra("KEY_LONGITUDE"));
 		sharedPref_key = intent.getStringExtra("SHARED_PREF_KEY");
 		
+		// Set destination name
+		textView_destination_name.setText("Destination: " + place_name);
+		
 	}
 	
 	// Display specific direction information based on selected mode of transport in spinner drop down list 
@@ -150,7 +155,7 @@ public class ItineraryItemDirection extends Activity implements OnNavigationList
 		// Reset polyline points on transport mode change
 		overview_polyline_points = "";
 		// Reset TextView messages on transport mode change
-		textView_current_location.setText("");;
+		textView_current_location.setText("");
 		textView_destination_location.setText("");
 		textView_total_distance.setText("");
 		textView_total_duration.setText("");

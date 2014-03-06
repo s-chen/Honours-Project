@@ -92,6 +92,11 @@ public class RecommendedPlaceInfo extends Activity implements OnRatingBarChangeL
 		recommended_place_type = intent.getStringExtra("KEY_TYPE");
 		
 		
+		// Set Recommended Place name as title
+		TextView textView_recommended_place_name = (TextView) findViewById(R.id.recommended_place_name);
+		textView_recommended_place_name.setText(recommended_place_name);
+		
+		
 		// Create instance of GPSListener
 		gps = new GPSListener(this);
 		
@@ -407,7 +412,7 @@ public class RecommendedPlaceInfo extends Activity implements OnRatingBarChangeL
     		Toast.makeText(getApplicationContext(), "Item already added to Itinerary", Toast.LENGTH_SHORT).show();
     	} else { 		
     		user_session.storePlaceData(recommended_place_id, recommended_place_name, recommended_place_type, recommended_place_latitude, recommended_place_longitude);
-    		Toast.makeText(getApplicationContext(), "Added place to Itinerary", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(getApplicationContext(), "Added recommended place to Itinerary", Toast.LENGTH_SHORT).show();
     	}
     	
     }
