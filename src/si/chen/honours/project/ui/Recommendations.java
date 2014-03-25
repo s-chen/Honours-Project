@@ -301,7 +301,7 @@ public class Recommendations extends Activity {
 					 * User 1 ratings: r1{1}, r1{2}, r1{3},..., r1{n}
 					 * User 2 ratings: r2{1}, r2{2}, r2{3},..., r2{n}
 					 * Compute the partial Euclidean Distance:
-					 * (r1{1} - r2{1})^2 + (r1{2} - r2{2})^2 + ... + (r1{n} - r2{n})
+					 * (r1{1} - r2{1})^2 + (r1{2} - r2{2})^2 + ... + (r1{n} - r2{n})^2
 					 */
 					partial_euclidean_distance += Math.pow((fb_user_rating - user_rating),2);
 				}
